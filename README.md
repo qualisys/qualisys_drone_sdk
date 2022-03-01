@@ -5,6 +5,12 @@
 
 quadkit is an entry point for students, researchers, engineers, artists, and designers to start tracking and flying drones using a Qualisys motion capture system.
 
+## Hardware Setup
+
+## Software Environment
+
+    pip install qtm cflib
+
 ## Setting Up and Flying One Drone
 
 ## Setting Up and Flying Multiple Drones
