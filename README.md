@@ -8,6 +8,8 @@ quadkit is an entry point for students, researchers, engineers, artists, and des
 
     pip install qtm cflib
 
-## Setting Up and Flying One Drone
+## Bitcraze Crazyflie
 
-## Setting Up and Flying Multiple Drones
+## Bitcraze Crazyflie Swarm
+
+## DJI Tello
