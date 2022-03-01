@@ -2,7 +2,12 @@
 
 quadkit is an entry point for students, researchers, engineers, artists, and designers to start tracking and flying drones using a Qualisys motion capture system.
 
-## Hardware Setup
+## Box Contents
+
+- 2x Bitcraze Crazyflie Drones
+- 1x Bitcraze Antenna
+- 2x Bitcraze Spare Parts Bundle
+- 2x Qualisys x Bitcraze Active Marker Deck
 
 ## QTM Settings
 
