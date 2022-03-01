@@ -1,2 +1,3 @@
-# drone-resources
-Resources for integrating various drones (DJI, Bitcraze...) with Qualisys motion capture systems
+# quadkit
+
+Resources for integrating various quadcopter drones (DJI, Bitcraze...) with Qualisys motion capture systems
