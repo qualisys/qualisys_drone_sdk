@@ -20,6 +20,11 @@ We recommend the following settings:
 
 ## Bitcraze Crazyflie
 
+For takeoff, the drone should be placed on the floor with its front pointing in the positive x-direction of the QTM coordinate system.
+
+(**Important:** If the front of the drone is not aligned with the x-direction it may **lose control and crash**. The stability of the control algorithm depends on correct initial alignment.)
+
+
 ## Bitcraze Crazyflie Swarm
 
 ## DJI Tello
