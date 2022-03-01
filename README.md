@@ -3,7 +3,7 @@
 
 # quadkit
 
-Resources for integrating various quadcopter drones (DJI, Bitcraze...) with Qualisys motion capture systems
+quadkit is an entry point for students, researchers, engineers, artists, and designers to start tracking and flying drones using a Qualisys motion capture system.
 
 ## Setting Up and Flying One Drone
 
