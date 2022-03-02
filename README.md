@@ -58,9 +58,9 @@ Pressing the `L` key on the keyboard while the script is running will stop the p
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
 
-# Bitcraze Crazyflie Swarm
-
 ### [crazyflie_dual.py](crazyflie_dual.py)
+
+This script demonstrates a semi-choreographed "swarm" flight with two Crazyflie drones.
 
 ## DJI Tello
 
