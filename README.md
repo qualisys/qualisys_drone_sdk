@@ -27,11 +27,23 @@ We recommend the following settings:
 
 ## Bitcraze Crazyflie
 
-For takeoff, the drone should be placed on the floor with its front pointing in the positive x-direction of the QTM coordinate system.
+For takeoff, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system
 
 We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects:
 
 ### crazyflie_solo.py
+
+This script demonstrates a basic scenario using a Qualisys motion capture system to control the flight path of a Crazyflie.
+
+It also runs through the electronic, mechanical, and communications systems of the Crazyflie. It's a good idea to run this script once to check that everything is in order, before executing more complex behavior.
+
+The script commands the Crazyflie to:
+
+- Take off and hover 1m above its initial position for 30 seconds
+- Move out 50cm in the X direction and complete 2 circles around its initial position
+- For 1 minute, move randomly within a cubic volume that is 1m on each side, centered 1m above its initial position
+
+Pressing the `L` key on the keyboard while the script is running will stop the program and attempt to calmly land the drone. 
 
 ### crazyflie_interactive.py
 
@@ -44,3 +56,10 @@ We provide two scripts that demonstrate the Crazyflie integration, which can be 
 ### tello_solo.py
 
 ### tello_interactive.py
+
+## Resources and Inspirations
+
+- Tutorial on [Building Interactions with the Bitcraze Crazyflie and Motion Capture](https://www.baytas.net/blog/crazyflie) by Mehmet Aydın Baytaş
+- Fun project: [Santa's Flying Helpers](https://www.bitcraze.io/2021/12/santas-flying-helpers/) by Bitcraze
+- [Overview of different positioning systems](https://www.bitcraze.io/2021/05/positioning-system-overview/) you can use with the Bitcraze Crazyflie
+- [Notes on the design of Drone Chi](https://www.bitcraze.io/2019/12/designing-dronechi/), a meditative human-drone interaction experiment by Joseph La Delfa
