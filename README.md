@@ -28,7 +28,7 @@ The programming language we prefer for drone scripting is [Python](https://www.p
 Additionally, the following Python packages are required (install them using [pip](https://pypi.org/project/pip/)):
 
 - [qtm](https://github.com/qualisys/qualisys_python_sdk)
-- For Crazyflie: [cflib](https://github.com/bitcraze/crazyflie-lib-python)
+- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie)
 
 ## Bitcraze Crazyflie
 
