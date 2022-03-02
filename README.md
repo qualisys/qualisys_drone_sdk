@@ -4,12 +4,14 @@
 
 quadkit is an entry point for students, researchers, engineers, artists, and designers to start tracking and flying drones using a Qualisys motion capture system.
 
-## Box Contents
+# Box Contents
 
 - 2x Bitcraze Crazyflie Drones
 - 1x Bitcraze Antenna
 - 2x Bitcraze Spare Parts Bundle
 - 2x Qualisys x Bitcraze Active Marker Deck
+
+# Setup
 
 ## QTM Settings
 
@@ -29,6 +31,8 @@ Additionally, the following Python packages are required (install them using [pi
 
 - [qtm](https://github.com/qualisys/qualisys_python_sdk)
 - [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie)
+
+# Drone Platforms and Starter Scripts
 
 ## Bitcraze Crazyflie
 
@@ -54,7 +58,7 @@ Pressing the `L` key on the keyboard while the script is running will stop the p
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
 
-## Bitcraze Crazyflie Swarm
+# Bitcraze Crazyflie Swarm
 
 ### crazyflie_dual.py
 
@@ -64,7 +68,7 @@ This script demonstrates real-time interactive control of a Crazyflie, coupling 
 
 ### tello_interactive.py
 
-## Resources and Inspirations
+# Resources and Inspirations
 
 - Tutorial on [Building Interactions with the Bitcraze Crazyflie and Motion Capture](https://www.baytas.net/blog/crazyflie) by Mehmet Aydın Baytaş
 - Fun project: [Santa's Flying Helpers](https://www.bitcraze.io/2021/12/santas-flying-helpers/) by Bitcraze
