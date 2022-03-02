@@ -52,6 +52,8 @@ Pressing the `L` key on the keyboard while the script is running will stop the p
 
 ### crazyflie_interactive.py
 
+This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
+
 ## Bitcraze Crazyflie Swarm
 
 ### crazyflie_dual.py
