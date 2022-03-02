@@ -27,7 +27,7 @@ We recommend the following settings:
 
 ## Bitcraze Crazyflie
 
-For takeoff, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system
+**Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
 
 We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects:
 
