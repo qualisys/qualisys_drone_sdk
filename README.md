@@ -39,9 +39,9 @@ It also runs through the electronic, mechanical, and communications systems of t
 
 The script commands the Crazyflie to:
 
-- Take off and hover 1m above its initial position for 30 seconds
-- Move out 50cm in the X direction and complete 2 circles around its initial position
-- For 1 minute, move randomly within a cubic volume that is 1m on each side, centered 1m above its initial position
+1. Take off and hover 1m above its initial position for 30 seconds
+2. Move out 50cm in the X direction and complete 2 circles around its initial position
+3. For 1 minute, move randomly within a cubic volume that is 1m on each side, centered 1m above its initial position
 
 Pressing the `L` key on the keyboard while the script is running will stop the program and attempt to calmly land the drone. 
 
