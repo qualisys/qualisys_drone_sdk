@@ -23,7 +23,12 @@ We recommend the following settings:
 
 ## Software Environment
 
-    pip install qtm cflib
+The programming language we prefer for drone scripting is [Python](https://www.python.org/), which should be installed properly in your computer.
+
+Additionally, the following Python packages are required (install them using [pip](https://pypi.org/project/pip/)):
+
+- [qtm](https://github.com/qualisys/qualisys_python_sdk)
+- For Crazyflie: [cflib](https://github.com/bitcraze/crazyflie-lib-python)
 
 ## Bitcraze Crazyflie
 
