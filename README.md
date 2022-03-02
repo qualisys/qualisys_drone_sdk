@@ -40,7 +40,7 @@ Additionally, the following Python packages are required (install them using [pi
 
 We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects:
 
-### crazyflie_solo.py
+### [crazyflie_solo.py](crazyflie_solo.py)
 
 This script demonstrates a basic scenario using a Qualisys motion capture system to control the flight path of a Crazyflie.
 
@@ -54,13 +54,13 @@ The script commands the Crazyflie to:
 
 Pressing the `L` key on the keyboard while the script is running will stop the program and attempt to calmly land the drone. 
 
-### crazyflie_interactive.py
+### [crazyflie_interactive.py](crazyflie_interactive.py)
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
 
 # Bitcraze Crazyflie Swarm
 
-### crazyflie_dual.py
+### [crazyflie_dual.py](crazyflie_dual.py)
 
 ## DJI Tello
 
