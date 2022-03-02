@@ -29,6 +29,18 @@ We recommend the following settings:
 
 For takeoff, the drone should be placed on the floor with its front pointing in the positive x-direction of the QTM coordinate system.
 
+We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects:
+
+### crazyflie_solo.py
+
+### crazyflie_interactive.py
+
 ## Bitcraze Crazyflie Swarm
 
+### crazyflie_dual.py
+
 ## DJI Tello
+
+### tello_solo.py
+
+### tello_interactive.py
