@@ -15,6 +15,17 @@ quadkit is an entry point for students, researchers, engineers, artists, and des
 
 # Setup
 
+## Software Environment and Drivers
+
+quadkit has been designed and tested on Windows, and may or may not work on other operating systems.
+
+[Python](https://www.python.org/) should be installed properly on your computer.
+
+The following Python packages are required (install them using [pip](https://pypi.org/project/pip/)):
+
+- [qtm](https://github.com/qualisys/qualisys_python_sdk)
+- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie)
+
 ## QTM Settings
 
 We recommend the following settings:
@@ -25,24 +36,21 @@ We recommend the following settings:
   - Third Rotation Axis: `X`, Positive Rotation: `Clockwise`, Name: `Roll`, Angle Range: `-180 to 180 deg.`
 - Capture Rate: 100 Hz
 
-## Software Environment
-
-The programming language we prefer for drone scripting is [Python](https://www.python.org/), which should be installed properly in your computer.
-
-Additionally, the following Python packages are required (install them using [pip](https://pypi.org/project/pip/)):
-
-- [qtm](https://github.com/qualisys/qualisys_python_sdk)
-- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie)
-
 ---
 
 # Drone Platforms and Starter Scripts
 
 ## Bitcraze Crazyflie
 
-**Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
+We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects.
 
-We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects:
+### Setup
+
+- Install drivers for both Crazyflie and the Crazyradio dongle using [Zadig](https://zadig.akeo.ie/) following [Bitcraze's instructions](https://www.bitcraze.io/documentation/repository/crazyradio-firmware/master/building/usbwindows/).
+
+- **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
+
+- If you intend to fly multiple drones, configure the drones' radio addresses using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address) or over USB (requires Crazyflie driver).
 
 ### [crazyflie_solo.py](crazyflie_solo.py)
 
@@ -56,7 +64,7 @@ The script commands the Crazyflie to:
 2. Move out 50cm in the X direction and complete 2 circles around its initial position
 3. For 1 minute, move randomly within a cubic volume that is 1m on each side, centered 1m above its initial position
 
-Pressing the `L` key on the keyboard while the script is running will stop the program and attempt to calmly land the drone. 
+Press `Esc` to stop the program and attempt to calmly land the drone. 
 
 ### [crazyflie_interactive.py](crazyflie_interactive.py)
 
