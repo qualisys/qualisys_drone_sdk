@@ -17,3 +17,7 @@ class World:
         self.origin = origin
         self.speed = speed
         self.tolerance = tolerance
+
+    def set_origin_xy(self, pose):
+        self.origin.x = pose.x
+        self.origin.y = pose.y

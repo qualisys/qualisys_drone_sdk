@@ -1,5 +1,9 @@
+from qfly import utils
+
+
 class Pose:
     """Holds pose data with euler angles and/or rotation matrix"""
+
     def __init__(self, x, y, z, roll=None, pitch=None, yaw=None, rotmatrix=None):
         self.x = x
         self.y = y
@@ -19,7 +23,7 @@ class Pose:
         return cls(qtm_6d[0][0] / 1000,
                    qtm_6d[0][1] / 1000,
                    qtm_6d[0][2] / 1000,
-                   rotmatrix = cf_rot)
+                   rotmatrix=cf_rot)
 
     @classmethod
     def from_qtm_6deuler(cls, qtm_6deuler):
@@ -27,12 +31,21 @@ class Pose:
         return cls(qtm_6deuler[0][0] / 1000,
                    qtm_6deuler[0][1] / 1000,
                    qtm_6deuler[0][2] / 1000,
-                   roll  = qtm_6deuler[1][2],
-                   pitch = qtm_6deuler[1][1],
-                   yaw   = qtm_6deuler[1][0])
+                   roll=qtm_6deuler[1][2],
+                   pitch=qtm_6deuler[1][1],
+                   yaw=qtm_6deuler[1][0])
+
+    def clamp(self, world):
+        """Keep within limits specified by the world parameter"""
+        self.x = max(world.origin.x - world.expanse + world.buffer,
+                     min(self.x, world.origin.x + world.expanse - world.buffer))
+        self.y = max(world.origin.y - world.expanse + world.buffer,
+                     min(self.y, world.origin.y + world.expanse - world.buffer))
+        self.z = max(world.origin.z - world.expanse + world.buffer,
+                     min(self.z, world.origin.z + world.expanse - world.buffer))
 
     def distance_to(self, other_point):
-        return sqrt(
+        return utils.sqrt(
             (self.x - other_point.x) ** 2 +
             (self.y - other_point.y) ** 2 +
             (self.z - other_point.z) ** 2)

@@ -8,14 +8,14 @@
 
 ---
 
-# Box Contents
+<!-- # Box Contents
 
 - 2x Bitcraze Crazyflie Drones
 - 1x Bitcraze Antenna
 - 2x Bitcraze Spare Parts Bundle
 - 2x Qualisys x Bitcraze Active Marker Deck
 
----
+--- -->
 
 # Setup
 
