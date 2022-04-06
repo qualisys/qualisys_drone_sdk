@@ -21,26 +21,14 @@
 
 ## Software Environment and Drivers
 
-quadkit has been designed and tested on Windows, and may or may not work on other operating systems.
+quadkit has been designed and tested on Windows. It may or may not work on other operating systems.
 
 [Python](https://www.python.org/) should be installed properly on your computer.
 
 The following Python packages are required (install them using [pip](https://pypi.org/project/pip/)):
 
-- [qtm](https://github.com/qualisys/qualisys_python_sdk)
-- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie)
-
-## QTM Settings
-
-We recommend the following settings:
-
-- Custom Euler angle definitions:
-  - First Rotation Axis: `Z`, Positive Rotation: `Clockwise`, Name: `Yaw`, Angle Range: `-180 to 180 deg.`
-  - Second Rotation Axis: `Y`, Positive Rotation: `Counterclockwise`, Name: `Pitch`
-  - Third Rotation Axis: `X`, Positive Rotation: `Clockwise`, Name: `Roll`, Angle Range: `-180 to 180 deg.`
-- Capture Rate: 100 Hz
-
----
+- [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK)
+- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones)
 
 # Drone Platforms and Starter Scripts
 
@@ -48,17 +36,26 @@ We recommend the following settings:
 
 We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects.
 
+We recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck) for tracking the drones. Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. In most situations, active markers achieve better results.
+
 ### Setup
 
 - Install drivers for both Crazyflie and the Crazyradio dongle using [Zadig](https://zadig.akeo.ie/) following [Bitcraze's instructions](https://www.bitcraze.io/documentation/repository/crazyradio-firmware/master/building/usbwindows/).
 
 - **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
 
-- If you intend to fly multiple drones, configure the drones' radio addresses using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address) or over USB (requires Crazyflie driver).
+- If you intend to fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
+
+- In QTM, we recommend the following settings:
+  - Custom Euler angle definitions:
+    - First Rotation Axis: `Z`, Positive Rotation: `Clockwise`, Name: `Yaw`, Angle Range: `-180 to 180 deg.`
+    - Second Rotation Axis: `Y`, Positive Rotation: `Counterclockwise`, Name: `Pitch`
+    - Third Rotation Axis: `X`, Positive Rotation: `Clockwise`, Name: `Roll`, Angle Range: `-180 to 180 deg.`
+  - Capture Rate: 100 Hz
 
 ### [crazyflie_solo.py](crazyflie_solo.py)
 
-This script demonstrates a basic scenario using a Qualisys motion capture system to control the flight path of a Crazyflie.
+This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie.
 
 It also runs through the electronic, mechanical, and communications systems of the Crazyflie. It's a good idea to run this script once to check that everything is in order, before executing more complex behavior.
 
@@ -73,6 +70,10 @@ Press `Esc` to stop the program and attempt to calmly land the drone.
 ### [crazyflie_interactive.py](crazyflie_interactive.py)
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
+
+In addition to the drone, it requires a rigid body 
+
+Press `Esc` to stop the program and attempt to calmly land the drone. 
 
 ### [crazyflie_dual.py](crazyflie_dual.py)
 

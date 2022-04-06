@@ -12,11 +12,12 @@ setup(
     ),
     author="Mehmet Aydin Baytas",
     author_email="support@qualisys.com",
+    install_requires=['qtm'],
     license="GPL",
     packages=["qfly"],
     classifiers=[
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.5",

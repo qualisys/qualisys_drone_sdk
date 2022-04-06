@@ -1,5 +1,4 @@
 import math
-from random import uniform
 import time
 
 from cflib.crazyflie.log import LogConfig
@@ -103,17 +102,6 @@ class QualisysCrazyflie():
             self.cf.commander.send_hover_setpoint(0, 0, 0, float(z) / 10.0)
             time.sleep(0.15)
         self.cf.commander.send_stop_setpoint()
-
-    def random_step(self, max_step=0.05):
-        """
-        Executes a 3D random walk step.
-        """
-        _pose = self.pose
-        target = qfly.Pose(_pose.x + uniform(-1, 1) * max_step,
-                           _pose.y + uniform(-1, 1) * max_step,
-                           _pose.z + uniform(-1, 1) * max_step,
-                           _pose.yaw + uniform(-1, 1) * max_step)
-        self.safe_position_setpoint(target)
 
     def safe_position_setpoint(self, target):
         """

@@ -19,8 +19,10 @@
 #  along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-import time
 import pynput
+from random import uniform
+import time
+
 
 from qfly import Pose, QualisysCrazyflie, World
 import qfly
@@ -83,7 +85,13 @@ with QualisysCrazyflie(cf_body_name,
 
         # 3) For 1 minute, move randomly within a cubic volume that is 1m on each side, centered 1m above its initial position
         if 60 < dt < 120:
-            qcf.random_walk()
+            max_step=0.05
+            _pose = qcf.pose
+            target = qfly.Pose(_pose.x + uniform(-1, 1) * max_step,
+                            _pose.y + uniform(-1, 1) * max_step,
+                            _pose.z + uniform(-1, 1) * max_step,
+                            _pose.yaw + uniform(-1, 1) * max_step)
+            qcf.safe_position_setpoint(target)
 
     # Land calmly
     qcf.land()
