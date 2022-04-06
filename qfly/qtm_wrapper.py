@@ -42,7 +42,7 @@ class QtmWrapper(Thread):
         self.connection = await qtm.connect(self.qtm_ip)
 
         if self.connection == None:
-            print("QTM connection error! Terminating...")
+            print("Could not connect to QTM! Terminating...")
             os._exit(1)
 
         params_xml = await self.connection.get_parameters(parameters=['6d'])
@@ -87,15 +87,11 @@ class QtmWrapper(Thread):
         # Get 6DOF data for Crazyflie
         cf_6d = component_6d[self.bodyToIdx[self.cf_body_name]]
         # Store in temp until validity is checked
-        _cf_pose = Pose.from_qtm_6d(cf_6d)
-        # Check validity
-        if _cf_pose.is_valid():
-            # Update global var for pose
-            cf_pose = _cf_pose
-            # Stream full pose to Crazyflie
+        cf_pose = Pose.from_qtm_6d(cf_6d)
+        # Check validity and stream to Crazyflie
+        if cf_pose.is_valid():
             if self.on_cf_pose:
-                self.on_cf_pose(
-                    [cf_pose.x, cf_pose.y, cf_pose.z, cf_pose.rotmatrix])
+                self.on_cf_pose(cf_pose)
                 self.tracking_loss = 0
         else:
             self.tracking_loss += 1
