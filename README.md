@@ -71,13 +71,17 @@ Press `Esc` to stop the program and attempt to calmly land the drone.
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
 
-In addition to the drone, it requires a rigid body 
+In addition to the drone, it requires a "controller" rigid body configured in QTM. We recommend the [Qualisys Traqr range](https://www.qualisys.com/accessories/traqr/).
 
 Press `Esc` to stop the program and attempt to calmly land the drone. 
 
 ### [crazyflie_dual.py](crazyflie_dual.py)
 
 This script demonstrates a semi-choreographed "swarm" flight with two Crazyflie drones.
+
+...
+
+Press `Esc` to stop the program and attempt to calmly land the drones. 
 
 ## DJI Tello
 
