@@ -21,20 +21,20 @@
 
 ## Software Environment and Drivers
 
-quadkit has been designed and tested on Windows. It may or may not work on other operating systems.
+qfly has been designed and tested on Windows. It may or may not work on other operating systems.
 
-[Python](https://www.python.org/) should be installed properly on your computer.
+[Python](https://www.python.org/) version 3.10 or equivalent should be installed properly on your computer.
 
 The following Python packages are required (install them using [pip](https://pypi.org/project/pip/)):
 
-- [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK)
-- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones)
+- [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
+- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones) 0.1.18 or equivalent
 
-# Drone Platforms and Starter Scripts
+# Drone Platforms and Example Scripts
 
 ## Bitcraze Crazyflie
 
-We provide two scripts that demonstrate the Crazyflie integration, which can be used as a starting point for your own projects.
+We provide 3 example scripts for the Crazyflie integration, which can be used as a starting point for your own projects.
 
 We recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck) for tracking the drones. Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. In most situations, active markers achieve better results.
 
@@ -44,28 +44,30 @@ We recommend the [Active Marker Deck](https://store.bitcraze.io/collections/deck
 
 - **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
 
-- If you intend to fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
+- To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
 
-- In QTM, we recommend the following settings:
-  - Custom Euler angle definitions:
-    - First Rotation Axis: `Z`, Positive Rotation: `Clockwise`, Name: `Yaw`, Angle Range: `-180 to 180 deg.`
-    - Second Rotation Axis: `Y`, Positive Rotation: `Counterclockwise`, Name: `Pitch`
-    - Third Rotation Axis: `X`, Positive Rotation: `Clockwise`, Name: `Roll`, Angle Range: `-180 to 180 deg.`
-  - Capture Rate: 100 Hz
+- Everything has been tested at a capture rate of 100 Hz.
 
 ### [crazyflie_solo.py](crazyflie_solo.py)
 
-This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie.
+This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
 
-It also runs through the electronic, mechanical, and communications systems of the Crazyflie. It's a good idea to run this script once to check that everything is in order, before executing more complex behavior.
-
-The script commands the Crazyflie to:
-
-1. Take off and hover 1m above its initial position for 30 seconds
-2. Move out 50cm in the X direction and complete 2 circles around its initial position
-3. For 1 minute, move randomly within a cubic volume that is 1m on each side, centered 1m above its initial position
+1. Take off and hover at the center of its airspace
+2. Move out half the radius of the airspace and circle around the Z axis
+3. Come back to center, move out half the radius of the airspace and circle around the Y axis
+4. Come back to center, move out half the radius of the airspace and circle around the X axis
+5. Come back to center, execute a 3D random walk
+6. Come back to center, land carefully
 
 Press `Esc` to stop the program and attempt to calmly land the drone. 
+
+### [crazyflie_multi.py](crazyflie_dual.py)
+
+This script demonstrates a semi-choreographed "swarm" flight with two Crazyflie drones.
+
+The drones execute movements that are very similar to the solo script, but with multiple drones together.
+
+Press `Esc` to stop the program and attempt to calmly land the drones. 
 
 ### [crazyflie_interactive.py](crazyflie_interactive.py)
 
@@ -75,13 +77,6 @@ In addition to the drone, it requires a "controller" rigid body configured in QT
 
 Press `Esc` to stop the program and attempt to calmly land the drone. 
 
-### [crazyflie_dual.py](crazyflie_dual.py)
-
-This script demonstrates a semi-choreographed "swarm" flight with two Crazyflie drones.
-
-...
-
-Press `Esc` to stop the program and attempt to calmly land the drones. 
 
 ## DJI Tello
 
