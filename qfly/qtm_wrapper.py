@@ -16,17 +16,26 @@ class QtmWrapper(Thread):
     ----------
     body : string
         Name of 6DOF rigid body being tracked
-    qtm_ip : string
-        IP address of QTM instance
     on_pose: function
         Callback to trigger when pose packet is received
-
-    Methods
-    -------
-    TBD
+    qtm_ip : string
+        IP address of QTM instance
     """
 
     def __init__(self, body, on_pose, qtm_ip="127.0.0.1"):
+        """
+        Construct QtmWrapper object
+
+        Parameters
+        ----------
+        body : string
+            Name of 6DOF rigid body being tracked
+        on_pose : function(Pose)
+            Callback to trigger when pose packet is received
+        qtm_ip : string
+            IP address of QTM instance
+        """
+
         Thread.__init__(self)
 
         self.body = body
@@ -41,20 +50,25 @@ class QtmWrapper(Thread):
 
         self.start()
 
-    def close(self):
-        self._stay_open = False
-        self.join()
-
     def run(self):
+        """
+        Run QTM wrapper coroutine
+        """
         asyncio.run(self._life_cycle())
 
     async def _life_cycle(self):
+        """
+        QTM wrapper coroutine
+        """
         await self._connect()
         while(self._stay_open):
             await asyncio.sleep(1)
         await self._close()
 
     async def _connect(self):
+        """
+        Connect to QTM machine
+        """
         # Establish connection
         print('[QTM] Connecting to QTM at ' + self.qtm_ip)
         self._connection = await qtm.connect(self.qtm_ip)
@@ -106,7 +120,7 @@ class QtmWrapper(Thread):
         body_6d = component_6d[self._body_idx]
         # Create Pose object from 6D data
         pose = Pose.from_qtm_6d(body_6d)
-        # Check validity and stream to Crazyflie
+        # Check validity and pass on
         if pose.is_valid():
             self.on_pose(pose)
             self.tracking_loss = 0
@@ -114,5 +128,15 @@ class QtmWrapper(Thread):
             self.tracking_loss += 1
 
     async def _close(self):
+        """
+        End lifecycle by disconnecting from QTM machine
+        """
         await self._connection.stream_frames_stop()
         self._connection.disconnect()
+
+    def close(self):
+        """
+        Stop QTM wrapper thread.
+        """
+        self._stay_open = False
+        self.join()

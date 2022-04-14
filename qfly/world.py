@@ -2,7 +2,8 @@ from qfly import Pose
 
 
 class World:
-    """Hold safety-critical information about the physical world
+    """
+    Hold safety-critical information about the physical world
 
     Attributes
     ----------
@@ -16,11 +17,6 @@ class World:
         max allowed airspeed (unit: m/s)
     tracking_tolerance : int
         max allowed mocap frame loss (unit: frames)
-
-    Methods
-    -------
-    set_origin(pose):
-        changes x, y, z coordinates of origin
     """
 
     def __init__(self,
@@ -30,6 +26,9 @@ class World:
                  speed_limit=0.4,  # in m/s
                  tracking_tolerance=150  # in frames
                  ):
+        """
+        TBD
+        """
 
         self.origin = origin
         self.expanse = expanse
@@ -38,4 +37,7 @@ class World:
         self.tracking_tolerance = tracking_tolerance
 
     def set_origin_xy(self, pose):
+        """
+        TBD
+        """
         self.origin = pose
