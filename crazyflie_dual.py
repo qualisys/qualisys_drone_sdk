@@ -88,5 +88,5 @@ with (QualisysCrazyflie(cf_body_names[0], cf_uris[0], world) as qcf_0,
         # centered 1m above its initial position
 
     # Land calmly
-    qcf_0.land()
-    qcf_1.land()
+    qcf_0.land_in_place()
+    qcf_1.land_in_place()

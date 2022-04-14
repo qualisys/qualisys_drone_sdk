@@ -25,24 +25,14 @@ class Pose:
                    qtm_6d[0][2] / 1000,
                    rotmatrix=cf_rot)
 
-    @classmethod
-    def from_qtm_6deuler(cls, qtm_6deuler):
-        """Build pose from rigid body data in QTM 6deuler component"""
-        return cls(qtm_6deuler[0][0] / 1000,
-                   qtm_6deuler[0][1] / 1000,
-                   qtm_6deuler[0][2] / 1000,
-                   roll=qtm_6deuler[1][2],
-                   pitch=qtm_6deuler[1][1],
-                   yaw=qtm_6deuler[1][0])
-
     def clamp(self, world):
         """Keep within limits specified by the world parameter"""
-        self.x = max(world.origin.x - world.expanse + world.buffer,
-                     min(self.x, world.origin.x + world.expanse - world.buffer))
-        self.y = max(world.origin.y - world.expanse + world.buffer,
-                     min(self.y, world.origin.y + world.expanse - world.buffer))
-        self.z = max(world.origin.z - world.expanse + world.buffer,
-                     min(self.z, world.origin.z + world.expanse - world.buffer))
+        self.x = max(world.origin.x - world.expanse + world.padding,
+                     min(self.x, world.origin.x + world.expanse - world.padding))
+        self.y = max(world.origin.y - world.expanse + world.padding,
+                     min(self.y, world.origin.y + world.expanse - world.padding))
+        self.z = max(0,
+                     min(self.z, world.origin.z + (2 * world.expanse) - world.padding))
 
     def distance_to(self, other_point):
         return utils.sqrt(
@@ -55,5 +45,6 @@ class Pose:
         return self.x == self.x and self.y == self.y and self.z == self.z
 
     def __str__(self):
-        return "x: {:6.2f} y: {:6.2f} z: {:6.2f} Roll: {:6.2f} Pitch: {:6.2f} Yaw: {:6.2f}".format(
-            self.x, self.y, self.z, self.roll, self.pitch, self.yaw)
+        # return "x: {:6.2f} y: {:6.2f} z: {:6.2f} Roll: {:6.2f} Pitch: {:6.2f} Yaw: {:6.2f}".format(
+            # self.x, self.y, self.z, self.roll, self.pitch, self.yaw)
+        return f'x: {self.x} y: {self.y} z: {self.z} yaw: {self.yaw}'
