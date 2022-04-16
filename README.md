@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/1661078/163686493-199c6ffb-0f5e-4e9b-be47-7b0ff5e60560.png)
+![image](https://user-images.githubusercontent.com/1661078/163686559-87f00b77-9b04-444e-9a92-92bcfabddd26.png)
 
 # Qualisys Drone SDK
 
