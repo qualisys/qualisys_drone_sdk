@@ -15,7 +15,8 @@ from qfly.utils import sqrt
 
 
 class QualisysCrazyflie(Thread):
-    """Wrapper for Crazyflie drone to fly with Qualisys motion capture systems
+    """
+    Wrapper for Crazyflie drone to fly with Qualisys motion capture systems
 
     Attributes
     ----------
@@ -113,7 +114,8 @@ class QualisysCrazyflie(Thread):
 
         Parameters
         ----------
-        world (World): (Optional) World object defining airspace rules.
+        world : World (optional) 
+            World object defining airspace rules.
             Defaults to object's own world if not supplied.
         """
         if world is None:
@@ -172,7 +174,7 @@ class QualisysCrazyflie(Thread):
         Parameters
         ----------
         target : object
-            An object that has a Pose attribute
+            An object that has a pose attribute
         z_offset : float (optional)
             Vertical offset between target and landing start pose. (unit: m, default: 0.5)
         decrement : int (optional)
@@ -180,8 +182,16 @@ class QualisysCrazyflie(Thread):
         timestep : float (optional
             Time between target keyframes. (unit: s, default: 0.15)
         """
-        init_pose = qfly.Pose(target.pose.x, target.pose.y,
-                              target.pose.z + z_offset)
+        try:
+            init_pose = qfly.Pose(target.pose.x,
+                                  target.pose.y,
+                                  target.pose.z + z_offset)
+        except AttributeError:
+            print(f'''[{self.cf_body_name}@{self.cf_uri}] !!! ERROR !!!
+                Landing target has no pose attribute! Landing in place instead!''')
+            self.land_in_place()
+            return
+
         z_cm = int(init_pose.z * 100)
 
         print(
@@ -206,7 +216,7 @@ class QualisysCrazyflie(Thread):
         target : Pose
             Pose object bearting target coordinate and yaw.
             Yaw defaults to 0 if not supplied.
-        world : World (optional
+        world : World (optional)
             World object defining airspace rules.
             Defaults to object's own world if not supplied.
         """

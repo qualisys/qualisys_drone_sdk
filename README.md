@@ -23,12 +23,12 @@
 
 qfly has been designed and tested on Windows. It may or may not work on other operating systems.
 
-[Python](https://www.python.org/) version 3.10 or equivalent should be installed properly on your computer.
+Requirements:
 
-The following Python packages are required (install them using [pip](https://pypi.org/project/pip/)):
-
-- [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
-- [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones) 0.1.18 or equivalent
+- [Python](https://www.python.org/) 3.10 or equivalent
+- Python packages (install using [pip](https://pypi.org/project/pip/)):
+  - [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
+  - [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones) 0.1.18 or equivalent
 
 # Drone Platforms and Example Scripts
 
@@ -36,17 +36,15 @@ The following Python packages are required (install them using [pip](https://pyp
 
 We provide 3 example scripts for the Crazyflie integration, which can be used as a starting point for your own projects.
 
-We recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck) for tracking the drones. Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. In most situations, active markers achieve better results.
+For tracking hardware, we recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck). Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. In most situations, active markers achieve better results.
 
 ### Setup
 
 - Install drivers for both Crazyflie and the Crazyradio dongle using [Zadig](https://zadig.akeo.ie/) following [Bitcraze's instructions](https://www.bitcraze.io/documentation/repository/crazyradio-firmware/master/building/usbwindows/).
 
-- **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
-
 - To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
 
-- Everything has been tested at a capture rate of 100 Hz.
+- **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
 
 ### [crazyflie_solo.py](crazyflie_solo.py)
 

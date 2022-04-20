@@ -10,14 +10,22 @@ from qfly import Pose
 
 
 class QtmWrapper(Thread):
-    """Run QTM connection on its own thread.
+    """
+    Wrapper for opening and running an asynchronous QTM connection
+    that receives and responds to real time data packets.
+    
+    Designed for real time interactive applications, e.g. drone control.
+    Each entity being tracked should:
+    1) instantiate its own QtmWrapper,
+    2) be defined as a rigid body in QTM,
+    3) pass a callback function to its QtmWrapper which responds to pose data.
 
     Attributes
     ----------
     body : string
-        Name of 6DOF rigid body being tracked
+        name of rigid body being tracked
     on_pose: function
-        Callback to trigger when pose packet is received
+        callback to trigger when packet with pose is received
     qtm_ip : string
         IP address of QTM instance
     """
@@ -104,8 +112,10 @@ class QtmWrapper(Thread):
         """
         Process 6D packet stream into Pose object and pass on
 
-        Parameters:
-            packet (QRTPacket): Incoming packet from QTM
+        Parameters
+        ----------
+        packet : QRTPacket
+            Incoming packet from QTM
         """
         # Extract 6D component from packet
         header, component_6d = packet.get_6d()
