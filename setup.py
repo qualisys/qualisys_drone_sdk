@@ -13,7 +13,7 @@ setup(
     author="Mehmet Aydin Baytas",
     author_email="support@qualisys.com",
     install_requires=['qtm'],
-    license="GPL",
+    license="MIT",
     packages=["qfly"],
     classifiers=[
         "Intended Audience :: Developers",
@@ -26,6 +26,6 @@ setup(
         "Topic :: Scientific/Engineering",
         "Topic :: Utilities",
     ],
-    python_requires=">=3.10",
+    python_requires=">=3.9",
     zip_safe=True,
 )

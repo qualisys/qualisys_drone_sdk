@@ -6,7 +6,7 @@ class Pose:
     Full pose data with euler angles or rotation matrix.
     """
 
-    def __init__(self, x, y, z):
+    def __init__(self, x, y, z, roll=None, pitch=None, yaw=None, rotmatrix=None):
         self.x = x
         self.y = y
         self.z = z
