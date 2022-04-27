@@ -6,8 +6,9 @@ from qfly import Pose, QualisysCrazyflie, World, utils
 
 
 # SETTINGS
-cf_body_name = 'cf'  # QTM rigid body name
-cf_uri = 'radio://0/80/1M/E7E7E7E7E7'  # Crazyflie address
+cf_body_name = 'E7E7E7E702'  # QTM rigid body name
+cf_uri = 'radio://0/80/1M/E7E7E7E702'  # Crazyflie address
+cf_marker_ids = [21, 22, 23, 24]
 
 # Watch key presses with a global variable
 last_key_pressed = None
@@ -34,7 +35,8 @@ world = World()
 # Prepare for liftoff
 with QualisysCrazyflie(cf_body_name,
                        cf_uri,
-                       world) as qcf:
+                       world,
+                       marker_ids=cf_marker_ids) as qcf:
 
     # Let there be time
     t = time()
@@ -138,7 +140,7 @@ with QualisysCrazyflie(cf_body_name,
         if dt < 40:
             print(f'[t={int(dt)}] Maneuvering - Random...')
             # Set target
-            step_size = 0.2 # in m
+            step_size = 0.2  # in m
             _pose = qcf.pose
             target = Pose(_pose.x + random.randint(-1, 1) * step_size,
                           _pose.y + random.randint(-1, 1) * step_size,

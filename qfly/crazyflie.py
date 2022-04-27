@@ -31,7 +31,9 @@ class QualisysCrazyflie(Thread):
     def __init__(self,
                  cf_body_name,
                  cf_uri,
-                 world):
+                 world,
+                 qtm_ip="127.0.0.1",
+                 marker_ids=[1, 2, 3, 4]):
         """
         Construct QualisysCrazyflie object
 
@@ -43,23 +45,27 @@ class QualisysCrazyflie(Thread):
             Crazyflie radio address
         world : World
             World object defining airspace rules
+        qtm_ip : str
+            IP address of QTM host.
+        marker_ids : [int]
+            ID numbers to be assigned to active markers
+            in order of front, right, back, left
         """
 
         print(f'[{cf_body_name}@{cf_uri}] Initializing...')
-
-        #  marker_ids=[101, 102, 103, 104]
 
         cflib.crtp.init_drivers()
 
         self.cf_body_name = cf_body_name
         self.cf_uri = cf_uri
         self.world = world
-        # self.marker_ids = marker_ids
+        self.marker_ids = marker_ids
 
         self.scf = None
         self.cf = None
         self.pose = None
         self.qtm = None
+        self.qtm_ip = qtm_ip
 
         print(f'[{self.cf_body_name}@{self.cf_uri}] Connecting...')
 
@@ -73,23 +79,24 @@ class QualisysCrazyflie(Thread):
 
         print(f'[{self.cf_body_name}@{self.cf_uri}] Connected...')
 
-        print(
-            f'[{self.cf_body_name}@{self.cf_uri}] Connecting to QTM at {self.qtm.qtm_ip}...')
-
         # Slow down
         self.set_speed_limit(self.world.speed_limit)
 
-        # # Set active marker IDs
-        # print(
-        #     f'[{self.cf_body_name}@{self.cf_uri}] Active marker IDs: {self.marker_ids}')
-        # self.cf.param.set_value('activeMarker.back', self.marker_ids[0])
-        # self.cf.param.set_value('activeMarker.front', self.marker_ids[1])
-        # self.cf.param.set_value('activeMarker.left', self.marker_ids[2])
-        # self.cf.param.set_value('activeMarker.right', self.marker_ids[3])
+        # Set active marker IDs
+        print(
+            f'[{self.cf_body_name}@{self.cf_uri}] Setting active marker IDs: {self.marker_ids}')
+        self.cf.param.set_value('activeMarker.front', self.marker_ids[0])
+        self.cf.param.set_value('activeMarker.right', self.marker_ids[1])
+        self.cf.param.set_value('activeMarker.back', self.marker_ids[2])
+        self.cf.param.set_value('activeMarker.left', self.marker_ids[3])
 
         self.qtm = qfly.QtmWrapper(
             self.cf_body_name,
-            lambda pose: self._set_pose(pose))
+            lambda pose: self._set_pose(pose),
+            qtm_ip=self.qtm_ip)
+
+        print(
+            f'[{self.cf_body_name}@{self.cf_uri}] Connecting to QTM at {self.qtm.qtm_ip}...')
 
         self.setup()
 
@@ -140,6 +147,32 @@ class QualisysCrazyflie(Thread):
             return False
         else:
             return True
+
+    def descend(self, ground_z=0, decrement=5):
+        """
+        Execute one step of a gentle landing sequence directly downward from current position.
+
+        Parameters
+        ----------
+        ground_z : float (optional) 
+            Height to land at. (unit: m)
+        decrement : int (optional)
+            Distance between target keyframes. Defaults to 3. (unit: cm)
+        """
+        init_pose = self.pose
+        _z_cm = int(init_pose.z * 100)
+
+        target = qfly.Pose(init_pose.x,
+                           init_pose.y,
+                           float((_z_cm - decrement) / 100.0))
+        
+        # Engage
+        if target.z < 0:
+            self.cf.commander.send_stop_setpoint()
+        else:
+            print(
+            f'[{self.cf_body_name}@{self.cf_uri}] Descending from {_z_cm} cm...')
+            self.safe_position_setpoint(target)
 
     def land_in_place(self, ground_z=0, decrement=3, timestep=0.15):
         """
