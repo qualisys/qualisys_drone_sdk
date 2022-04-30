@@ -34,8 +34,6 @@ Requirements:
 
 ## Bitcraze Crazyflie
 
-We provide 3 example scripts for the Crazyflie integration, which can be used as a starting point for your own projects.
-
 For tracking hardware, we recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck). Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. In most situations, active markers achieve better results.
 
 ### Setup
@@ -46,20 +44,20 @@ For tracking hardware, we recommend the [Active Marker Deck](https://store.bitcr
 
 - **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
 
-### [crazyflie_solo.py](crazyflie_solo.py)
+### [crazyflie_solo.py](examples/crazyflie_solo.py)
 
 This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
 
 1. Take off and hover at the center of its airspace
-2. Move out half the radius of the airspace and circle around the Z axis
-3. Come back to center, move out half the radius of the airspace and circle around the Y axis
-4. Come back to center, move out half the radius of the airspace and circle around the X axis
-5. Come back to center, execute a 3D random walk
+2. Circle around the Z axis
+3. Circle around the Y axis
+4. Circle around the X axis
+5. Execute a 3D random walk within safe airspace
 6. Come back to center, land carefully
 
 Press `Esc` to stop the program and attempt to calmly land the drone. 
 
-### [crazyflie_multi.py](crazyflie_dual.py)
+### [crazyflie_multi.py](examples/crazyflie_multi_1.py)
 
 This script demonstrates a semi-choreographed "swarm" flight with two Crazyflie drones.
 
@@ -67,13 +65,15 @@ The drones execute movements that are very similar to the solo script, but with 
 
 Press `Esc` to stop the program and attempt to calmly land the drones. 
 
-### [crazyflie_interactive.py](crazyflie_interactive.py)
+### [crazyflie_interactive.py](examples/crazyflie_interactive.py)
 
-This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
+In progress.
+
+<!-- This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
 
 In addition to the drone, it requires a "controller" rigid body configured in QTM. We recommend the [Qualisys Traqr range](https://www.qualisys.com/accessories/traqr/).
 
-Press `Esc` to stop the program and attempt to calmly land the drone. 
+Press `Esc` to stop the program and attempt to calmly land the drone.  -->
 
 
 ## DJI Tello
