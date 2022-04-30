@@ -73,9 +73,11 @@ class QualisysCrazyflie(Thread):
         """
         Enter QualisysCrazyflie context
         """
-        self.scf = SyncCrazyflie(self.cf_uri)
+        self.cf = Crazyflie(ro_cache=None, rw_cache=None)
+        self.scf = SyncCrazyflie(self.cf_uri, cf=self.cf)
+        # self.scf = SyncCrazyflie(self.cf_uri)
         self.scf.open_link()
-        self.cf = self.scf.cf
+        # self.cf = self.scf.cf
 
         print(f'[{self.cf_body_name}@{self.cf_uri}] Connected...')
 
@@ -147,16 +149,17 @@ class QualisysCrazyflie(Thread):
             return False
         else:
             return True
+    
 
-    def descend(self, ground_z=0, decrement=5):
+    def ascend(self, z_ceiling=1, step=5):
         """
-        Execute one step of a gentle landing sequence directly downward from current position.
+        Execute one step of a gentle ascension sequence directly upward from current position.
 
         Parameters
         ----------
-        ground_z : float (optional) 
-            Height to land at. (unit: m)
-        decrement : int (optional)
+        z_ceiling : float (optional) 
+            Height to ascend to. (unit: m)
+        step : int (optional)
             Distance between target keyframes. Defaults to 3. (unit: cm)
         """
         init_pose = self.pose
@@ -164,18 +167,40 @@ class QualisysCrazyflie(Thread):
 
         target = qfly.Pose(init_pose.x,
                            init_pose.y,
-                           float((_z_cm - decrement) / 100.0))
+                           min(z_ceiling, float((_z_cm + step) / 100.0)))
+        print(
+        f'[{self.cf_body_name}@{self.cf_uri}] Ascending from {_z_cm} cm to {z_ceiling}...')
+        self.safe_position_setpoint(target)
+
+    def descend(self, z_floor=0, step=5):
+        """
+        Execute one step of a gentle descension sequence directly downward from current position.
+
+        Parameters
+        ----------
+        z_floor : float (optional) 
+            Height to descend to. (unit: m)
+        step : int (optional)
+            Distance between target keyframes. Defaults to 3. (unit: cm)
+        """
+        init_pose = self.pose
+        _z_cm = int(init_pose.z * 100)
+
+        target = qfly.Pose(init_pose.x,
+                           init_pose.y,
+                           float((_z_cm - step) / 100.0))
         
         # Engage
-        if target.z < 0:
+        if target.z < z_floor:
             self.cf.commander.send_stop_setpoint()
         else:
             print(
-            f'[{self.cf_body_name}@{self.cf_uri}] Descending from {_z_cm} cm...')
+            f'[{self.cf_body_name}@{self.cf_uri}] Descending from {_z_cm} cm to {z_floor} cm...')
             self.safe_position_setpoint(target)
 
     def land_in_place(self, ground_z=0, decrement=3, timestep=0.15):
         """
+        FIXME: DO NOT USE. NOT SUITABLE FOR MULTIPLE DRONES.
         Execute a gentle landing sequence directly downward from current position.
 
         Parameters
@@ -202,6 +227,7 @@ class QualisysCrazyflie(Thread):
 
     def land_to_moving_target(self, target, z_offset=0.5, decrement=3, timestep=0.15):
         """
+        FIXME: DO NOT USE. NOT SUITABLE FOR MULTIPLE DRONES.
         Execute a gentle landing sequence aiming at a live target.
 
         Parameters

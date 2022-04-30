@@ -9,15 +9,24 @@ import numpy as np
 
 # SETTINGS
 # QTM rigid body names
-cf_body_names = ['E7E7E7E701',
-                 'E7E7E7E702']
+cf_body_names = [
+    'E7E7E7E701',
+    'E7E7E7E702',
+    # 'E7E7E7E703',
+]
 # Crazyflie addresses
-cf_uris = ['radio://0/80/1M/E7E7E7E701',
-           'radio://0/80/1M/E7E7E7E702']
+cf_uris = [
+    'radio://0/80/1M/E7E7E7E701',
+    'radio://0/80/1M/E7E7E7E702',
+    # 'radio://0/80/1M/E7E7E7E703',
+]
 
 # Crazyflie addresses
-cf_marker_ids = [[11, 12, 13, 14],
-                 [21, 22, 23, 24]]
+cf_marker_ids = [
+    [11, 12, 13, 14],
+    [21, 22, 23, 24],
+    # [31, 32, 33, 34],
+]
 
 # Watch key presses with a global variable
 last_key_pressed = None

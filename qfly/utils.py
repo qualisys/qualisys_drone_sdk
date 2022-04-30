@@ -17,3 +17,14 @@ def pol2cart(rho, phi):
     x = rho * math.cos(math.radians(phi))
     y = rho * math.sin(math.radians(phi))
     return(x, y)
+
+
+def sph2cart(r, theta, phi):
+    """
+    Convert from spherical (rho, theta, phi) to cartesian (x, y, z) coordinates. 
+    phi and theta in degrees.
+    """
+    x = r * math.sin(math.radians(theta)) * math.cos(math.radians(phi))
+    y = r * math.sin(math.radians(theta)) * math.sin(math.radians(phi))
+    z = r * math.cos(math.radians(theta))
+    return(x, y, z)
