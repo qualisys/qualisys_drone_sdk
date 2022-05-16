@@ -41,20 +41,21 @@ class Pose:
         self.z = max(0,
                      min(self.z, world.origin.z + (2 * world.expanse) - world.padding))
 
-    def distance_to(self, other_point):
+    def distance_to(self, other_pose):
         """
         TBD
         """
         return utils.sqrt(
-            (self.x - other_point.x) ** 2 +
-            (self.y - other_point.y) ** 2 +
-            (self.z - other_point.z) ** 2)
+            (self.x - other_pose.x) ** 2 +
+            (self.y - other_pose.y) ** 2 +
+            (self.z - other_pose.z) ** 2)
 
     def is_valid(self):
         """
         Check if any of the coodinates are NaN.
         """
         return self.x == self.x and self.y == self.y and self.z == self.z
+
 
     def __str__(self):
         """

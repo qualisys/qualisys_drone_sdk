@@ -1,5 +1,7 @@
 import asyncio
 import contextlib
+import math
+import os
 import random
 import pynput
 from time import sleep, time
@@ -39,7 +41,7 @@ def on_press(key):
     global last_key_pressed
     last_key_pressed = key
     if key == pynput.keyboard.Key.esc:
-        fly = False
+        os.exit(1)
 
 
 # Listen to the keyboard
@@ -70,9 +72,10 @@ with parallel(*_qcfs) as qcfs:
     # MAIN LOOP WITH SAFETY CHECK
     while(dt < 32):
 
-        # Terminate upon Esc command
-        if last_key_pressed == pynput.keyboard.Key.esc:
-            break
+        # Land with L key
+        if hasattr(last_key_pressed, 'char'):
+            if last_key_pressed.char == "l":
+                break
 
         # Mind the clock
         dt = time() - t
@@ -80,7 +83,7 @@ with parallel(*_qcfs) as qcfs:
         for idx, qcf in enumerate(qcfs):
 
             # Take off and hover in the center of safe airspace
-            if dt < 3:
+            if dt < 5:
                 print(f'[t={int(dt)}] Liftoff...')
                 qcf.ascend()
 
@@ -104,11 +107,12 @@ with parallel(*_qcfs) as qcfs:
                 print(f'[t={int(dt)}] Maneuvering - Sphere...')
                 # Set target
                 # Calculate angles based on time
-                phi = (dt * 100) % 360
-                theta = (dt * 50) % 180
+                phi = (dt * 180) % 360
+                # theta = (math.sin((dt * 60) % 180) + 1) * 90
+                theta = 90
                 # Offset angle based on array
                 phi = (phi + (360 / len(qcfs)) * (idx / len(qcfs))) % 360
-                theta = (theta + (180 / len(qcfs)) * (idx / len(qcfs))) % 180
+                # theta = (theta + (180 / len(qcfs)) * (idx / len(qcfs))) % 180
                 _x, _y, _z = utils.sph2cart(0.5, theta, phi)
                 target = Pose(world.origin.x + _x,
                               world.origin.y + _y,
