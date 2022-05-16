@@ -12,3 +12,4 @@ from .crazyflie import QualisysCrazyflie
 from .pose import Pose
 from .qtm_wrapper import QtmWrapper
 from .world import World
+from .parallel import parallel

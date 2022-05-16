@@ -32,8 +32,8 @@ class QualisysCrazyflie(Thread):
                  cf_body_name,
                  cf_uri,
                  world,
-                 qtm_ip="127.0.0.1",
-                 marker_ids=[1, 2, 3, 4]):
+                 marker_ids=[1, 2, 3, 4],
+                 qtm_ip="127.0.0.1"):
         """
         Construct QualisysCrazyflie object
 
@@ -61,11 +61,12 @@ class QualisysCrazyflie(Thread):
         self.world = world
         self.marker_ids = marker_ids
 
-        self.scf = None
-        self.cf = None
         self.pose = None
         self.qtm = None
         self.qtm_ip = qtm_ip
+
+        self.cf = Crazyflie(ro_cache=None, rw_cache=None)
+        self.scf = SyncCrazyflie(self.cf_uri, cf=self.cf)
 
         print(f'[{self.cf_body_name}@{self.cf_uri}] Connecting...')
 
@@ -73,8 +74,7 @@ class QualisysCrazyflie(Thread):
         """
         Enter QualisysCrazyflie context
         """
-        self.cf = Crazyflie(ro_cache=None, rw_cache=None)
-        self.scf = SyncCrazyflie(self.cf_uri, cf=self.cf)
+
         # self.scf = SyncCrazyflie(self.cf_uri)
         self.scf.open_link()
         # self.cf = self.scf.cf
@@ -104,7 +104,7 @@ class QualisysCrazyflie(Thread):
 
         return self
 
-    def __exit__(self, exc_type, exc_value, tb):
+    def __exit__(self, exc_type=None, exc_value=None, tb=None):
         """
         Exit QualisysCrazyflie context
         """
@@ -149,9 +149,8 @@ class QualisysCrazyflie(Thread):
             return False
         else:
             return True
-    
 
-    def ascend(self, z_ceiling=1, step=5):
+    def ascend(self, z_ceiling=1, step=16.0):
         """
         Execute one step of a gentle ascension sequence directly upward from current position.
 
@@ -165,14 +164,17 @@ class QualisysCrazyflie(Thread):
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
 
+
         target = qfly.Pose(init_pose.x,
                            init_pose.y,
                            min(z_ceiling, float((_z_cm + step) / 100.0)))
+        
+
         print(
-        f'[{self.cf_body_name}@{self.cf_uri}] Ascending from {_z_cm} cm to {z_ceiling}...')
+            f'[{self.cf_body_name}@{self.cf_uri}] Ascending from {_z_cm} cm to {z_ceiling}...')
         self.safe_position_setpoint(target)
 
-    def descend(self, z_floor=0, step=5):
+    def descend(self, z_floor=0.0, step=16.0):
         """
         Execute one step of a gentle descension sequence directly downward from current position.
 
@@ -189,18 +191,19 @@ class QualisysCrazyflie(Thread):
         target = qfly.Pose(init_pose.x,
                            init_pose.y,
                            float((_z_cm - step) / 100.0))
-        
+
         # Engage
         if target.z < z_floor:
             self.cf.commander.send_stop_setpoint()
         else:
             print(
-            f'[{self.cf_body_name}@{self.cf_uri}] Descending from {_z_cm} cm to {z_floor} cm...')
+                f'[{self.cf_body_name}@{self.cf_uri}] Descending from {_z_cm} cm to {z_floor} cm...')
             self.safe_position_setpoint(target)
 
     def land_in_place(self, ground_z=0, decrement=3, timestep=0.15):
         """
-        FIXME: DO NOT USE. NOT SUITABLE FOR MULTIPLE DRONES.
+        WARNING: DO NOT USE. NOT SUITABLE FOR MULTIPLE DRONES.
+        FIXME
         Execute a gentle landing sequence directly downward from current position.
 
         Parameters

@@ -94,6 +94,7 @@ with contextlib.ExitStack() as stack:
                               world.expanse)
                 # Engage
                 qcf.safe_position_setpoint(target)
+
                 sleep(0.1)
 
             # Move out half of the safe airspace in the X direction and circle around Z axis
