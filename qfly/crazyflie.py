@@ -150,7 +150,7 @@ class QualisysCrazyflie(Thread):
         else:
             return True
 
-    def ascend(self, z_ceiling=1, step=16.0):
+    def ascend(self, z_ceiling=1, step=12.0):
         """
         Execute one step of a gentle ascension sequence directly upward from current position.
 
@@ -174,7 +174,7 @@ class QualisysCrazyflie(Thread):
             f'[{self.cf_body_name}@{self.cf_uri}] Ascending from {_z_cm} cm to {z_ceiling}...')
         self.safe_position_setpoint(target)
 
-    def descend(self, z_floor=0.0, step=16.0):
+    def descend(self, z_floor=0.0, step=12.0):
         """
         Execute one step of a gentle descension sequence directly downward from current position.
 

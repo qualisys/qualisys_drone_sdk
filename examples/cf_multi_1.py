@@ -1,9 +1,7 @@
-import contextlib
-import random
 import pynput
 from time import sleep, time
 
-from qfly import Pose, QualisysCrazyflie, World, utils
+from qfly import Pose, QualisysCrazyflie, World, parallel, utils
 
 import numpy as np
 
@@ -37,8 +35,6 @@ def on_press(key):
     """React to keyboard."""
     global last_key_pressed
     last_key_pressed = key
-    if key == pynput.keyboard.Key.esc:
-        fly = False
 
 
 # Listen to the keyboard
@@ -50,16 +46,15 @@ listener.start()
 world = World()
 
 # Stack up context managers
-with contextlib.ExitStack() as stack:
-    # Init drones
-    qcfs = [
-        stack.enter_context(QualisysCrazyflie(
-            cf_body_name,
-            cf_uri,
-            world,
-            marker_ids=cf_marker_id))
-        for cf_body_name, cf_uri, cf_marker_id
-        in zip(cf_body_names, cf_uris, cf_marker_ids)]
+
+_qcfs = [QualisysCrazyflie(cf_body_name,
+                           cf_uri,
+                           world,
+                           marker_ids=cf_marker_id)
+         for cf_body_name, cf_uri, cf_marker_id
+         in zip(cf_body_names, cf_uris, cf_marker_ids)]
+
+with parallel(*_qcfs) as qcfs:
 
     # Let there be time
     t = time()
@@ -68,10 +63,13 @@ with contextlib.ExitStack() as stack:
     print("Beginning maneuvers...")
 
     # MAIN LOOP WITH SAFETY CHECK
-    while(next((False for qcf in qcfs if qcf.is_safe == False), True) and dt < 32):
-        # while(qcfs[0].is_safe()):
+    while(dt < 32):
 
-        # Terminate upon Esc command
+        # Safety check
+        if not all(qcf.is_safe() for qcf in qcfs):
+            break
+
+        # Land with Esc
         if last_key_pressed == pynput.keyboard.Key.esc:
             break
 
@@ -80,8 +78,12 @@ with contextlib.ExitStack() as stack:
 
         for idx, qcf in enumerate(qcfs):
 
+            if dt < 5:
+                print(f'[t={int(dt)}] Liftoff...')
+                qcf.ascend(step=10.0)
+
             # Take off and hover in the center of safe airspace
-            if t < 2:
+            elif dt < 8:
                 print(f'[t={int(dt)}] Maneuvering - Center...')
                 # Set target
                 x = np.interp(idx,
@@ -194,6 +196,6 @@ with contextlib.ExitStack() as stack:
                 sleep(0.1)
 
     # Land calmly
-    while(next((False for qcf in qcfs if qcf.pose.z < 0.05), True)):
+    while(any(qcf.pose.z > 0.1 for qcf in qcfs)):
         for qcf in qcfs:
             qcf.descend()

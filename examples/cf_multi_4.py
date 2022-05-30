@@ -1,8 +1,4 @@
-import asyncio
-import contextlib
-import math
 import os
-import random
 import pynput
 from time import sleep, time
 
@@ -40,8 +36,6 @@ def on_press(key):
     """React to keyboard."""
     global last_key_pressed
     last_key_pressed = key
-    if key == pynput.keyboard.Key.esc:
-        os.exit(1)
 
 
 # Listen to the keyboard
@@ -72,10 +66,13 @@ with parallel(*_qcfs) as qcfs:
     # MAIN LOOP WITH SAFETY CHECK
     while(dt < 32):
 
-        # Land with L key
-        if hasattr(last_key_pressed, 'char'):
-            if last_key_pressed.char == "l":
-                break
+        # Safety check
+        if not all(qcf.is_safe() for qcf in qcfs):
+            break
+
+        # Land with Esc
+        if last_key_pressed == pynput.keyboard.Key.esc:
+            break
 
         # Mind the clock
         dt = time() - t

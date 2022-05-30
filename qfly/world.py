@@ -24,7 +24,7 @@ class World:
                  expanse=1.0,  # in m
                  padding=0.15,  # in m
                  speed_limit=0.4,  # in m/s
-                 tracking_tolerance=150  # in frames
+                 tracking_tolerance=100  # in frames
                  ):
         """
         TBD

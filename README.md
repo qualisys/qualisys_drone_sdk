@@ -1,25 +1,15 @@
-![image](https://user-images.githubusercontent.com/1661078/163686619-32bba27d-70ed-48ba-beec-237f2724fff0.png)
+![qfly | Qualisys Drone SDK](qfly_banner.png)
 
 # Qualisys Drone SDK
 
-**WARNING: This project is under development. Do not expect anything to work.**
+qfly | Qualisys Drone SDK is a Python library to track and fly drones with [Qualisys motion capture systems](https://qualisys.com/). It is is designed to be an entry point for students, researchers, engineers, artists, and designers to develop drone applications. 
 
-<!-- an entry point for students, researchers, engineers, artists, and designers to start tracking and flying drones using a Qualisys motion capture system. -->
+**STATUS: DEV PREVIEW** :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/mbaytas/qualisys_drone_sdk/issues) and [Discussions](https://github.com/mbaytas/qualisys_drone_sdk/discussions). For completed, ongoing, and future development, see [Projects](https://github.com/mbaytas/qualisys_drone_sdk/projects).
 
----
-
-<!-- # Box Contents
-
-- 2x Bitcraze Crazyflie Drones
-- 1x Bitcraze Antenna
-- 2x Bitcraze Spare Parts Bundle
-- 2x Qualisys x Bitcraze Active Marker Deck
-
---- -->
 
 # Setup
 
-## Software Environment and Drivers
+## Requirements
 
 qfly has been designed and tested on Windows. It may or may not work on other operating systems.
 
@@ -30,7 +20,15 @@ Requirements:
   - [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
   - [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones) 0.1.18 or equivalent
 
+## qfly Setup
+
+1. Clone the qfly source code to your local machine.
+2. Install the qfly package in "development mode" by running `python -m pip install -e .` in the package root directory.
+
+
 # Drone Platforms and Example Scripts
+
+![Bitcraze Crazyflie](qfly_cf.png)
 
 ## Bitcraze Crazyflie
 
@@ -44,7 +42,7 @@ For tracking hardware, we recommend the [Active Marker Deck](https://store.bitcr
 
 - **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
 
-### [crazyflie_solo.py](examples/crazyflie_solo.py)
+### [cf_solo.py](examples/cf_solo.py)
 
 This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
 
@@ -52,12 +50,11 @@ This script demonstrates a basic scenario using the Qualisys motion capture syst
 2. Circle around the Z axis
 3. Circle around the Y axis
 4. Circle around the X axis
-5. Execute a 3D random walk within safe airspace
 6. Come back to center, land carefully
 
 Press `Esc` to stop the program and attempt to calmly land the drone. 
 
-### [crazyflie_multi.py](examples/crazyflie_multi_1.py)
+### [cf_multi_1.py](examples/cf_multi_1.py)
 
 This script demonstrates a semi-choreographed "swarm" flight with two Crazyflie drones.
 
@@ -65,9 +62,9 @@ The drones execute movements that are very similar to the solo script, but with 
 
 Press `Esc` to stop the program and attempt to calmly land the drones. 
 
-### [crazyflie_interactive.py](examples/crazyflie_interactive.py)
+### cf_interactive.py
 
-In progress.
+Coming soon...
 
 <!-- This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
 
@@ -75,12 +72,11 @@ In addition to the drone, it requires a "controller" rigid body configured in QT
 
 Press `Esc` to stop the program and attempt to calmly land the drone.  -->
 
+![Tello EDU](qfly_tello.png)
 
-## DJI Tello
+## Tello EDU
 
-### tello_solo.py
-
-### tello_interactive.py
+Coming soon...
 
 ---
 
