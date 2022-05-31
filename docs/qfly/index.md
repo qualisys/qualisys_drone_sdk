@@ -1,0 +1,97 @@
+Module qfly
+===========
+![qfly | Qualisys Drone SDK](qfly_banner.png)
+
+# Qualisys Drone SDK
+
+qfly | Qualisys Drone SDK is a Python library to track and fly drones with [Qualisys motion capture systems](https://qualisys.com/). It is is designed to be an entry point for students, researchers, engineers, artists, and designers to develop drone applications. 
+
+**STATUS: DEV PREVIEW** :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/mbaytas/qualisys_drone_sdk/issues) and [Discussions](https://github.com/mbaytas/qualisys_drone_sdk/discussions). For completed, ongoing, and future development, see [Projects](https://github.com/mbaytas/qualisys_drone_sdk/projects).
+
+# Setup
+
+## Requirements
+
+qfly has been designed and tested on Windows. It may or may not work on other operating systems.
+
+Requirements:
+
+- [Python](https://www.python.org/) 3.10 or equivalent
+- Python packages (install using [pip](https://pypi.org/project/pip/)):
+  - [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
+  - [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones) 0.1.18 or equivalent
+
+## qfly Setup
+
+1. Clone the qfly source code to your local machine.
+2. Install the qfly package in "development mode" by running `python -m pip install -e .` in the package root directory.
+
+# Drone Platforms and Example Scripts
+
+![Bitcraze Crazyflie](qfly_cf.png)
+
+## Bitcraze Crazyflie
+
+For tracking hardware, we recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck). Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. In most situations, active markers achieve better results.
+
+### Setup
+
+- Install drivers for both Crazyflie and the Crazyradio dongle using [Zadig](https://zadig.akeo.ie/) following [Bitcraze's instructions](https://www.bitcraze.io/documentation/repository/crazyradio-firmware/master/building/usbwindows/).
+
+- To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
+
+- **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
+
+### [cf_solo.py](examples/cf_solo.py)
+
+This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
+
+1. Take off and hover at the center of its airspace
+2. Circle around the Z axis
+3. Circle around the Y axis
+4. Circle around the X axis
+6. Come back to center, land carefully
+
+Press `Esc` to stop the program and attempt to calmly land the drone. 
+
+### [cf_multi_1.py](examples/cf_multi_1.py)
+
+This script demonstrates a semi-choreographed "swarm" flight with two Crazyflie drones.
+
+The drones execute movements that are very similar to the solo script, but with multiple drones together.
+
+Press `Esc` to stop the program and attempt to calmly land the drones. 
+
+### cf_interactive.py
+
+Coming soon...
+
+<!-- This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
+
+In addition to the drone, it requires a "controller" rigid body configured in QTM. We recommend the [Qualisys Traqr range](https://www.qualisys.com/accessories/traqr/).
+
+Press `Esc` to stop the program and attempt to calmly land the drone.  -->
+
+![Tello EDU](qfly_tello.png)
+
+## Tello EDU
+
+Coming soon...
+
+---
+
+# Resources and Inspirations
+
+- Tutorial on [Building Interactions with the Bitcraze Crazyflie and Motion Capture](https://www.baytas.net/blog/crazyflie) by Mehmet Aydın Baytaş
+- Fun project: [Santa's Flying Helpers](https://www.bitcraze.io/2021/12/santas-flying-helpers/) by Bitcraze
+- [Overview of different positioning systems](https://www.bitcraze.io/2021/05/positioning-system-overview/) you can use with the Bitcraze Crazyflie
+- [Notes on the design of Drone Chi](https://www.bitcraze.io/2019/12/designing-dronechi/), a meditative human-drone interaction experiment by Joseph La Delfa
+
+Sub-modules
+-----------
+* qfly.crazyflie
+* qfly.parallel
+* qfly.pose
+* qfly.qtm_wrapper
+* qfly.utils
+* qfly.world
