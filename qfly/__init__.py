@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
-#
-#  Copyright (C) 2022 Qualisys AB
-#  Portions (C) 2021 Weatherlight AB
-#
-#  "qfly"
-#  Qualisys Drone SDK
-#
+"""
+qfly | Qualisys Drone SDK is a Python library to track and fly drones with
+Qualisys motion capture systems. It is is designed to be an entry point for 
+students, researchers, engineers, artists, and designers to develop drone 
+applications.
+
+.. include:: ../README.md
+"""
 
 
 from .crazyflie import QualisysCrazyflie
