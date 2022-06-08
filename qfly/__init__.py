@@ -5,6 +5,7 @@
 #  Copyright (C) 2022 Qualisys AB
 #
 
+# include README to auto-generate documentation with pdoc
 """
 .. include:: ../README.md
 """
