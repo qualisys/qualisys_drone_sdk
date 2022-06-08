@@ -55,7 +55,20 @@ class World:
                  tracking_tolerance=100  # in frames
                  ):
         &#34;&#34;&#34;
-        TBD
+        Construct World object
+
+        Parameters
+        ----------
+        origin : Pose
+            Pose object containing x, y, z coordinates of origin
+        expanse : float
+            radius of &#34;safe&#34; airspace extending from origin (unit: m)
+        padding : float
+            safety tolerance at expanse boundary (unit: m)
+        speed_limit : float
+            max allowed airspeed (unit: m/s)
+        tracking_tolerance : int
+            max allowed mocap frame loss (unit: frames)
         &#34;&#34;&#34;
 
         self.origin = origin
@@ -66,7 +79,12 @@ class World:
 
     def set_origin_xy(self, pose):
         &#34;&#34;&#34;
-        TBD
+        Move World origin to new coordinates
+
+        Parameters
+        ----------
+        pose : Pose
+            Pose object containing x, y, z coordinates of new origin
         &#34;&#34;&#34;
         self.origin = pose</code></pre>
 </details>
@@ -98,8 +116,20 @@ class World:
 <dd>max allowed airspeed (unit: m/s)</dd>
 <dt><strong><code>tracking_tolerance</code></strong> :&ensp;<code>int</code></dt>
 <dd>max allowed mocap frame loss (unit: frames)</dd>
-<dt><strong><code>TBD</code></strong></dt>
-<dd>&nbsp;</dd>
+</dl>
+<p>Construct World object</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>origin</code></strong> :&ensp;<code>Pose</code></dt>
+<dd>Pose object containing x, y, z coordinates of origin</dd>
+<dt><strong><code>expanse</code></strong> :&ensp;<code>float</code></dt>
+<dd>radius of "safe" airspace extending from origin (unit: m)</dd>
+<dt><strong><code>padding</code></strong> :&ensp;<code>float</code></dt>
+<dd>safety tolerance at expanse boundary (unit: m)</dd>
+<dt><strong><code>speed_limit</code></strong> :&ensp;<code>float</code></dt>
+<dd>max allowed airspeed (unit: m/s)</dd>
+<dt><strong><code>tracking_tolerance</code></strong> :&ensp;<code>int</code></dt>
+<dd>max allowed mocap frame loss (unit: frames)</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -131,7 +161,20 @@ class World:
                  tracking_tolerance=100  # in frames
                  ):
         &#34;&#34;&#34;
-        TBD
+        Construct World object
+
+        Parameters
+        ----------
+        origin : Pose
+            Pose object containing x, y, z coordinates of origin
+        expanse : float
+            radius of &#34;safe&#34; airspace extending from origin (unit: m)
+        padding : float
+            safety tolerance at expanse boundary (unit: m)
+        speed_limit : float
+            max allowed airspeed (unit: m/s)
+        tracking_tolerance : int
+            max allowed mocap frame loss (unit: frames)
         &#34;&#34;&#34;
 
         self.origin = origin
@@ -142,7 +185,12 @@ class World:
 
     def set_origin_xy(self, pose):
         &#34;&#34;&#34;
-        TBD
+        Move World origin to new coordinates
+
+        Parameters
+        ----------
+        pose : Pose
+            Pose object containing x, y, z coordinates of new origin
         &#34;&#34;&#34;
         self.origin = pose</code></pre>
 </details>
@@ -152,14 +200,24 @@ class World:
 <span>def <span class="ident">set_origin_xy</span></span>(<span>self, pose)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>TBD</p></div>
+<div class="desc"><p>Move World origin to new coordinates</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>pose</code></strong> :&ensp;<code>Pose</code></dt>
+<dd>Pose object containing x, y, z coordinates of new origin</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def set_origin_xy(self, pose):
     &#34;&#34;&#34;
-    TBD
+    Move World origin to new coordinates
+
+    Parameters
+    ----------
+    pose : Pose
+        Pose object containing x, y, z coordinates of new origin
     &#34;&#34;&#34;
     self.origin = pose</code></pre>
 </details>
