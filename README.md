@@ -6,7 +6,7 @@ qfly | Qualisys Drone SDK is a Python library to track and fly drones with [Qual
 
 **STATUS: DEV PREVIEW** :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/mbaytas/qualisys_drone_sdk/issues) and [Discussions](https://github.com/mbaytas/qualisys_drone_sdk/discussions). For completed, ongoing, and future development, see [Projects](https://github.com/mbaytas/qualisys_drone_sdk/projects).
 
-qfly is architected as a concurrent wrapper for the [Qualisys Python SDK](https://github.com/qualisys/qualisys_python_sdk) along with Python SDKs for popular drone platforms like [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Ryze Tello EDU](https://www.ryzerobotics.com/tello-edu). It significantly reduces the software development workload compared to using vanilla SDKs. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.
+qfly is architected as a concurrent wrapper for the [Qualisys Python SDK](https://github.com/qualisys/qualisys_python_sdk) along with Python libraries for popular drone platforms like [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Ryze Tello EDU](https://www.ryzerobotics.com/tello-edu), thereby significantly reducing the software development workload compared to using these libraries vanilla form. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.
 
 Various safety, stability, and convenience measures are built in, including:
 
@@ -51,7 +51,7 @@ To install qfly DEV PREVIEW:
     - This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
 - **Before takeoff with the Crazyflie, always place the drone(s) flat on the floor, with the front pointing in the positive x-direction of the QTM coordinate system.**
 
-### Example script: [cf_solo.py](examples/cf_solo.py)
+### Example script: [cf_solo.py](https://github.com/qualisys/qualisys_drone_sdk/blob/main/examples/cf_solo.py)
 
 This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
 
@@ -63,7 +63,7 @@ This script demonstrates a basic scenario using the Qualisys motion capture syst
 
 Press `Esc` to stop the program and attempt to calmly land the drone. 
 
-### Example script: [cf_multi_1.py](examples/cf_multi_1.py)
+### Example script: [cf_multi_1.py](https://github.com/qualisys/qualisys_drone_sdk/blob/main/examples/cf_multi_1.py)
 
 This script demonstrates a semi-choreographed "swarm" flight with multiple Crazyflie drones.
 
