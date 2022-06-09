@@ -31,20 +31,7 @@
 
 class World:
     &#34;&#34;&#34;
-    Hold safety-critical information about the physical world
-
-    Attributes
-    ----------
-    origin : Pose
-        Pose object containing x, y, z coordinates of origin
-    expanse : float
-        radius of &#34;safe&#34; airspace extending from origin (unit: m)
-    padding : float
-        safety tolerance at expanse boundary (unit: m)
-    speed_limit : float
-        max allowed airspeed (unit: m/s)
-    tracking_tolerance : int
-        max allowed mocap frame loss (unit: frames)
+    Hold safety-critical information about the physical world.
     &#34;&#34;&#34;
 
     def __init__(self,
@@ -55,20 +42,25 @@ class World:
                  tracking_tolerance=100  # in frames
                  ):
         &#34;&#34;&#34;
-        Construct World object
+        Constructs World object
 
         Parameters
         ----------
         origin : Pose
-            Pose object containing x, y, z coordinates of origin
+            Pose object containing x, y, z coordinates of origin.
         expanse : float
-            radius of &#34;safe&#34; airspace extending from origin (unit: m)
+            Edge dimension of cubic &#34;safe&#34; airspace extending from origin.
+            (Unit: m)
         padding : float
-            safety tolerance at expanse boundary (unit: m)
+            Safety tolerance at expanse boundary.
+            (Unit: m)
         speed_limit : float
-            max allowed airspeed (unit: m/s)
+            Max allowed airspeed in horizontal (xy) 
+            and vertical (z) dimensions.
+            (Unit: m/s)
         tracking_tolerance : int
-            max allowed mocap frame loss (unit: frames)
+            Max allowed mocap frame loss.
+            (Unit: frames)
         &#34;&#34;&#34;
 
         self.origin = origin
@@ -103,33 +95,25 @@ class World:
 <span>(</span><span>origin=&lt;qfly.pose.Pose object&gt;, expanse=1.0, padding=0.15, speed_limit=0.4, tracking_tolerance=100)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Hold safety-critical information about the physical world</p>
-<h2 id="attributes">Attributes</h2>
-<dl>
-<dt><strong><code>origin</code></strong> :&ensp;<code>Pose</code></dt>
-<dd>Pose object containing x, y, z coordinates of origin</dd>
-<dt><strong><code>expanse</code></strong> :&ensp;<code>float</code></dt>
-<dd>radius of "safe" airspace extending from origin (unit: m)</dd>
-<dt><strong><code>padding</code></strong> :&ensp;<code>float</code></dt>
-<dd>safety tolerance at expanse boundary (unit: m)</dd>
-<dt><strong><code>speed_limit</code></strong> :&ensp;<code>float</code></dt>
-<dd>max allowed airspeed (unit: m/s)</dd>
-<dt><strong><code>tracking_tolerance</code></strong> :&ensp;<code>int</code></dt>
-<dd>max allowed mocap frame loss (unit: frames)</dd>
-</dl>
-<p>Construct World object</p>
+<div class="desc"><p>Hold safety-critical information about the physical world.</p>
+<p>Constructs World object</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
 <dt><strong><code>origin</code></strong> :&ensp;<code>Pose</code></dt>
-<dd>Pose object containing x, y, z coordinates of origin</dd>
+<dd>Pose object containing x, y, z coordinates of origin.</dd>
 <dt><strong><code>expanse</code></strong> :&ensp;<code>float</code></dt>
-<dd>radius of "safe" airspace extending from origin (unit: m)</dd>
+<dd>Edge dimension of cubic "safe" airspace extending from origin.
+(Unit: m)</dd>
 <dt><strong><code>padding</code></strong> :&ensp;<code>float</code></dt>
-<dd>safety tolerance at expanse boundary (unit: m)</dd>
+<dd>Safety tolerance at expanse boundary.
+(Unit: m)</dd>
 <dt><strong><code>speed_limit</code></strong> :&ensp;<code>float</code></dt>
-<dd>max allowed airspeed (unit: m/s)</dd>
+<dd>Max allowed airspeed in horizontal (xy)
+and vertical (z) dimensions.
+(Unit: m/s)</dd>
 <dt><strong><code>tracking_tolerance</code></strong> :&ensp;<code>int</code></dt>
-<dd>max allowed mocap frame loss (unit: frames)</dd>
+<dd>Max allowed mocap frame loss.
+(Unit: frames)</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -137,20 +121,7 @@ class World:
 </summary>
 <pre><code class="python">class World:
     &#34;&#34;&#34;
-    Hold safety-critical information about the physical world
-
-    Attributes
-    ----------
-    origin : Pose
-        Pose object containing x, y, z coordinates of origin
-    expanse : float
-        radius of &#34;safe&#34; airspace extending from origin (unit: m)
-    padding : float
-        safety tolerance at expanse boundary (unit: m)
-    speed_limit : float
-        max allowed airspeed (unit: m/s)
-    tracking_tolerance : int
-        max allowed mocap frame loss (unit: frames)
+    Hold safety-critical information about the physical world.
     &#34;&#34;&#34;
 
     def __init__(self,
@@ -161,20 +132,25 @@ class World:
                  tracking_tolerance=100  # in frames
                  ):
         &#34;&#34;&#34;
-        Construct World object
+        Constructs World object
 
         Parameters
         ----------
         origin : Pose
-            Pose object containing x, y, z coordinates of origin
+            Pose object containing x, y, z coordinates of origin.
         expanse : float
-            radius of &#34;safe&#34; airspace extending from origin (unit: m)
+            Edge dimension of cubic &#34;safe&#34; airspace extending from origin.
+            (Unit: m)
         padding : float
-            safety tolerance at expanse boundary (unit: m)
+            Safety tolerance at expanse boundary.
+            (Unit: m)
         speed_limit : float
-            max allowed airspeed (unit: m/s)
+            Max allowed airspeed in horizontal (xy) 
+            and vertical (z) dimensions.
+            (Unit: m/s)
         tracking_tolerance : int
-            max allowed mocap frame loss (unit: frames)
+            Max allowed mocap frame loss.
+            (Unit: frames)
         &#34;&#34;&#34;
 
         self.origin = origin

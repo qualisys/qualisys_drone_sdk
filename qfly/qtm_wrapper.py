@@ -16,9 +16,9 @@ class QtmWrapper(Thread):
     
     Designed for real time interactive applications, e.g. drone control.
     Each entity being tracked should:
-    1) instantiate its own QtmWrapper,
-    2) be defined as a rigid body in QTM,
-    3) pass a callback function to its QtmWrapper which responds to pose data.
+    (1) instantiate its own QtmWrapper,
+    (2) be defined as a rigid body in QTM,
+    (3) pass a callback function to its QtmWrapper which responds to pose data.
     """
 
     def __init__(self, body, on_pose, qtm_ip="127.0.0.1"):
@@ -28,11 +28,11 @@ class QtmWrapper(Thread):
         Parameters
         ----------
         body : string
-            Name of 6DOF rigid body being tracked
+            Name of 6DOF rigid body being tracked.
         on_pose : function(Pose)
-            Callback to trigger when pose packet is received
+            Callback to trigger when pose packet is received.
         qtm_ip : string
-            IP address of QTM instance
+            IP address of QTM instance.
         """
 
         Thread.__init__(self)
@@ -51,13 +51,13 @@ class QtmWrapper(Thread):
 
     def run(self):
         """
-        Run QTM wrapper coroutine
+        Run QTM wrapper coroutine.
         """
         asyncio.run(self._life_cycle())
 
     async def _life_cycle(self):
         """
-        QTM wrapper coroutine
+        QTM wrapper coroutine.
         """
         await self._connect()
         while(self._stay_open):
@@ -66,7 +66,7 @@ class QtmWrapper(Thread):
 
     async def _connect(self):
         """
-        Connect to QTM machine
+        Connect to QTM machine.
         """
         # Establish connection
         print('[QTM] Connecting to QTM at ' + self.qtm_ip)
@@ -101,7 +101,7 @@ class QtmWrapper(Thread):
 
     def _on_packet(self, packet):
         """
-        Process 6D packet stream into Pose object and pass on
+        Process 6D packet stream into Pose object and pass on.
 
         Parameters
         ----------
@@ -130,7 +130,7 @@ class QtmWrapper(Thread):
 
     async def _close(self):
         """
-        End lifecycle by disconnecting from QTM machine
+        End lifecycle by disconnecting from QTM machine.
         """
         await self._connection.stream_frames_stop()
         self._connection.disconnect()

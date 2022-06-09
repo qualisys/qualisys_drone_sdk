@@ -3,20 +3,7 @@ from qfly import Pose
 
 class World:
     """
-    Hold safety-critical information about the physical world
-
-    Attributes
-    ----------
-    origin : Pose
-        Pose object containing x, y, z coordinates of origin
-    expanse : float
-        radius of "safe" airspace extending from origin (unit: m)
-    padding : float
-        safety tolerance at expanse boundary (unit: m)
-    speed_limit : float
-        max allowed airspeed (unit: m/s)
-    tracking_tolerance : int
-        max allowed mocap frame loss (unit: frames)
+    Hold safety-critical information about the physical world.
     """
 
     def __init__(self,
@@ -27,20 +14,25 @@ class World:
                  tracking_tolerance=100  # in frames
                  ):
         """
-        Construct World object
+        Constructs World object
 
         Parameters
         ----------
         origin : Pose
-            Pose object containing x, y, z coordinates of origin
+            Pose object containing x, y, z coordinates of origin.
         expanse : float
-            radius of "safe" airspace extending from origin (unit: m)
+            Edge dimension of cubic "safe" airspace extending from origin.
+            (Unit: m)
         padding : float
-            safety tolerance at expanse boundary (unit: m)
+            Safety tolerance at expanse boundary.
+            (Unit: m)
         speed_limit : float
-            max allowed airspeed (unit: m/s)
+            Max allowed airspeed in horizontal (xy) 
+            and vertical (z) dimensions.
+            (Unit: m/s)
         tracking_tolerance : int
-            max allowed mocap frame loss (unit: frames)
+            Max allowed mocap frame loss.
+            (Unit: frames)
         """
 
         self.origin = origin

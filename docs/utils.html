@@ -35,25 +35,52 @@ import traceback
 def sqrt(x):
     &#34;&#34;&#34;
     Calculate sqrt while avoiding rounding errors with slightly negative x.
+
+    Parameters
+    ----------
+    x : float
+        Number to calculate square root of.
     &#34;&#34;&#34;
     if x &lt; 0.0:
         return 0.0
     return math.sqrt(x)
 
 
-def pol2cart(rho, phi):
+def pol2cart(r, phi):
     &#34;&#34;&#34;
-    Convert from polar (rho, phi) to cartesian (x, y) coordinates. phi is in degrees.
+    Convert from polar (rho, phi)
+    to cartesian (x, y) coordinates.
+
+    Parameters
+    ----------
+    r : float
+        Radial distance to origin.
+        (Unit: m)
+    phi : float
+        Azimuthal angle.
+        (Unit: degrees)
     &#34;&#34;&#34;
-    x = rho * math.cos(math.radians(phi))
-    y = rho * math.sin(math.radians(phi))
+    x = r * math.cos(math.radians(phi))
+    y = r * math.sin(math.radians(phi))
     return(x, y)
 
 
 def sph2cart(r, theta, phi):
     &#34;&#34;&#34;
-    Convert from spherical (rho, theta, phi) to cartesian (x, y, z) coordinates. 
-    phi and theta in degrees.
+    Convert from spherical (rho, theta, phi)
+    to cartesian (x, y, z) coordinates.
+
+    Parameters
+    ----------
+    r : float
+        Radial distance to origin.
+        (Unit: m)
+    theta : float
+        Polar angle.
+        (Unit: degrees)
+    phi : float
+        Azimuthal angle.
+        (Unit: degrees)
     &#34;&#34;&#34;
     x = r * math.sin(math.radians(theta)) * math.cos(math.radians(phi))
     y = r * math.sin(math.radians(theta)) * math.sin(math.radians(phi))
@@ -69,20 +96,40 @@ def sph2cart(r, theta, phi):
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="qfly.utils.pol2cart"><code class="name flex">
-<span>def <span class="ident">pol2cart</span></span>(<span>rho, phi)</span>
+<span>def <span class="ident">pol2cart</span></span>(<span>r, phi)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Convert from polar (rho, phi) to cartesian (x, y) coordinates. phi is in degrees.</p></div>
+<div class="desc"><p>Convert from polar (rho, phi)
+to cartesian (x, y) coordinates.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>r</code></strong> :&ensp;<code>float</code></dt>
+<dd>Radial distance to origin.
+(Unit: m)</dd>
+<dt><strong><code>phi</code></strong> :&ensp;<code>float</code></dt>
+<dd>Azimuthal angle.
+(Unit: degrees)</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def pol2cart(rho, phi):
+<pre><code class="python">def pol2cart(r, phi):
     &#34;&#34;&#34;
-    Convert from polar (rho, phi) to cartesian (x, y) coordinates. phi is in degrees.
+    Convert from polar (rho, phi)
+    to cartesian (x, y) coordinates.
+
+    Parameters
+    ----------
+    r : float
+        Radial distance to origin.
+        (Unit: m)
+    phi : float
+        Azimuthal angle.
+        (Unit: degrees)
     &#34;&#34;&#34;
-    x = rho * math.cos(math.radians(phi))
-    y = rho * math.sin(math.radians(phi))
+    x = r * math.cos(math.radians(phi))
+    y = r * math.sin(math.radians(phi))
     return(x, y)</code></pre>
 </details>
 </dd>
@@ -90,16 +137,40 @@ def sph2cart(r, theta, phi):
 <span>def <span class="ident">sph2cart</span></span>(<span>r, theta, phi)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Convert from spherical (rho, theta, phi) to cartesian (x, y, z) coordinates.
-phi and theta in degrees.</p></div>
+<div class="desc"><p>Convert from spherical (rho, theta, phi)
+to cartesian (x, y, z) coordinates.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>r</code></strong> :&ensp;<code>float</code></dt>
+<dd>Radial distance to origin.
+(Unit: m)</dd>
+<dt><strong><code>theta</code></strong> :&ensp;<code>float</code></dt>
+<dd>Polar angle.
+(Unit: degrees)</dd>
+<dt><strong><code>phi</code></strong> :&ensp;<code>float</code></dt>
+<dd>Azimuthal angle.
+(Unit: degrees)</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def sph2cart(r, theta, phi):
     &#34;&#34;&#34;
-    Convert from spherical (rho, theta, phi) to cartesian (x, y, z) coordinates. 
-    phi and theta in degrees.
+    Convert from spherical (rho, theta, phi)
+    to cartesian (x, y, z) coordinates.
+
+    Parameters
+    ----------
+    r : float
+        Radial distance to origin.
+        (Unit: m)
+    theta : float
+        Polar angle.
+        (Unit: degrees)
+    phi : float
+        Azimuthal angle.
+        (Unit: degrees)
     &#34;&#34;&#34;
     x = r * math.sin(math.radians(theta)) * math.cos(math.radians(phi))
     y = r * math.sin(math.radians(theta)) * math.sin(math.radians(phi))
@@ -111,7 +182,12 @@ phi and theta in degrees.</p></div>
 <span>def <span class="ident">sqrt</span></span>(<span>x)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Calculate sqrt while avoiding rounding errors with slightly negative x.</p></div>
+<div class="desc"><p>Calculate sqrt while avoiding rounding errors with slightly negative x.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>float</code></dt>
+<dd>Number to calculate square root of.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -119,6 +195,11 @@ phi and theta in degrees.</p></div>
 <pre><code class="python">def sqrt(x):
     &#34;&#34;&#34;
     Calculate sqrt while avoiding rounding errors with slightly negative x.
+
+    Parameters
+    ----------
+    x : float
+        Number to calculate square root of.
     &#34;&#34;&#34;
     if x &lt; 0.0:
         return 0.0
