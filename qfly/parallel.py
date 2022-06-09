@@ -11,17 +11,16 @@ __all__ = ["MultipleError", "parallel"]
 
 
 class parallel(object):
+    """
+    Concurrently starts and stops multiple context managers
+    in different threads.
 
-    """Concurrently start and stop serveral context managers in different
-    threads.
-
-    Typical usage::
+    Typical usage:
 
         with parallel(Foo(), Bar()) as managers:
             foo, bar = managers
             foo.do_something()
             bar.do_something()
-
     """
 
     def __init__(self, *managers):
@@ -32,7 +31,7 @@ class parallel(object):
         threads = []
 
         for mgr in self.managers:
-            t = threading.Thread(target=run,
+            t = threading.Thread(target=self._run,
                                  args=(mgr.__enter__, tuple(), errors))
             t.start()
             threads.append(t)
@@ -50,7 +49,7 @@ class parallel(object):
         threads = []
 
         for mgr in self.managers:
-            t = threading.Thread(target=run,
+            t = threading.Thread(target=self._run,
                                  args=(mgr.__exit__, exc_info, errors))
             t.start()
             threads.append(t)
@@ -61,10 +60,17 @@ class parallel(object):
         if errors:
             raise MultipleError(errors)
 
+    def _run(func, args, errors):
+        try:
+            func(*args)
+        except:
+            errors.append(sys.exc_info())
+
 
 class MultipleError(Exception):
-
-    """Exception class to collect several errors in a single object."""
+    """
+    Exception class to collect several errors in a single object.
+    """
 
     def __init__(self, errors):
         super(Exception, self).__init__()
@@ -75,13 +81,3 @@ class MultipleError(Exception):
         for exc_type, exc_val, exc_tb in self.errors:
             bits.extend(traceback.format_exception(exc_type, exc_val, exc_tb))
         return "".join(bits)
-
-
-def run(func, args, errors):
-    """Helper for ``parallel``.
-
-    """
-    try:
-        func(*args)
-    except:
-        errors.append(sys.exc_info())
