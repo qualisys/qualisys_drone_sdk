@@ -68,10 +68,8 @@ class QualisysCrazyflie(Thread):
         marker_ids : [int] (optional)
             ID numbers to be assigned to active markers
             in order of front, right, back, left.
-            (Default: [1, 2, 3, 4])
         qtm_ip : str (optional)
             IP address of QTM host.
-            (Default: &#39;127.0.0.1&#39;)
         &#34;&#34;&#34;
 
         print(f&#39;[{cf_body_name}@{cf_uri}] Initializing...&#39;)
@@ -149,11 +147,9 @@ class QualisysCrazyflie(Thread):
         z_ceiling : float (optional) 
             Height to ascend to.
             (Unit: m)
-            (Default: 1 m)
         step : int (optional)
             Distance between target keyframes.
             (Unit: cm)
-            (Default: 12 cm)
         &#34;&#34;&#34;
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
@@ -176,11 +172,9 @@ class QualisysCrazyflie(Thread):
         z_floor : float (optional) 
             Height to descend to.
             (Unit: m)
-            (Default: 0 m)
         step : int (optional)
             Distance between target keyframes.
             (Unit: cm)
-            (Default: 12 cm)
         &#34;&#34;&#34;
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
@@ -205,7 +199,7 @@ class QualisysCrazyflie(Thread):
         ----------
         world : World (optional) 
             World object defining airspace rules.
-            (Default: QualisysCrazyflie object&#39;s own world)
+            Defaults to QualisysCrazyflie object&#39;s own world.
         &#34;&#34;&#34;
         if world is None:
             world = self.world
@@ -285,10 +279,10 @@ class QualisysCrazyflie(Thread):
         ----------
         target : Pose
             Pose object bearting target coordinate and yaw.
-            (Yaw defaults to 0 if not supplied.)
+            Yaw defaults to 0 if not supplied.
         world : World (optional) 
             World object defining airspace rules.
-            (Default: QualisysCrazyflie object&#39;s own world)
+            Defaults to QualisysCrazyflie object&#39;s own world.
         &#34;&#34;&#34;
         # Sane defaults
         if world is None:
@@ -419,11 +413,9 @@ with Qualisys motion capture systems.</p>
 <dd>World object defining airspace rules.</dd>
 <dt><strong><code>marker_ids</code></strong> :&ensp;<code>[int] (optional)</code></dt>
 <dd>ID numbers to be assigned to active markers
-in order of front, right, back, left.
-(Default: [1, 2, 3, 4])</dd>
+in order of front, right, back, left.</dd>
 <dt><strong><code>qtm_ip</code></strong> :&ensp;<code>str (optional)</code></dt>
-<dd>IP address of QTM host.
-(Default: '127.0.0.1')</dd>
+<dd>IP address of QTM host.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -455,10 +447,8 @@ in order of front, right, back, left.
         marker_ids : [int] (optional)
             ID numbers to be assigned to active markers
             in order of front, right, back, left.
-            (Default: [1, 2, 3, 4])
         qtm_ip : str (optional)
             IP address of QTM host.
-            (Default: &#39;127.0.0.1&#39;)
         &#34;&#34;&#34;
 
         print(f&#39;[{cf_body_name}@{cf_uri}] Initializing...&#39;)
@@ -536,11 +526,9 @@ in order of front, right, back, left.
         z_ceiling : float (optional) 
             Height to ascend to.
             (Unit: m)
-            (Default: 1 m)
         step : int (optional)
             Distance between target keyframes.
             (Unit: cm)
-            (Default: 12 cm)
         &#34;&#34;&#34;
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
@@ -563,11 +551,9 @@ in order of front, right, back, left.
         z_floor : float (optional) 
             Height to descend to.
             (Unit: m)
-            (Default: 0 m)
         step : int (optional)
             Distance between target keyframes.
             (Unit: cm)
-            (Default: 12 cm)
         &#34;&#34;&#34;
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
@@ -592,7 +578,7 @@ in order of front, right, back, left.
         ----------
         world : World (optional) 
             World object defining airspace rules.
-            (Default: QualisysCrazyflie object&#39;s own world)
+            Defaults to QualisysCrazyflie object&#39;s own world.
         &#34;&#34;&#34;
         if world is None:
             world = self.world
@@ -672,10 +658,10 @@ in order of front, right, back, left.
         ----------
         target : Pose
             Pose object bearting target coordinate and yaw.
-            (Yaw defaults to 0 if not supplied.)
+            Yaw defaults to 0 if not supplied.
         world : World (optional) 
             World object defining airspace rules.
-            (Default: QualisysCrazyflie object&#39;s own world)
+            Defaults to QualisysCrazyflie object&#39;s own world.
         &#34;&#34;&#34;
         # Sane defaults
         if world is None:
@@ -794,12 +780,10 @@ directly upward from current position.</p>
 <dl>
 <dt><strong><code>z_ceiling</code></strong> :&ensp;<code>float (optional) </code></dt>
 <dd>Height to ascend to.
-(Unit: m)
-(Default: 1 m)</dd>
+(Unit: m)</dd>
 <dt><strong><code>step</code></strong> :&ensp;<code>int (optional)</code></dt>
 <dd>Distance between target keyframes.
-(Unit: cm)
-(Default: 12 cm)</dd>
+(Unit: cm)</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -815,11 +799,9 @@ directly upward from current position.</p>
     z_ceiling : float (optional) 
         Height to ascend to.
         (Unit: m)
-        (Default: 1 m)
     step : int (optional)
         Distance between target keyframes.
         (Unit: cm)
-        (Default: 12 cm)
     &#34;&#34;&#34;
     init_pose = self.pose
     _z_cm = int(init_pose.z * 100)
@@ -843,12 +825,10 @@ directly downward from current position.</p>
 <dl>
 <dt><strong><code>z_floor</code></strong> :&ensp;<code>float (optional) </code></dt>
 <dd>Height to descend to.
-(Unit: m)
-(Default: 0 m)</dd>
+(Unit: m)</dd>
 <dt><strong><code>step</code></strong> :&ensp;<code>int (optional)</code></dt>
 <dd>Distance between target keyframes.
-(Unit: cm)
-(Default: 12 cm)</dd>
+(Unit: cm)</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -864,11 +844,9 @@ directly downward from current position.</p>
     z_floor : float (optional) 
         Height to descend to.
         (Unit: m)
-        (Default: 0 m)
     step : int (optional)
         Distance between target keyframes.
         (Unit: cm)
-        (Default: 12 cm)
     &#34;&#34;&#34;
     init_pose = self.pose
     _z_cm = int(init_pose.z * 100)
@@ -895,7 +873,7 @@ directly downward from current position.</p>
 <dl>
 <dt><strong><code>world</code></strong> :&ensp;<code>World (optional) </code></dt>
 <dd>World object defining airspace rules.
-(Default: QualisysCrazyflie object's own world)</dd>
+Defaults to QualisysCrazyflie object's own world.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -909,7 +887,7 @@ directly downward from current position.</p>
     ----------
     world : World (optional) 
         World object defining airspace rules.
-        (Default: QualisysCrazyflie object&#39;s own world)
+        Defaults to QualisysCrazyflie object&#39;s own world.
     &#34;&#34;&#34;
     if world is None:
         world = self.world
@@ -1019,10 +997,10 @@ within safe airspace defined by world.</p>
 <dl>
 <dt><strong><code>target</code></strong> :&ensp;<code>Pose</code></dt>
 <dd>Pose object bearting target coordinate and yaw.
-(Yaw defaults to 0 if not supplied.)</dd>
+Yaw defaults to 0 if not supplied.</dd>
 <dt><strong><code>world</code></strong> :&ensp;<code>World (optional) </code></dt>
 <dd>World object defining airspace rules.
-(Default: QualisysCrazyflie object's own world)</dd>
+Defaults to QualisysCrazyflie object's own world.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -1037,10 +1015,10 @@ within safe airspace defined by world.</p>
     ----------
     target : Pose
         Pose object bearting target coordinate and yaw.
-        (Yaw defaults to 0 if not supplied.)
+        Yaw defaults to 0 if not supplied.
     world : World (optional) 
         World object defining airspace rules.
-        (Default: QualisysCrazyflie object&#39;s own world)
+        Defaults to QualisysCrazyflie object&#39;s own world.
     &#34;&#34;&#34;
     # Sane defaults
     if world is None:

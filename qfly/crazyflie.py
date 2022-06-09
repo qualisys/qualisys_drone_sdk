@@ -40,10 +40,8 @@ class QualisysCrazyflie(Thread):
         marker_ids : [int] (optional)
             ID numbers to be assigned to active markers
             in order of front, right, back, left.
-            (Default: [1, 2, 3, 4])
         qtm_ip : str (optional)
             IP address of QTM host.
-            (Default: '127.0.0.1')
         """
 
         print(f'[{cf_body_name}@{cf_uri}] Initializing...')
@@ -121,11 +119,9 @@ class QualisysCrazyflie(Thread):
         z_ceiling : float (optional) 
             Height to ascend to.
             (Unit: m)
-            (Default: 1 m)
         step : int (optional)
             Distance between target keyframes.
             (Unit: cm)
-            (Default: 12 cm)
         """
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
@@ -148,11 +144,9 @@ class QualisysCrazyflie(Thread):
         z_floor : float (optional) 
             Height to descend to.
             (Unit: m)
-            (Default: 0 m)
         step : int (optional)
             Distance between target keyframes.
             (Unit: cm)
-            (Default: 12 cm)
         """
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
@@ -177,7 +171,7 @@ class QualisysCrazyflie(Thread):
         ----------
         world : World (optional) 
             World object defining airspace rules.
-            (Default: QualisysCrazyflie object's own world)
+            Defaults to QualisysCrazyflie object's own world.
         """
         if world is None:
             world = self.world
@@ -257,10 +251,10 @@ class QualisysCrazyflie(Thread):
         ----------
         target : Pose
             Pose object bearting target coordinate and yaw.
-            (Yaw defaults to 0 if not supplied.)
+            Yaw defaults to 0 if not supplied.
         world : World (optional) 
             World object defining airspace rules.
-            (Default: QualisysCrazyflie object's own world)
+            Defaults to QualisysCrazyflie object's own world.
         """
         # Sane defaults
         if world is None:

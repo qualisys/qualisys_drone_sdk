@@ -19,20 +19,11 @@ class QtmWrapper(Thread):
     1) instantiate its own QtmWrapper,
     2) be defined as a rigid body in QTM,
     3) pass a callback function to its QtmWrapper which responds to pose data.
-
-    Attributes
-    ----------
-    body : string
-        name of rigid body being tracked
-    on_pose: function
-        callback to trigger when packet with pose is received
-    qtm_ip : string
-        IP address of QTM instance
     """
 
     def __init__(self, body, on_pose, qtm_ip="127.0.0.1"):
         """
-        Construct QtmWrapper object
+        Constructs QtmWrapper object
 
         Parameters
         ----------

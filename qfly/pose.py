@@ -19,7 +19,12 @@ class Pose:
     @classmethod
     def from_qtm_6d(cls, qtm_6d):
         """
-        Construct Pose from QTM 6D component.
+        Constructs Pose from QTM 6D component.
+
+        Parameters
+        ----------
+        qtm_6d
+            6D pose data from QTM component
         """
         qtm_rot = qtm_6d[1].matrix
         rotmatrix = [[qtm_rot[0], qtm_rot[3], qtm_rot[6]],
@@ -32,7 +37,13 @@ class Pose:
 
     def clamp(self, world):
         """
-        Keep within safe airspace defined by world parameter.
+        Geofences pose within safe airspace
+        defined by world parameter.
+
+        Parameters
+        ----------
+        world : World
+            World object defining airspace rules.
         """
         self.x = max(world.origin.x - world.expanse + world.padding,
                      min(self.x, world.origin.x + world.expanse - world.padding))
@@ -43,7 +54,13 @@ class Pose:
 
     def distance_to(self, other_pose):
         """
-        TBD
+        Returns distance between coordinates
+        represented by two Pose objects.
+
+        Parameters
+        ----------
+        other_pose : Pose
+            Target Pose to measure distance between.
         """
         return utils.sqrt(
             (self.x - other_pose.x) ** 2 +
@@ -52,15 +69,11 @@ class Pose:
 
     def is_valid(self):
         """
-        Check if any of the coodinates are NaN.
+        Checks if any of the coodinates are NaN.
         """
         return self.x == self.x and self.y == self.y and self.z == self.z
 
-
     def __str__(self):
-        """
-        TBD
-        """
         # return "x: {:6.2f} y: {:6.2f} z: {:6.2f} Roll: {:6.2f} Pitch: {:6.2f} Yaw: {:6.2f}".format(
         # self.x, self.y, self.z, self.roll, self.pitch, self.yaw)
         return f'x: {self.x} y: {self.y} z: {self.z} yaw: {self.yaw}'

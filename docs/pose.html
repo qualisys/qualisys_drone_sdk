@@ -47,7 +47,12 @@ class Pose:
     @classmethod
     def from_qtm_6d(cls, qtm_6d):
         &#34;&#34;&#34;
-        Construct Pose from QTM 6D component.
+        Constructs Pose from QTM 6D component.
+
+        Parameters
+        ----------
+        qtm_6d
+            6D pose data from QTM component
         &#34;&#34;&#34;
         qtm_rot = qtm_6d[1].matrix
         rotmatrix = [[qtm_rot[0], qtm_rot[3], qtm_rot[6]],
@@ -60,7 +65,13 @@ class Pose:
 
     def clamp(self, world):
         &#34;&#34;&#34;
-        Keep within safe airspace defined by world parameter.
+        Geofences pose within safe airspace
+        defined by world parameter.
+
+        Parameters
+        ----------
+        world : World
+            World object defining airspace rules.
         &#34;&#34;&#34;
         self.x = max(world.origin.x - world.expanse + world.padding,
                      min(self.x, world.origin.x + world.expanse - world.padding))
@@ -71,7 +82,13 @@ class Pose:
 
     def distance_to(self, other_pose):
         &#34;&#34;&#34;
-        TBD
+        Returns distance between coordinates
+        represented by two Pose objects.
+
+        Parameters
+        ----------
+        other_pose : Pose
+            Target Pose to measure distance between.
         &#34;&#34;&#34;
         return utils.sqrt(
             (self.x - other_pose.x) ** 2 +
@@ -80,15 +97,11 @@ class Pose:
 
     def is_valid(self):
         &#34;&#34;&#34;
-        Check if any of the coodinates are NaN.
+        Checks if any of the coodinates are NaN.
         &#34;&#34;&#34;
         return self.x == self.x and self.y == self.y and self.z == self.z
 
-
     def __str__(self):
-        &#34;&#34;&#34;
-        TBD
-        &#34;&#34;&#34;
         # return &#34;x: {:6.2f} y: {:6.2f} z: {:6.2f} Roll: {:6.2f} Pitch: {:6.2f} Yaw: {:6.2f}&#34;.format(
         # self.x, self.y, self.z, self.roll, self.pitch, self.yaw)
         return f&#39;x: {self.x} y: {self.y} z: {self.z} yaw: {self.yaw}&#39;</code></pre>
@@ -131,7 +144,12 @@ class Pose:
     @classmethod
     def from_qtm_6d(cls, qtm_6d):
         &#34;&#34;&#34;
-        Construct Pose from QTM 6D component.
+        Constructs Pose from QTM 6D component.
+
+        Parameters
+        ----------
+        qtm_6d
+            6D pose data from QTM component
         &#34;&#34;&#34;
         qtm_rot = qtm_6d[1].matrix
         rotmatrix = [[qtm_rot[0], qtm_rot[3], qtm_rot[6]],
@@ -144,7 +162,13 @@ class Pose:
 
     def clamp(self, world):
         &#34;&#34;&#34;
-        Keep within safe airspace defined by world parameter.
+        Geofences pose within safe airspace
+        defined by world parameter.
+
+        Parameters
+        ----------
+        world : World
+            World object defining airspace rules.
         &#34;&#34;&#34;
         self.x = max(world.origin.x - world.expanse + world.padding,
                      min(self.x, world.origin.x + world.expanse - world.padding))
@@ -155,7 +179,13 @@ class Pose:
 
     def distance_to(self, other_pose):
         &#34;&#34;&#34;
-        TBD
+        Returns distance between coordinates
+        represented by two Pose objects.
+
+        Parameters
+        ----------
+        other_pose : Pose
+            Target Pose to measure distance between.
         &#34;&#34;&#34;
         return utils.sqrt(
             (self.x - other_pose.x) ** 2 +
@@ -164,15 +194,11 @@ class Pose:
 
     def is_valid(self):
         &#34;&#34;&#34;
-        Check if any of the coodinates are NaN.
+        Checks if any of the coodinates are NaN.
         &#34;&#34;&#34;
         return self.x == self.x and self.y == self.y and self.z == self.z
 
-
     def __str__(self):
-        &#34;&#34;&#34;
-        TBD
-        &#34;&#34;&#34;
         # return &#34;x: {:6.2f} y: {:6.2f} z: {:6.2f} Roll: {:6.2f} Pitch: {:6.2f} Yaw: {:6.2f}&#34;.format(
         # self.x, self.y, self.z, self.roll, self.pitch, self.yaw)
         return f&#39;x: {self.x} y: {self.y} z: {self.z} yaw: {self.yaw}&#39;</code></pre>
@@ -183,7 +209,12 @@ class Pose:
 <span>def <span class="ident">from_qtm_6d</span></span>(<span>qtm_6d)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Construct Pose from QTM 6D component.</p></div>
+<div class="desc"><p>Constructs Pose from QTM 6D component.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>qtm_6d</code></strong></dt>
+<dd>6D pose data from QTM component</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -191,7 +222,12 @@ class Pose:
 <pre><code class="python">@classmethod
 def from_qtm_6d(cls, qtm_6d):
     &#34;&#34;&#34;
-    Construct Pose from QTM 6D component.
+    Constructs Pose from QTM 6D component.
+
+    Parameters
+    ----------
+    qtm_6d
+        6D pose data from QTM component
     &#34;&#34;&#34;
     qtm_rot = qtm_6d[1].matrix
     rotmatrix = [[qtm_rot[0], qtm_rot[3], qtm_rot[6]],
@@ -210,14 +246,26 @@ def from_qtm_6d(cls, qtm_6d):
 <span>def <span class="ident">clamp</span></span>(<span>self, world)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Keep within safe airspace defined by world parameter.</p></div>
+<div class="desc"><p>Geofences pose within safe airspace
+defined by world parameter.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>world</code></strong> :&ensp;<code>World</code></dt>
+<dd>World object defining airspace rules.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def clamp(self, world):
     &#34;&#34;&#34;
-    Keep within safe airspace defined by world parameter.
+    Geofences pose within safe airspace
+    defined by world parameter.
+
+    Parameters
+    ----------
+    world : World
+        World object defining airspace rules.
     &#34;&#34;&#34;
     self.x = max(world.origin.x - world.expanse + world.padding,
                  min(self.x, world.origin.x + world.expanse - world.padding))
@@ -231,14 +279,26 @@ def from_qtm_6d(cls, qtm_6d):
 <span>def <span class="ident">distance_to</span></span>(<span>self, other_pose)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>TBD</p></div>
+<div class="desc"><p>Returns distance between coordinates
+represented by two Pose objects.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>other_pose</code></strong> :&ensp;<code><a title="qfly.pose.Pose" href="#qfly.pose.Pose">Pose</a></code></dt>
+<dd>Target Pose to measure distance between.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def distance_to(self, other_pose):
     &#34;&#34;&#34;
-    TBD
+    Returns distance between coordinates
+    represented by two Pose objects.
+
+    Parameters
+    ----------
+    other_pose : Pose
+        Target Pose to measure distance between.
     &#34;&#34;&#34;
     return utils.sqrt(
         (self.x - other_pose.x) ** 2 +
@@ -250,14 +310,14 @@ def from_qtm_6d(cls, qtm_6d):
 <span>def <span class="ident">is_valid</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Check if any of the coodinates are NaN.</p></div>
+<div class="desc"><p>Checks if any of the coodinates are NaN.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def is_valid(self):
     &#34;&#34;&#34;
-    Check if any of the coodinates are NaN.
+    Checks if any of the coodinates are NaN.
     &#34;&#34;&#34;
     return self.x == self.x and self.y == self.y and self.z == self.z</code></pre>
 </details>
