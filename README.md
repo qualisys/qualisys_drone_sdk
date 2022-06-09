@@ -6,20 +6,32 @@ qfly | Qualisys Drone SDK is a Python library to track and fly drones with [Qual
 
 **STATUS: DEV PREVIEW** :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/mbaytas/qualisys_drone_sdk/issues) and [Discussions](https://github.com/mbaytas/qualisys_drone_sdk/discussions). For completed, ongoing, and future development, see [Projects](https://github.com/mbaytas/qualisys_drone_sdk/projects).
 
+qfly dramatically reduces the software development workload needed to fly drones with Qualisys motion capture systems. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.
+
+Various safety, stability, and convenience measures are built in, including:
+
+- geofencing
+- speed limits
+- smooth takeoff and landing
+- interrupt and land
+
+qfly can control swarms comprising an arbitrary number and combination of drones, e.g. [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Ryze Tello EDU](https://www.ryzerobotics.com/tello-edu) drones can be flown together.
+
 ### Requirements
 
 - [Python](https://www.python.org/) 3.10 or equivalent
 - Python packages (install using [pip](https://pypi.org/project/pip/)):
     - [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
     - [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones) 0.1.18 or equivalent
-- qfly has been designed and tested on Windows. It may or may not work on other operating systems.
+
+qfly has been designed and tested on Windows. It may or may not work on other operating systems.
 
 ### Setup
 
-To install the qfly DEV PREVIEW:
+To install qfly DEV PREVIEW:
 
-1. Clone the qfly source code to your local machine.
-2. Install the qfly package in "development mode" by running `python -m pip install -e .` in the package root directory.
+1. Clone the [qfly source code](https://github.com/qualisys/qualisys_drone_sdk) to your local machine.
+2. Navigate to the package root directory and install the qfly package in "development mode" by running: `python -m pip install -e .`
 
 # Drone Platforms and Example Scripts
 
@@ -30,13 +42,14 @@ To install the qfly DEV PREVIEW:
 ### Requirements
 
 - [Bitcraze Crazyflie 2.1](https://www.bitcraze.io/products/crazyflie-2-1/)
-- For tracking: We recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck). Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. Markers can also be mounted on the drone by hand.
+- For tracking: For best results, we recommend the [Active Marker Deck](https://store.bitcraze.io/collections/decks/products/active-marker-deck). Alternatively, a [Motion Capture Marker Deck](https://store.bitcraze.io/collections/decks/products/motion-capture-marker-deck) is available. Markers can also be mounted on the drone by hand.
 
 ### Setup
 
 - Install drivers for both Crazyflie and the Crazyradio dongle using [Zadig](https://zadig.akeo.ie/) following [Bitcraze's instructions](https://www.bitcraze.io/documentation/repository/crazyradio-firmware/master/building/usbwindows/).
-- To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
-- **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
+- To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).\
+    - This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
+- **Before takeoff with the Crazyflie, always place the drone(s) flat on the floor, with the front pointing in the positive x-direction of the QTM coordinate system.**
 
 ### Example script: [cf_solo.py](examples/cf_solo.py)
 

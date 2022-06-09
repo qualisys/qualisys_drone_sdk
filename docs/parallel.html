@@ -39,11 +39,11 @@ __all__ = [&#34;MultipleError&#34;, &#34;parallel&#34;]
 
 
 class parallel(object):
+    &#34;&#34;&#34;
+    Concurrently starts and stops multiple context managers
+    in different threads.
 
-    &#34;&#34;&#34;Concurrently start and stop serveral context managers in different
-    threads.
-
-    Typical usage::
+    Typical usage:
 
         with parallel(Foo(), Bar()) as managers:
             foo, bar = managers
@@ -60,7 +60,7 @@ class parallel(object):
         threads = []
 
         for mgr in self.managers:
-            t = threading.Thread(target=run,
+            t = threading.Thread(target=self._run,
                                  args=(mgr.__enter__, tuple(), errors))
             t.start()
             threads.append(t)
@@ -78,7 +78,7 @@ class parallel(object):
         threads = []
 
         for mgr in self.managers:
-            t = threading.Thread(target=run,
+            t = threading.Thread(target=self._run,
                                  args=(mgr.__exit__, exc_info, errors))
             t.start()
             threads.append(t)
@@ -89,10 +89,17 @@ class parallel(object):
         if errors:
             raise MultipleError(errors)
 
+    def _run(func, args, errors):
+        try:
+            func(*args)
+        except:
+            errors.append(sys.exc_info())
+
 
 class MultipleError(Exception):
-
-    &#34;&#34;&#34;Exception class to collect several errors in a single object.&#34;&#34;&#34;
+    &#34;&#34;&#34;
+    Exception class to collect several errors in a single object.
+    &#34;&#34;&#34;
 
     def __init__(self, errors):
         super(Exception, self).__init__()
@@ -102,17 +109,7 @@ class MultipleError(Exception):
         bits = []
         for exc_type, exc_val, exc_tb in self.errors:
             bits.extend(traceback.format_exception(exc_type, exc_val, exc_tb))
-        return &#34;&#34;.join(bits)
-
-
-def run(func, args, errors):
-    &#34;&#34;&#34;Helper for ``parallel``.
-
-    &#34;&#34;&#34;
-    try:
-        func(*args)
-    except:
-        errors.append(sys.exc_info())</code></pre>
+        return &#34;&#34;.join(bits)</code></pre>
 </details>
 </section>
 <section>
@@ -135,8 +132,9 @@ def run(func, args, errors):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MultipleError(Exception):
-
-    &#34;&#34;&#34;Exception class to collect several errors in a single object.&#34;&#34;&#34;
+    &#34;&#34;&#34;
+    Exception class to collect several errors in a single object.
+    &#34;&#34;&#34;
 
     def __init__(self, errors):
         super(Exception, self).__init__()
@@ -159,9 +157,9 @@ def run(func, args, errors):
 <span>(</span><span>*managers)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Concurrently start and stop serveral context managers in different
-threads.</p>
-<p>Typical usage::</p>
+<div class="desc"><p>Concurrently starts and stops multiple context managers
+in different threads.</p>
+<p>Typical usage:</p>
 <pre><code>with parallel(Foo(), Bar()) as managers:
     foo, bar = managers
     foo.do_something()
@@ -172,11 +170,11 @@ threads.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class parallel(object):
+    &#34;&#34;&#34;
+    Concurrently starts and stops multiple context managers
+    in different threads.
 
-    &#34;&#34;&#34;Concurrently start and stop serveral context managers in different
-    threads.
-
-    Typical usage::
+    Typical usage:
 
         with parallel(Foo(), Bar()) as managers:
             foo, bar = managers
@@ -193,7 +191,7 @@ threads.</p>
         threads = []
 
         for mgr in self.managers:
-            t = threading.Thread(target=run,
+            t = threading.Thread(target=self._run,
                                  args=(mgr.__enter__, tuple(), errors))
             t.start()
             threads.append(t)
@@ -211,7 +209,7 @@ threads.</p>
         threads = []
 
         for mgr in self.managers:
-            t = threading.Thread(target=run,
+            t = threading.Thread(target=self._run,
                                  args=(mgr.__exit__, exc_info, errors))
             t.start()
             threads.append(t)
@@ -220,7 +218,13 @@ threads.</p>
             thread.join()
 
         if errors:
-            raise MultipleError(errors)</code></pre>
+            raise MultipleError(errors)
+
+    def _run(func, args, errors):
+        try:
+            func(*args)
+        except:
+            errors.append(sys.exc_info())</code></pre>
 </details>
 </dd>
 </dl>
