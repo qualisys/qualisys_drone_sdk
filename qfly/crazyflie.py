@@ -1,4 +1,3 @@
-import math
 from threading import Thread
 import time
 import traceback
@@ -11,7 +10,6 @@ from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.syncCrazyflie import SyncCrazyflie
 
 import qfly
-from qfly.utils import sqrt
 
 
 class QualisysCrazyflie(Thread):
@@ -24,6 +22,8 @@ class QualisysCrazyflie(Thread):
         Name of Crazyflie's rigid body in QTM
     cf_uri : str
         Crazyflie radio address
+    pose : Pose
+        Pose object keeping track of whereabouts
     world : World
         World object defining airspace rules
     """
@@ -62,6 +62,8 @@ class QualisysCrazyflie(Thread):
         self.marker_ids = marker_ids
 
         self.pose = None
+        self.anchor = None
+
         self.qtm = None
         self.qtm_ip = qtm_ip
 
@@ -81,9 +83,6 @@ class QualisysCrazyflie(Thread):
 
         print(f'[{self.cf_body_name}@{self.cf_uri}] Connected...')
 
-        # Slow down
-        self.set_speed_limit(self.world.speed_limit)
-
         # Set active marker IDs
         print(
             f'[{self.cf_body_name}@{self.cf_uri}] Setting active marker IDs: {self.marker_ids}')
@@ -91,6 +90,12 @@ class QualisysCrazyflie(Thread):
         self.cf.param.set_value('activeMarker.right', self.marker_ids[1])
         self.cf.param.set_value('activeMarker.back', self.marker_ids[2])
         self.cf.param.set_value('activeMarker.left', self.marker_ids[3])
+
+        # Turn off LED to conserve battery
+        self.set_led_ring(0)
+
+        # Slow down
+        self.set_speed_limit(self.world.speed_limit)
 
         self.qtm = qfly.QtmWrapper(
             self.cf_body_name,
@@ -152,7 +157,7 @@ class QualisysCrazyflie(Thread):
 
     def ascend(self, z_ceiling=1, step=12.0):
         """
-        Execute one step of a gentle ascension sequence directly upward from current position.
+        Execute one step of a gentle rising sequence directly upward from current position.
 
         Parameters
         ----------
@@ -164,19 +169,17 @@ class QualisysCrazyflie(Thread):
         init_pose = self.pose
         _z_cm = int(init_pose.z * 100)
 
-
         target = qfly.Pose(init_pose.x,
                            init_pose.y,
                            min(z_ceiling, float((_z_cm + step) / 100.0)))
-        
 
-        print(
-            f'[{self.cf_body_name}@{self.cf_uri}] Ascending from {_z_cm} cm to {z_ceiling}...')
+        # print(
+        #     f'[{self.cf_body_name}@{self.cf_uri}] Ascending from {_z_cm} cm to {z_ceiling}...')
         self.safe_position_setpoint(target)
 
     def descend(self, z_floor=0.0, step=12.0):
         """
-        Execute one step of a gentle descension sequence directly downward from current position.
+        Execute one step of a gentle landing sequence directly downward from current position.
 
         Parameters
         ----------
@@ -196,37 +199,27 @@ class QualisysCrazyflie(Thread):
         if target.z < z_floor:
             self.cf.commander.send_stop_setpoint()
         else:
-            print(
-                f'[{self.cf_body_name}@{self.cf_uri}] Descending from {_z_cm} cm to {z_floor} cm...')
+            # print(
+            #     f'[{self.cf_body_name}@{self.cf_uri}] Descending from {_z_cm} cm to {z_floor} cm...')
             self.safe_position_setpoint(target)
 
-    def land_in_place(self, ground_z=0, decrement=3, timestep=0.15):
+    def land_in_place(self):
         """
-        WARNING: DO NOT USE. NOT SUITABLE FOR MULTIPLE DRONES.
-        FIXME
-        Execute a gentle landing sequence directly downward from current position.
-
-        Parameters
-        ----------
-        ground_z : float (optional) 
-            Height to land at. (unit: m)
-        decrement : int (optional)
-            Distance between target keyframes. Defaults to 3. (unit: cm)
-        timestep : float (optional)
-            Time between target keyframes. Defaults to 0.15. (unit: s)
+        Land sequence directly downward from current position.
         """
-        init_pose = self.pose
-        _z_cm = int(init_pose.z * 100)
+        if self.anchor is None or self.anchor.distance_to(self.pose) > self.world.padding:
+            self.anchor = self.pose
 
         print(
-            f'[{self.cf_body_name}@{self.cf_uri}] Landing to ground from {_z_cm} cm...')
+            f'[{self.cf_body_name}@{self.cf_uri}] Landing to ground...')
 
-        # Linear interpolation between starting pose and target
-        for z_cm in range(_z_cm, ground_z * 100, -decrement):
-            target = qfly.Pose(init_pose.x, init_pose.y, float(z_cm / 100.0))
+        target = qfly.Pose(self.anchor.x, self.anchor.y, 0)
+
+        if self.pose.distance_to(target) < 0.1:
+            self.anchor = None
+            self.cf.commander.send_stop_setpoint()
+        else:
             self.safe_position_setpoint(target)
-            time.sleep(timestep)
-        self.cf.commander.send_stop_setpoint()
 
     def land_to_moving_target(self, target, z_offset=0.5, decrement=3, timestep=0.15):
         """
@@ -267,6 +260,25 @@ class QualisysCrazyflie(Thread):
             time.sleep(timestep)
             z_cm = z_cm - decrement
         self.cf.commander.send_stop_setpoint()
+
+    def rise_in_place(self, z=1):
+        """
+        Ascension sequence directly upwards from current position.
+
+        Parameters
+        ----------
+        z_ceiling : float (optional) 
+            Height to ascend to. (unit: m)
+        """
+        if self.anchor is None or self.anchor.distance_to(self.pose) > self.world.padding:
+            self.anchor = self.pose
+
+        print(
+            f'[{self.cf_body_name}@{self.cf_uri}] Ascending...')
+
+        target = qfly.Pose(self.anchor.x, self.anchor.y, z)
+
+        self.safe_position_setpoint(target)
 
     def safe_position_setpoint(self, target, world=None):
         """
@@ -354,6 +366,18 @@ class QualisysCrazyflie(Thread):
                         max_y - min_y) < threshold and (
                         max_z - min_z) < threshold:
                     break
+
+    def set_led_ring(self, val):
+        """
+        Set LED ring effect.
+
+        Parameters
+        ----------
+        val : int
+            LED ring effect ID. See Bitcraze documentation:
+            https://www.bitcraze.io/documentation/repository/crazyflie-firmware/master/api/params/#ring
+        """
+        self.cf.param.set_value('ring.effect', val)
 
     def set_speed_limit(self, speed_limit):
         """

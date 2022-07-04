@@ -9,7 +9,9 @@
 
 
 from .crazyflie import QualisysCrazyflie
+from .deck import QualisysDeck
 from .pose import Pose
 from .qtm_wrapper import QtmWrapper
+from .traqr import QualisysTraqr
 from .world import World
-from .parallel import parallel
+from .parallel import ParallelContexts

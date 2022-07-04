@@ -10,7 +10,7 @@ import unittest
 __all__ = ["MultipleError", "parallel"]
 
 
-class parallel(object):
+class ParallelContexts(object):
 
     """Concurrently start and stop serveral context managers in different
     threads.

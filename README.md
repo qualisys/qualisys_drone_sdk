@@ -42,6 +42,8 @@ For tracking hardware, we recommend the [Active Marker Deck](https://store.bitcr
 
 - **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
 
+- In case of emergency, press `Ctrl` + `C` in the terminal window to terminate the program.
+
 ### [cf_solo.py](examples/cf_solo.py)
 
 This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
@@ -53,6 +55,8 @@ This script demonstrates a basic scenario using the Qualisys motion capture syst
 6. Come back to center, land carefully
 
 Press `Esc` to stop the program and attempt to calmly land the drone. 
+
+
 
 ### [cf_multi_1.py](examples/cf_multi_1.py)
 

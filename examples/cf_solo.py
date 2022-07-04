@@ -1,4 +1,11 @@
-import random
+"""
+qfly | Qualisys Drone SDK Example Script: Solo Crazyflie
+
+Takes off, flies circles around Z, Y, X axes.
+ESC to land at any time.
+"""
+
+
 import pynput
 from time import sleep, time
 
@@ -7,10 +14,9 @@ from qfly import Pose, QualisysCrazyflie, World, utils
 
 # SETTINGS
 cf_body_name = 'E7E7E7E701'  # QTM rigid body name
-cf_uri = 'radio://0/80/1M/E7E7E7E701'  # Crazyflie address
+cf_uri = 'radio://0/80/2M/E7E7E7E701'  # Crazyflie address
 cf_marker_ids = [11, 12, 13, 14]
-# cf_marker_ids = [21, 22, 23, 24]
-# cf_marker_ids = [31, 32, 33, 34]
+
 
 # Watch key presses with a global variable
 last_key_pressed = None
@@ -56,18 +62,17 @@ with QualisysCrazyflie(cf_body_name,
         # Mind the clock
         dt = time() - t
 
-        # 1Take off and hover in the center of safe airspace for 5 seconds
-        if dt < 2:
+        # Take off and hover in the center of safe airspace for 5 seconds
+        if dt < 3:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
+            sleep(0.02)
 
         # Move out half of the safe airspace in the X direction and circle around Z axis
-        if dt < 10:
+        elif dt < 10:
             print(f'[t={int(dt)}] Maneuvering - Circle around Z...')
             # Set target
             phi = 2 * 360 * (dt-5) / 5  # Calculate angle based on time
@@ -77,21 +82,19 @@ with QualisysCrazyflie(cf_body_name,
                           world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
+            sleep(0.02)
 
         # Back to center
-        if dt < 12:
+        elif dt < 13:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
+            sleep(0.02)
 
         # Move out half of the safe airspace in the Z direction and circle around Y axis
-        if dt < 20:
+        elif dt < 20:
             print(f'[t={int(dt)}] Maneuvering - Circle around X...')
             # Set target
             phi = 2 * 360 * (dt-5) / 5  # Calculate angle based on time
@@ -101,21 +104,19 @@ with QualisysCrazyflie(cf_body_name,
                           world.expanse + _z)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
+            sleep(0.02)
 
         # Back to center
-        if dt < 22:
+        elif dt < 23:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
+            sleep(0.02)
 
         # Move out half of the safe airspace in the Z direction and circle around X axis
-        if dt < 30:
+        elif dt < 30:
             print(f'[t={int(dt)}] Maneuvering - Circle around X...')
             # Set target
             phi = 2 * 360 * (dt-5) / 5  # Calculate angle based on time
@@ -125,45 +126,21 @@ with QualisysCrazyflie(cf_body_name,
                           world.expanse + _z)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
+            sleep(0.02)
 
         # Back to center
-        if dt < 32:
+        elif dt < 33:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
-
-        # 3D random walk in safe airspace
-        if dt < 40:
-            print(f'[t={int(dt)}] Maneuvering - Random...')
-            # Set target
-            step_size = 0.2  # in m
-            _pose = qcf.pose
-            target = Pose(_pose.x + random.randint(-1, 1) * step_size,
-                          _pose.y + random.randint(-1, 1) * step_size,
-                          _pose.z + random.randint(-1, 1) * step_size)
-            # Engage
-            qcf.safe_position_setpoint(target)
-            sleep(0.5)
-            continue
-
-        # Back to center
-        if dt < 42:
-            print(f'[t={int(dt)}] Maneuvering - Center...')
-            # Set target
-            target = Pose(world.origin.x, world.origin.y, world.expanse)
-            # Engage
-            qcf.safe_position_setpoint(target)
-            sleep(0.1)
-            continue
+            sleep(0.02)
 
         else:
             break
 
-    # Land calmly
-    qcf.land_in_place()
+    # Land
+    while (qcf.pose.z > 0.1):
+        qcf.land_in_place()
+        sleep(0.02)

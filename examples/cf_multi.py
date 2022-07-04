@@ -1,8 +1,15 @@
-import os
+"""
+qfly | Qualisys Drone SDK Example Script: Multi Crazyflie
+
+Drones take off and fly circles around Z axis.
+ESC to land at any time.
+"""
+
+
 import pynput
 from time import sleep, time
 
-from qfly import Pose, QualisysCrazyflie, World, utils, parallel
+from qfly import Pose, QualisysCrazyflie, World, ParallelContexts, utils
 
 import numpy as np
 
@@ -11,20 +18,23 @@ import numpy as np
 cf_body_names = [
     'E7E7E7E701',
     'E7E7E7E702',
-    # 'E7E7E7E703'
+    'E7E7E7E703',
+    # 'E7E7E7E704',
 ]
 # Crazyflie addresses
 cf_uris = [
-    'radio://0/80/1M/E7E7E7E701',
-    'radio://0/80/1M/E7E7E7E702',
-    # 'radio://0/80/1M/E7E7E7E703'
+    'radio://0/80/2M/E7E7E7E701',
+    'radio://0/80/2M/E7E7E7E702',
+    'radio://0/80/2M/E7E7E7E703',
+    # 'radio://0/80/2M/E7E7E7E704',
 ]
 
 # Crazyflie addresses
 cf_marker_ids = [
     [11, 12, 13, 14],
     [21, 22, 23, 24],
-    # [31, 32, 33, 34]
+    [31, 32, 33, 34],
+    # [41, 42, 43, 44],
 ]
 
 # Watch key presses with a global variable
@@ -47,7 +57,6 @@ listener.start()
 world = World()
 
 # Stack up context managers
-
 _qcfs = [QualisysCrazyflie(cf_body_name,
                            cf_uri,
                            world,
@@ -55,7 +64,7 @@ _qcfs = [QualisysCrazyflie(cf_body_name,
          for cf_body_name, cf_uri, cf_marker_id
          in zip(cf_body_names, cf_uris, cf_marker_ids)]
 
-with parallel(*_qcfs) as qcfs:
+with ParallelContexts(*_qcfs) as qcfs:
 
     # Let there be time
     t = time()
@@ -63,12 +72,11 @@ with parallel(*_qcfs) as qcfs:
 
     print("Beginning maneuvers...")
 
-    # MAIN LOOP WITH SAFETY CHECK
-    while(dt < 32):
+    # "fly" variable used for landing on demand
+    fly = True
 
-        # Safety check
-        if not all(qcf.is_safe() for qcf in qcfs):
-            break
+    # MAIN LOOP WITH SAFETY CHECK
+    while(fly and all(qcf.is_safe() for qcf in qcfs)):
 
         # Land with Esc
         if last_key_pressed == pynput.keyboard.Key.esc:
@@ -77,65 +85,61 @@ with parallel(*_qcfs) as qcfs:
         # Mind the clock
         dt = time() - t
 
+        # Cycle all drones
         for idx, qcf in enumerate(qcfs):
 
             # Take off and hover in the center of safe airspace
-            if dt < 5:
-                print(f'[t={int(dt)}] Liftoff...')
-                qcf.ascend()
-
-            elif t < 8:
+            if dt < 3:
                 print(f'[t={int(dt)}] Maneuvering - Center...')
                 # Set target
                 x = np.interp(idx,
                               [0,
                                len(qcfs) - 1],
                               [world.origin.x - world.expanse / 2,
-                               world.origin.x + world.expanse / 2])
+                                  world.origin.x + world.expanse / 2])
                 target = Pose(x,
                               world.origin.y,
                               world.expanse)
                 # Engage
                 qcf.safe_position_setpoint(target)
-                sleep(0.1)
+                sleep(0.02)
 
-            # Make sphere
-            elif dt < 28:
-                print(f'[t={int(dt)}] Maneuvering - Sphere...')
+            # Move out half of the safe airspace in the X direction and circle around Z axis
+            elif dt < 30:
+                print(f'[t={int(dt)}] Maneuvering - Circle around Z...')
                 # Set target
-                # Calculate angles based on time
-                phi = (dt * 180) % 360
-                # theta = (math.sin((dt * 60) % 180) + 1) * 90
-                theta = 90
+                phi = (dt * 90) % 360  # Calculate angle based on time
                 # Offset angle based on array
-                phi = (phi + (360 / len(qcfs)) * (idx / len(qcfs))) % 360
-                # theta = (theta + (180 / len(qcfs)) * (idx / len(qcfs))) % 180
-                _x, _y, _z = utils.sph2cart(0.5, theta, phi)
+                phi = phi + 360 * (idx / len(qcfs))
+                _x, _y = utils.pol2cart(0.5, phi)
                 target = Pose(world.origin.x + _x,
                               world.origin.y + _y,
-                              world.expanse + _z)
-                print("TARGET ANGLE FOR " + str(idx) + " => " + str(phi))
+                              world.expanse)
                 # Engage
                 qcf.safe_position_setpoint(target)
-                sleep(0.1)
+                sleep(0.02)
 
             # Back to center
-            elif dt < 32:
+            elif dt < 33:
                 print(f'[t={int(dt)}] Maneuvering - Center...')
                 # Set target
                 x = np.interp(idx,
                               [0,
                                len(qcfs) - 1],
                               [world.origin.x - world.expanse / 2,
-                               world.origin.x + world.expanse / 2])
+                                  world.origin.x + world.expanse / 2])
                 target = Pose(x,
                               world.origin.y,
                               world.expanse)
                 # Engage
                 qcf.safe_position_setpoint(target)
-                sleep(0.1)
+                sleep(0.02)
 
-    # Land calmly
-    while(any(qcf.pose.z > 0.1 for qcf in qcfs)):
-        for qcf in qcfs:
-            qcf.descend()
+            else:
+                fly = False
+
+     # Land
+    while (qcf.pose.z > 0.1):
+        for idx, qcf in enumerate(qcfs):
+            qcf.land_in_place()
+            sleep(0.02)
