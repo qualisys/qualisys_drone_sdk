@@ -35,7 +35,7 @@ class QualisysCrazyflie(Thread):
                  marker_ids=[1, 2, 3, 4],
                  qtm_ip="127.0.0.1"):
         """
-        Constructs a QualisysCrazyflie object.
+        Construct QualisysCrazyflie object.
 
         Parameters
         ----------
@@ -74,12 +74,10 @@ class QualisysCrazyflie(Thread):
 
     def __enter__(self):
         """
-        Enters QualisysCrazyflie context
+        Enter QualisysCrazyflie context
         """
 
-        # self.scf = SyncCrazyflie(self.cf_uri)
         self.scf.open_link()
-        # self.cf = self.scf.cf
 
         print(f'[{self.cf_body_name}@{self.cf_uri}] Connected...')
 
@@ -111,7 +109,7 @@ class QualisysCrazyflie(Thread):
 
     def __exit__(self, exc_type=None, exc_value=None, tb=None):
         """
-        Exits QualisysCrazyflie context
+        Exit QualisysCrazyflie context
         """
         print(
             f'[{self.cf_body_name}@{self.cf_uri}] Exiting...')
@@ -121,6 +119,38 @@ class QualisysCrazyflie(Thread):
             traceback.print_exception(exc_type, exc_value, tb)
         self.qtm.close()
         self.scf.close_link()
+
+    def is_safe(self, world=None):
+        """
+        Perform safety checks, return False if unsafe
+        Parameters
+        ----------
+        world : World (optional) 
+            World object defining airspace rules.
+            Defaults to object's own world if not supplied.
+        """
+        if world is None:
+            world = self.world
+        # Is the drone tracked properly?
+        if self.qtm.tracking_loss > world.tracking_tolerance:
+            # Respond
+            print(f'''[{self.cf_body_name}@{self.cf_uri}] !!! SAFETY VIOLATION !!!
+                TRACKING LOST FOR {str(self.world.tracking_tolerance)} FRAMES!''')
+            return False
+        # Is the drone inside the safe volume?
+        if not (
+            # x direction
+            world.origin.x - world.expanse < self.pose.x < world.origin.x + world.expanse
+            # y direction
+            and world.origin.y - world.expanse < self.pose.y < world.origin.y + world.expanse
+            # z direction
+                and 0 < self.pose.z < world.origin.z + (2 * world.expanse)):
+            # Respond
+            print(f'''[{self.cf_body_name}@{self.cf_uri}] !!! SAFETY VIOLATION !!!
+                DRONE OUTSIDE SAFE VOLUME AT ({str(self.pose)})!''')
+            return False
+        else:
+            return True
 
     def ascend(self, z_ceiling=1, step=12.0):
         """
@@ -309,7 +339,7 @@ class QualisysCrazyflie(Thread):
         self.cf.param.set_value('stabilizer.estimator', '2')
 
         # Black magic
-        self.cf.param.set_value('locSrv.extQuatStdDev', 0.06)
+        self.cf.param.set_value('locSrv.extQuatStdDev', 0.2)
 
         # Reset estimator
         self.cf.param.set_value('kalman.resetEstimation', '1')
@@ -396,3 +426,14 @@ class QualisysCrazyflie(Thread):
         # Send to Crazyflie
         if self.cf is not None:
             self.cf.extpos.send_extpos(pose.x, pose.y, pose.z)
+            # qw = qfly.utils.sqrt(
+            #     1 + pose.rotmatrix[0][0] + pose.rotmatrix[1][1] + pose.rotmatrix[2][2]) / 2
+            # qx = qfly.utils.sqrt(
+            #     1 + pose.rotmatrix[0][0] - pose.rotmatrix[1][1] - pose.rotmatrix[2][2]) / 2
+            # qy = qfly.utils.sqrt(
+            #     1 - pose.rotmatrix[0][0] + pose.rotmatrix[1][1] - pose.rotmatrix[2][2]) / 2
+            # qz = qfly.utils.sqrt(
+            #     1 - pose.rotmatrix[0][0] - pose.rotmatrix[1][1] + pose.rotmatrix[2][2]) / 2
+            # ql = qfly.utils.sqrt(qx ** 2 + qy ** 2 + qz ** 2 + qw ** 2)
+            # self.cf.extpos.send_extpose(
+            #     pose.x, pose.y, pose.z, qx / ql, qy / ql, qz / ql, qw / ql)

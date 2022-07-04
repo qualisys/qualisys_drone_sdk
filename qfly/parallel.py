@@ -11,7 +11,7 @@ __all__ = ["MultipleError", "parallel"]
 
 
 class ParallelContexts(object):
-     """
+    """
     Concurrently starts and stops multiple context managers
     in different threads.
 

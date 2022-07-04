@@ -16,14 +16,14 @@ class QtmWrapper(Thread):
     
     Designed for real time interactive applications, e.g. drone control.
     Each entity being tracked should:
-    (1) instantiate its own QtmWrapper,
-    (2) be defined as a rigid body in QTM,
-    (3) pass a callback function to its QtmWrapper which responds to pose data.
+    1) instantiate its own QtmWrapper,
+    2) be defined as a rigid body in QTM,
+    3) pass a callback function to its QtmWrapper which responds to pose data.
     """
 
     def __init__(self, body, on_pose, qtm_ip="127.0.0.1"):
         """
-        Constructs QtmWrapper object
+        Construct QtmWrapper object
 
         Parameters
         ----------

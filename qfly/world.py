@@ -14,7 +14,7 @@ class World:
                  tracking_tolerance=100  # in frames
                  ):
         """
-        Constructs World object
+        Construct World object
 
         Parameters
         ----------
