@@ -39,10 +39,10 @@ class Pose:
         self.y = y
         self.z = z
 
-        self.roll = None
-        self.pitch = None
-        self.yaw = None
-        self.rotmatrix = None
+        self.roll = roll
+        self.pitch = pitch
+        self.yaw = yaw
+        self.rotmatrix = rotmatrix
 
     @classmethod
     def from_qtm_6d(cls, qtm_6d):
@@ -136,10 +136,10 @@ class Pose:
         self.y = y
         self.z = z
 
-        self.roll = None
-        self.pitch = None
-        self.yaw = None
-        self.rotmatrix = None
+        self.roll = roll
+        self.pitch = pitch
+        self.yaw = yaw
+        self.rotmatrix = rotmatrix
 
     @classmethod
     def from_qtm_6d(cls, qtm_6d):

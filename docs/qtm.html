@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>qfly.qtm_wrapper API documentation</title>
+<title>qfly.qtm API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>qfly.qtm_wrapper</code></h1>
+<h1 class="title">Module <code>qfly.qtm</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
@@ -44,14 +44,14 @@ class QtmWrapper(Thread):
     
     Designed for real time interactive applications, e.g. drone control.
     Each entity being tracked should:
-    (1) instantiate its own QtmWrapper,
-    (2) be defined as a rigid body in QTM,
-    (3) pass a callback function to its QtmWrapper which responds to pose data.
+    1) instantiate its own QtmWrapper,
+    2) be defined as a rigid body in QTM,
+    3) pass a callback function to its QtmWrapper which responds to pose data.
     &#34;&#34;&#34;
 
     def __init__(self, body, on_pose, qtm_ip=&#34;127.0.0.1&#34;):
         &#34;&#34;&#34;
-        Constructs QtmWrapper object
+        Construct QtmWrapper object
 
         Parameters
         ----------
@@ -180,7 +180,7 @@ class QtmWrapper(Thread):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="qfly.qtm_wrapper.QtmWrapper"><code class="flex name class">
+<dt id="qfly.qtm.QtmWrapper"><code class="flex name class">
 <span>class <span class="ident">QtmWrapper</span></span>
 <span>(</span><span>body, on_pose, qtm_ip='127.0.0.1')</span>
 </code></dt>
@@ -189,10 +189,10 @@ class QtmWrapper(Thread):
 that receives and responds to real time data packets.</p>
 <p>Designed for real time interactive applications, e.g. drone control.
 Each entity being tracked should:
-(1) instantiate its own QtmWrapper,
-(2) be defined as a rigid body in QTM,
-(3) pass a callback function to its QtmWrapper which responds to pose data.</p>
-<p>Constructs QtmWrapper object</p>
+1) instantiate its own QtmWrapper,
+2) be defined as a rigid body in QTM,
+3) pass a callback function to its QtmWrapper which responds to pose data.</p>
+<p>Construct QtmWrapper object</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
 <dt><strong><code>body</code></strong> :&ensp;<code>string</code></dt>
@@ -213,14 +213,14 @@ Each entity being tracked should:
     
     Designed for real time interactive applications, e.g. drone control.
     Each entity being tracked should:
-    (1) instantiate its own QtmWrapper,
-    (2) be defined as a rigid body in QTM,
-    (3) pass a callback function to its QtmWrapper which responds to pose data.
+    1) instantiate its own QtmWrapper,
+    2) be defined as a rigid body in QTM,
+    3) pass a callback function to its QtmWrapper which responds to pose data.
     &#34;&#34;&#34;
 
     def __init__(self, body, on_pose, qtm_ip=&#34;127.0.0.1&#34;):
         &#34;&#34;&#34;
-        Constructs QtmWrapper object
+        Construct QtmWrapper object
 
         Parameters
         ----------
@@ -345,7 +345,7 @@ Each entity being tracked should:
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="qfly.qtm_wrapper.QtmWrapper.close"><code class="name flex">
+<dt id="qfly.qtm.QtmWrapper.close"><code class="name flex">
 <span>def <span class="ident">close</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -362,7 +362,7 @@ Each entity being tracked should:
     self.join()</code></pre>
 </details>
 </dd>
-<dt id="qfly.qtm_wrapper.QtmWrapper.run"><code class="name flex">
+<dt id="qfly.qtm.QtmWrapper.run"><code class="name flex">
 <span>def <span class="ident">run</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -397,10 +397,10 @@ Each entity being tracked should:
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="qfly.qtm_wrapper.QtmWrapper" href="#qfly.qtm_wrapper.QtmWrapper">QtmWrapper</a></code></h4>
+<h4><code><a title="qfly.qtm.QtmWrapper" href="#qfly.qtm.QtmWrapper">QtmWrapper</a></code></h4>
 <ul class="">
-<li><code><a title="qfly.qtm_wrapper.QtmWrapper.close" href="#qfly.qtm_wrapper.QtmWrapper.close">close</a></code></li>
-<li><code><a title="qfly.qtm_wrapper.QtmWrapper.run" href="#qfly.qtm_wrapper.QtmWrapper.run">run</a></code></li>
+<li><code><a title="qfly.qtm.QtmWrapper.close" href="#qfly.qtm.QtmWrapper.close">close</a></code></li>
+<li><code><a title="qfly.qtm.QtmWrapper.run" href="#qfly.qtm.QtmWrapper.run">run</a></code></li>
 </ul>
 </li>
 </ul>

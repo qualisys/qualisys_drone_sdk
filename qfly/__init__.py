@@ -17,4 +17,4 @@ from .pose import Pose
 from .qtm import QtmWrapper
 from .traqr import QualisysTraqr
 from .world import World
-from .parallel import ParallelContexts
+from .parallel_contexts import ParallelContexts

@@ -103,3 +103,10 @@ Coming soon...
 - Fun project: [Santa's Flying Helpers](https://www.bitcraze.io/2021/12/santas-flying-helpers/) by Bitcraze
 - [Overview of different positioning systems](https://www.bitcraze.io/2021/05/positioning-system-overview/) you can use with the Bitcraze Crazyflie
 - [Notes on the design of Drone Chi](https://www.bitcraze.io/2019/12/designing-dronechi/), a meditative human-drone interaction experiment by Joseph La Delfa
+
+# Contributing
+
+The auto-generated documentation needs to be rebuilt using [pdoc3](https://pdoc3.github.io/) following code contributions. To generate the documentation files and place them correctly into the `docs/` folder that is served to the web, use the commands in Windows:
+
+    pdoc qfly --html --force --output-dir docs
+    move .\docs\qfly\* .\docs\

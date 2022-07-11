@@ -66,9 +66,20 @@
 <li>This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).</li>
 </ul>
 </li>
-<li><strong>Before takeoff with the Crazyflie, always place the drone(s) flat on the floor, with the front pointing in the positive x-direction of the QTM coordinate system.</strong></li>
+<li>
+<p><strong>Before takeoff with the Crazyflie, always place the drone(s) flat on the floor, with the front pointing in the positive x-direction of the QTM coordinate system.</strong></p>
+</li>
+<li>
+<p>To fly multiple drones, assign different radio addresses to them using the <a href="https://github.com/bitcraze/crazyflie-clients-python">Crazyflie PC client</a>. (Refer to "Firmware Configuration" in the <a href="https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/">Crazyflie PC client docs</a>.) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).</p>
+</li>
+<li>
+<p><strong>Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.</strong></p>
+</li>
+<li>
+<p>In case of emergency, press <code>Ctrl</code> + <code>C</code> in the terminal window to terminate the program.</p>
+</li>
 </ul>
-<h3 id="example-script-cf_solopy">Example script: <a href="https://github.com/qualisys/qualisys_drone_sdk/blob/main/examples/cf_solo.py">cf_solo.py</a></h3>
+<h3 id="cf_solopy"><a href="examples/cf_solo.py">cf_solo.py</a></h3>
 <p>This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:</p>
 <ol>
 <li>Take off and hover at the center of its airspace</li>
@@ -78,8 +89,7 @@
 <li>Come back to center, land carefully</li>
 </ol>
 <p>Press <code>Esc</code> to stop the program and attempt to calmly land the drone. </p>
-<h3 id="example-script-cf_multi_1py">Example script: <a href="https://github.com/qualisys/qualisys_drone_sdk/blob/main/examples/cf_multi_1.py">cf_multi_1.py</a></h3>
-<p>This script demonstrates a semi-choreographed "swarm" flight with multiple Crazyflie drones.</p>
+<h3 id="cf_multi_1py"><a href="examples/cf_multi_1.py">cf_multi_1.py</a></h3>
 <p>The drones execute movements that are very similar to the solo script.</p>
 <p>Press <code>Esc</code> to stop the program and attempt to calmly land the drones.</p>
 <p>*Notice: The swarm scripts have so far been tested with 3 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *</p>
@@ -100,6 +110,10 @@ Press <code>Esc</code> to stop the program and attempt to calmly land the drone.
 <li><a href="https://www.bitcraze.io/2021/05/positioning-system-overview/">Overview of different positioning systems</a> you can use with the Bitcraze Crazyflie</li>
 <li><a href="https://www.bitcraze.io/2019/12/designing-dronechi/">Notes on the design of Drone Chi</a>, a meditative human-drone interaction experiment by Joseph La Delfa</li>
 </ul>
+<h1 id="contributing">Contributing</h1>
+<p>The auto-generated documentation needs to be rebuilt using <a href="https://pdoc3.github.io/">pdoc</a> following code contributions.</p>
+<pre><code>pdoc --html docs
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -118,10 +132,12 @@ Press <code>Esc</code> to stop the program and attempt to calmly land the drone.
 
 
 from .crazyflie import QualisysCrazyflie
+from .deck import QualisysDeck
 from .pose import Pose
-from .qtm_wrapper import QtmWrapper
+from .qtm import QtmWrapper
+from .traqr import QualisysTraqr
 from .world import World
-from .parallel import parallel</code></pre>
+from .parallel_contexts import ParallelContexts</code></pre>
 </details>
 </section>
 <section>
@@ -131,7 +147,11 @@ from .parallel import parallel</code></pre>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt><code class="name"><a title="qfly.parallel" href="parallel.html">qfly.parallel</a></code></dt>
+<dt><code class="name"><a title="qfly.deck" href="deck.html">qfly.deck</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="qfly.parallel_contexts" href="parallel_contexts.html">qfly.parallel_contexts</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -139,7 +159,11 @@ from .parallel import parallel</code></pre>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt><code class="name"><a title="qfly.qtm_wrapper" href="qtm_wrapper.html">qfly.qtm_wrapper</a></code></dt>
+<dt><code class="name"><a title="qfly.qtm" href="qtm.html">qfly.qtm</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="qfly.traqr" href="traqr.html">qfly.traqr</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -173,8 +197,8 @@ from .parallel import parallel</code></pre>
 <li><a href="#bitcraze-crazyflie">Bitcraze Crazyflie</a><ul>
 <li><a href="#requirements_1">Requirements</a></li>
 <li><a href="#setup_1">Setup</a></li>
-<li><a href="#example-script-cf_solopy">Example script: cf_solo.py</a></li>
-<li><a href="#example-script-cf_multi_1py">Example script: cf_multi_1.py</a></li>
+<li><a href="#cf_solopy">cf_solo.py</a></li>
+<li><a href="#cf_multi_1py">cf_multi_1.py</a></li>
 <li><a href="#example-script-cf_interactivepy">Example script: cf_interactive.py</a></li>
 </ul>
 </li>
@@ -182,15 +206,18 @@ from .parallel import parallel</code></pre>
 </ul>
 </li>
 <li><a href="#resources-and-inspirations">Resources and Inspirations</a></li>
+<li><a href="#contributing">Contributing</a></li>
 </ul>
 </div>
 <ul id="index">
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="qfly.crazyflie" href="crazyflie.html">qfly.crazyflie</a></code></li>
-<li><code><a title="qfly.parallel" href="parallel.html">qfly.parallel</a></code></li>
+<li><code><a title="qfly.deck" href="deck.html">qfly.deck</a></code></li>
+<li><code><a title="qfly.parallel_contexts" href="parallel_contexts.html">qfly.parallel_contexts</a></code></li>
 <li><code><a title="qfly.pose" href="pose.html">qfly.pose</a></code></li>
-<li><code><a title="qfly.qtm_wrapper" href="qtm_wrapper.html">qfly.qtm_wrapper</a></code></li>
+<li><code><a title="qfly.qtm" href="qtm.html">qfly.qtm</a></code></li>
+<li><code><a title="qfly.traqr" href="traqr.html">qfly.traqr</a></code></li>
 <li><code><a title="qfly.utils" href="utils.html">qfly.utils</a></code></li>
 <li><code><a title="qfly.world" href="world.html">qfly.world</a></code></li>
 </ul>
