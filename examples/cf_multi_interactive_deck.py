@@ -1,7 +1,7 @@
 import pynput
 from time import sleep, time
 
-from qfly import Pose, QualisysCrazyflie, QualisysTraqr, World, parallel, utils
+from qfly import Pose, QualisysCrazyflie, QualisysTraqr, World, parallel_contexts, utils
 
 import numpy as np
 
@@ -61,7 +61,7 @@ _qcfs = [QualisysCrazyflie(cf_body_name,
          in zip(cf_body_names, cf_uris, cf_marker_ids)]
 
 with QualisysTraqr(traqr_body_name) as traqr:
-    with parallel(*_qcfs) as qcfs:
+    with parallel_contexts(*_qcfs) as qcfs:
 
         # Let there be time
         t = time()
