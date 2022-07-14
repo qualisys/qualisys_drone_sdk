@@ -1,3 +1,14 @@
+
+"""
+qfly | Qualisys Drone SDK Example Script: Interactive Crazyflie with Traqr
+
+Drones take off and fly circles around Z axis.
+
+The altitude (z) tracks a Traqr or other appropriately configured
+rigid body.
+ESC to land at any time.
+"""
+
 import pynput
 from time import sleep, time
 

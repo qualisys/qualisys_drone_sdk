@@ -1,7 +1,4 @@
 import math
-import sys
-import threading
-import traceback
 
 
 def sqrt(x):

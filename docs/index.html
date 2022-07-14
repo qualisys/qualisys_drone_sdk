@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>qfly API documentation</title>
-<meta name="description" content="![qfly | Qualisys Drone SDK](qfly_banner.png) …" />
+<meta name="description" content="![qfly | Qualisys Drone SDK](/_img/qfly_banner.png) …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,11 +22,11 @@
 <h1 class="title">Package <code>qfly</code></h1>
 </header>
 <section id="section-intro">
-<p><img alt="qfly | Qualisys Drone SDK" src="qfly_banner.png"></p>
+<p><img alt="qfly | Qualisys Drone SDK" src="/_img/qfly_banner.png"></p>
 <h1 id="qualisys-drone-sdk">Qualisys Drone SDK</h1>
 <p>qfly | Qualisys Drone SDK is a Python library to track and fly drones with <a href="https://qualisys.com/">Qualisys motion capture systems</a>. It is is designed to be an entry point for students, researchers, engineers, artists, and designers to develop drone applications. </p>
-<p><strong>STATUS: DEV PREVIEW</strong> :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use <a href="https://github.com/mbaytas/qualisys_drone_sdk/issues">Issues</a> and <a href="https://github.com/mbaytas/qualisys_drone_sdk/discussions">Discussions</a>. For completed, ongoing, and future development, see <a href="https://github.com/mbaytas/qualisys_drone_sdk/projects">Projects</a>.</p>
-<p>qfly is architected as a concurrent wrapper for the <a href="https://github.com/qualisys/qualisys_python_sdk">Qualisys Python SDK</a> along with Python libraries for popular drone platforms like <a href="https://www.bitcraze.io/products/crazyflie-2-1/">Bitcraze Crazyflie</a> and <a href="https://www.ryzerobotics.com/tello-edu">Ryze Tello EDU</a>, thereby significantly reducing the software development workload compared to using these libraries vanilla form. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.</p>
+<p><strong>STATUS: DEV PREVIEW</strong> :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use <a href="https://github.com/mbaytas/qualisys_drone_sdk/issues">Issues</a>.</p>
+<p>qfly is architected as a concurrent wrapper running the <a href="https://github.com/qualisys/qualisys_python_sdk">Qualisys Python SDK</a> together with Python libraries for popular drone platforms like <a href="https://www.bitcraze.io/products/crazyflie-2-1/">Bitcraze Crazyflie</a> and <a href="https://www.dji.com/robomaster-tt">Robomaster TT</a>. It dramatically reduces the software development workload for real-time drone control, compared to using these libraries vanilla form. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.</p>
 <p>Various safety, stability, and convenience measures are built in, including:</p>
 <ul>
 <li>geofencing</li>
@@ -34,7 +34,7 @@
 <li>smooth takeoff and landing</li>
 <li>interrupt and land</li>
 </ul>
-<p>qfly can control swarms comprising an arbitrary number and combination of drones, e.g. <a href="https://www.bitcraze.io/products/crazyflie-2-1/">Bitcraze Crazyflie</a> and <a href="https://www.ryzerobotics.com/tello-edu">Ryze Tello EDU</a> drones can be flown together.</p>
+<p>qfly can control swarms comprising an arbitrary combination of drones, e.g. <a href="https://www.bitcraze.io/products/crazyflie-2-1/">Bitcraze Crazyflie</a> and <a href="https://www.ryzerobotics.com/tello-edu">Ryze Tello EDU</a> drones can be flown together. The maximum number of drones in the swarm depends on limitations of the drone's software and electronics as well as fleet management practicalities.</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
 <li><a href="https://www.python.org/">Python</a> 3.10 or equivalent</li>
@@ -52,7 +52,7 @@
 <li>Navigate to the package root directory and install the qfly package in "development mode" by running: <code>python -m pip install -e .</code></li>
 </ol>
 <h1 id="drone-platforms-and-example-scripts">Drone Platforms and Example Scripts</h1>
-<p><img alt="Bitcraze Crazyflie" src="qfly_cf.png"></p>
+<p><img alt="Bitcraze Crazyflie" src="/_img/qfly_cf.png"></p>
 <h2 id="bitcraze-crazyflie">Bitcraze Crazyflie</h2>
 <h3 id="requirements_1">Requirements</h3>
 <ul>
@@ -99,8 +99,8 @@
 In addition to the drone, it requires a "controller" rigid body configured in QTM. We recommend the [Qualisys Traqr range](https://www.qualisys.com/accessories/traqr/).
 Press <code>Esc</code> to stop the program and attempt to calmly land the drone.
 -->
-<p><img alt="Tello EDU" src="qfly_tello.png"></p>
-<h2 id="tello-edu">Tello EDU</h2>
+<p><img alt="Tello EDU" src="/_img/qfly_tello.png"></p>
+<h2 id="robomaster-tt">Robomaster TT</h2>
 <p>Coming soon&hellip;</p>
 <hr>
 <h1 id="resources-and-inspirations">Resources and Inspirations</h1>
@@ -111,8 +111,10 @@ Press <code>Esc</code> to stop the program and attempt to calmly land the drone.
 <li><a href="https://www.bitcraze.io/2019/12/designing-dronechi/">Notes on the design of Drone Chi</a>, a meditative human-drone interaction experiment by Joseph La Delfa</li>
 </ul>
 <h1 id="contributing">Contributing</h1>
-<p>The auto-generated documentation needs to be rebuilt using <a href="https://pdoc3.github.io/">pdoc</a> following code contributions.</p>
-<pre><code>pdoc --html docs
+<p>The auto-generated documentation needs to be rebuilt using <a href="https://pdoc3.github.io/">pdoc3</a> following code contributions. To re-generate the documentation files and place them correctly into the <code>docs/</code> folder that is served to the web, use the commands in Windows:</p>
+<pre><code>del docs\*
+pdoc qfly --html --output-dir docs
+move .\docs\qfly\* .\docs\
 </code></pre>
 <details class="source">
 <summary>
@@ -202,7 +204,7 @@ from .parallel_contexts import ParallelContexts</code></pre>
 <li><a href="#example-script-cf_interactivepy">Example script: cf_interactive.py</a></li>
 </ul>
 </li>
-<li><a href="#tello-edu">Tello EDU</a></li>
+<li><a href="#robomaster-tt">Robomaster TT</a></li>
 </ul>
 </li>
 <li><a href="#resources-and-inspirations">Resources and Inspirations</a></li>

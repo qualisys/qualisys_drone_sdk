@@ -1,12 +1,12 @@
-![qfly | Qualisys Drone SDK](qfly_banner.png)
+![qfly | Qualisys Drone SDK](/_img/qfly_banner.png)
 
 # Qualisys Drone SDK
 
 qfly | Qualisys Drone SDK is a Python library to track and fly drones with [Qualisys motion capture systems](https://qualisys.com/). It is is designed to be an entry point for students, researchers, engineers, artists, and designers to develop drone applications. 
 
-**STATUS: DEV PREVIEW** :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/mbaytas/qualisys_drone_sdk/issues) and [Discussions](https://github.com/mbaytas/qualisys_drone_sdk/discussions). For completed, ongoing, and future development, see [Projects](https://github.com/mbaytas/qualisys_drone_sdk/projects).
+**STATUS: DEV PREVIEW** :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/mbaytas/qualisys_drone_sdk/issues).
 
-qfly is architected as a concurrent wrapper for the [Qualisys Python SDK](https://github.com/qualisys/qualisys_python_sdk) along with Python libraries for popular drone platforms like [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Ryze Tello EDU](https://www.ryzerobotics.com/tello-edu), thereby significantly reducing the software development workload compared to using these libraries vanilla form. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.
+qfly is architected as a concurrent wrapper running the [Qualisys Python SDK](https://github.com/qualisys/qualisys_python_sdk) together with Python libraries for popular drone platforms like [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Robomaster TT](https://www.dji.com/robomaster-tt). It dramatically reduces the software development workload for real-time drone control, compared to using these libraries vanilla form. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.
 
 Various safety, stability, and convenience measures are built in, including:
 
@@ -15,7 +15,7 @@ Various safety, stability, and convenience measures are built in, including:
 - smooth takeoff and landing
 - interrupt and land
 
-qfly can control swarms comprising an arbitrary number and combination of drones, e.g. [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Ryze Tello EDU](https://www.ryzerobotics.com/tello-edu) drones can be flown together.
+qfly can control swarms comprising an arbitrary combination of drones, e.g. [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Ryze Tello EDU](https://www.ryzerobotics.com/tello-edu) drones can be flown together. The maximum number of drones in the swarm depends on limitations of the drone's software and electronics as well as fleet management practicalities.
 
 ### Requirements
 
@@ -35,7 +35,7 @@ To install qfly DEV PREVIEW:
 
 # Drone Platforms and Example Scripts
 
-![Bitcraze Crazyflie](qfly_cf.png)
+![Bitcraze Crazyflie](/_img/qfly_cf.png)
 
 ## Bitcraze Crazyflie
 
@@ -89,9 +89,9 @@ In addition to the drone, it requires a "controller" rigid body configured in QT
 
 Press `Esc` to stop the program and attempt to calmly land the drone.  -->
 
-![Tello EDU](qfly_tello.png)
+![Tello EDU](/_img/qfly_tello.png)
 
-## Tello EDU
+## Robomaster TT
 
 Coming soon...
 
@@ -106,7 +106,8 @@ Coming soon...
 
 # Contributing
 
-The auto-generated documentation needs to be rebuilt using [pdoc3](https://pdoc3.github.io/) following code contributions. To generate the documentation files and place them correctly into the `docs/` folder that is served to the web, use the commands in Windows:
+The auto-generated documentation needs to be rebuilt using [pdoc3](https://pdoc3.github.io/) following code contributions. To re-generate the documentation files and place them correctly into the `docs/` folder that is served to the web, use the commands in Windows:
 
-    pdoc qfly --html --force --output-dir docs
+    del docs\*
+    pdoc qfly --html --output-dir docs
     move .\docs\qfly\* .\docs\

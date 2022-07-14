@@ -1,7 +1,7 @@
 """
 qfly | Qualisys Drone SDK Example Script: Control Engineering / Step Response Demo
 
-EXPERIMENTAL
+UNSTABLE / EXPERIMENTAL / UNDER DEVELOPMENT
 """
 
 import pynput

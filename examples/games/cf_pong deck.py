@@ -1,7 +1,7 @@
 """
 qfly | Qualisys Drone SDK Example Script: Drone Pong
 
-EXPERIMENTAL
+UNSTABLE / EXPERIMENTAL / UNDER DEVELOPMENT
 """
 
 import math

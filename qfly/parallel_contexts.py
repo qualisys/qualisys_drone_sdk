@@ -1,10 +1,8 @@
 from __future__ import with_statement
 
-import contextlib
 import sys
 import threading
 import traceback
-import unittest
 
 
 __all__ = ["MultipleError", "parallel"]
