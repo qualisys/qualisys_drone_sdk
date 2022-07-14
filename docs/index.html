@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>qfly API documentation</title>
-<meta name="description" content="![qfly | Qualisys Drone SDK](/_img/qfly_banner.png) …" />
+<meta name="description" content="![qfly | Qualisys Drone SDK](https://qualisys.github.io/qualisys_drone_sdk/qfly_banner.png) …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,7 +22,7 @@
 <h1 class="title">Package <code>qfly</code></h1>
 </header>
 <section id="section-intro">
-<p><img alt="qfly | Qualisys Drone SDK" src="/_img/qfly_banner.png"></p>
+<p><img alt="qfly | Qualisys Drone SDK" src="https://qualisys.github.io/qualisys_drone_sdk/qfly_banner.png"></p>
 <h1 id="qualisys-drone-sdk">Qualisys Drone SDK</h1>
 <p>qfly | Qualisys Drone SDK is a Python library to track and fly drones with <a href="https://qualisys.com/">Qualisys motion capture systems</a>. It is is designed to be an entry point for students, researchers, engineers, artists, and designers to develop drone applications. </p>
 <p><strong>STATUS: DEV PREVIEW</strong> :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use <a href="https://github.com/mbaytas/qualisys_drone_sdk/issues">Issues</a>.</p>
@@ -52,7 +52,7 @@
 <li>Navigate to the package root directory and install the qfly package in "development mode" by running: <code>python -m pip install -e .</code></li>
 </ol>
 <h1 id="drone-platforms-and-example-scripts">Drone Platforms and Example Scripts</h1>
-<p><img alt="Bitcraze Crazyflie" src="/_img/qfly_cf.png"></p>
+<p><img alt="Bitcraze Crazyflie" src="https://qualisys.github.io/qualisys_drone_sdk/qfly_cf.png"></p>
 <h2 id="bitcraze-crazyflie">Bitcraze Crazyflie</h2>
 <h3 id="requirements_1">Requirements</h3>
 <ul>
@@ -78,6 +78,9 @@
 <li>
 <p>In case of emergency, press <code>Ctrl</code> + <code>C</code> in the terminal window to terminate the program.</p>
 </li>
+<li>
+<p>White running the example scripts, Press <code>Esc</code> to stop the program and attempt to calmly land the drone.</p>
+</li>
 </ul>
 <h3 id="cf_solopy"><a href="examples/cf_solo.py">cf_solo.py</a></h3>
 <p>This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:</p>
@@ -88,18 +91,20 @@
 <li>Circle around the X axis</li>
 <li>Come back to center, land carefully</li>
 </ol>
-<p>Press <code>Esc</code> to stop the program and attempt to calmly land the drone. </p>
-<h3 id="cf_multi_1py"><a href="examples/cf_multi_1.py">cf_multi_1.py</a></h3>
-<p>The drones execute movements that are very similar to the solo script.</p>
-<p>Press <code>Esc</code> to stop the program and attempt to calmly land the drones.</p>
-<p>*Notice: The swarm scripts have so far been tested with 3 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *</p>
-<h3 id="example-script-cf_interactivepy">Example script: cf_interactive.py</h3>
-<p>Coming soon&hellip;</p>
-<!-- This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
-In addition to the drone, it requires a "controller" rigid body configured in QTM. We recommend the [Qualisys Traqr range](https://www.qualisys.com/accessories/traqr/).
-Press <code>Esc</code> to stop the program and attempt to calmly land the drone.
--->
-<p><img alt="Tello EDU" src="/_img/qfly_tello.png"></p>
+<h3 id="cf_multipy"><a href="examples/cf_multi.py">cf_multi.py</a></h3>
+<p>The drones take off and fly circles around Z axis.</p>
+<p>*Notice: The swarm scripts have so far been tested with 4 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *</p>
+<h3 id="example-script-cf_interactive_deckpy"><a href="examples/cf_interactive_deck.py">Example script: cf_interactive_deck.py</a></h3>
+<p>This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another drone equipped with an <a href="https://www.bitcraze.io/products/active-marker-deck/">Active Marker Deck</a>.</p>
+<p>The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the second Crazyflie.</p>
+<h3 id="example-script-cf_interactive_traqrpy"><a href="examples/cf_interactive_traqr.py">Example script: cf_interactive_traqr.py</a></h3>
+<p>This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of a <a href="https://www.qualisys.com/accessories/traqr/">Qualisys Traqr</a>.</p>
+<p>The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the Traqr.</p>
+<h3 id="example-script-cf_multi_interactivepy"><a href="examples/cf_multi_interactive.py">Example script: cf_multi_interactive.py</a></h3>
+<p>This script demonstrates real-time interactive control of a Crazyflie swarm, coupling the drones' flight to the position of a <a href="https://www.qualisys.com/accessories/traqr/">Qualisys Traqr</a>.</p>
+<p>The drones take off and fly circles around Z axis. The altitude (z) tracks the Traqr.
+ESC to land at any time.</p>
+<p><img alt="Tello EDU" src="https://qualisys.github.io/qualisys_drone_sdk/qfly_tello.png"></p>
 <h2 id="robomaster-tt">Robomaster TT</h2>
 <p>Coming soon&hellip;</p>
 <hr>
@@ -112,7 +117,7 @@ Press <code>Esc</code> to stop the program and attempt to calmly land the drone.
 </ul>
 <h1 id="contributing">Contributing</h1>
 <p>The auto-generated documentation needs to be rebuilt using <a href="https://pdoc3.github.io/">pdoc3</a> following code contributions. To re-generate the documentation files and place them correctly into the <code>docs/</code> folder that is served to the web, use the commands in Windows:</p>
-<pre><code>del docs\*
+<pre><code>del docs\*.html
 pdoc qfly --html --output-dir docs
 move .\docs\qfly\* .\docs\
 </code></pre>
@@ -200,8 +205,10 @@ from .parallel_contexts import ParallelContexts</code></pre>
 <li><a href="#requirements_1">Requirements</a></li>
 <li><a href="#setup_1">Setup</a></li>
 <li><a href="#cf_solopy">cf_solo.py</a></li>
-<li><a href="#cf_multi_1py">cf_multi_1.py</a></li>
-<li><a href="#example-script-cf_interactivepy">Example script: cf_interactive.py</a></li>
+<li><a href="#cf_multipy">cf_multi.py</a></li>
+<li><a href="#example-script-cf_interactive_deckpy">Example script: cf_interactive_deck.py</a></li>
+<li><a href="#example-script-cf_interactive_traqrpy">Example script: cf_interactive_traqr.py</a></li>
+<li><a href="#example-script-cf_multi_interactivepy">Example script: cf_multi_interactive.py</a></li>
 </ul>
 </li>
 <li><a href="#robomaster-tt">Robomaster TT</a></li>

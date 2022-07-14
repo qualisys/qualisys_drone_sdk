@@ -1,4 +1,4 @@
-![qfly | Qualisys Drone SDK](/_img/qfly_banner.png)
+![qfly | Qualisys Drone SDK](https://qualisys.github.io/qualisys_drone_sdk/qfly_banner.png)
 
 # Qualisys Drone SDK
 
@@ -35,7 +35,7 @@ To install qfly DEV PREVIEW:
 
 # Drone Platforms and Example Scripts
 
-![Bitcraze Crazyflie](/_img/qfly_cf.png)
+![Bitcraze Crazyflie](https://qualisys.github.io/qualisys_drone_sdk/qfly_cf.png)
 
 ## Bitcraze Crazyflie
 
@@ -57,6 +57,8 @@ To install qfly DEV PREVIEW:
 
 - In case of emergency, press `Ctrl` + `C` in the terminal window to terminate the program.
 
+- White running the example scripts, Press `Esc` to stop the program and attempt to calmly land the drone.
+
 ### [cf_solo.py](examples/cf_solo.py)
 
 This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
@@ -67,29 +69,33 @@ This script demonstrates a basic scenario using the Qualisys motion capture syst
 4. Circle around the X axis
 6. Come back to center, land carefully
 
-Press `Esc` to stop the program and attempt to calmly land the drone. 
+### [cf_multi.py](examples/cf_multi.py)
+
+The drones take off and fly circles around Z axis.
+
+*Notice: The swarm scripts have so far been tested with 4 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *
+
+### [Example script: cf_interactive_deck.py](examples/cf_interactive_deck.py)
+
+This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another drone equipped with an [Active Marker Deck](https://www.bitcraze.io/products/active-marker-deck/).
+
+The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the second Crazyflie.
+
+### [Example script: cf_interactive_traqr.py](examples/cf_interactive_traqr.py)
+
+This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of a [Qualisys Traqr](https://www.qualisys.com/accessories/traqr/).
+
+The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the Traqr.
+
+### [Example script: cf_multi_interactive.py](examples/cf_multi_interactive.py)
+
+This script demonstrates real-time interactive control of a Crazyflie swarm, coupling the drones' flight to the position of a [Qualisys Traqr](https://www.qualisys.com/accessories/traqr/).
+
+The drones take off and fly circles around Z axis. The altitude (z) tracks the Traqr.
+ESC to land at any time.
 
 
-
-### [cf_multi_1.py](examples/cf_multi_1.py)
-
-The drones execute movements that are very similar to the solo script.
-
-Press `Esc` to stop the program and attempt to calmly land the drones.
-
-*Notice: The swarm scripts have so far been tested with 3 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *
-
-### Example script: cf_interactive.py
-
-Coming soon...
-
-<!-- This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another object.
-
-In addition to the drone, it requires a "controller" rigid body configured in QTM. We recommend the [Qualisys Traqr range](https://www.qualisys.com/accessories/traqr/).
-
-Press `Esc` to stop the program and attempt to calmly land the drone.  -->
-
-![Tello EDU](/_img/qfly_tello.png)
+![Tello EDU](https://qualisys.github.io/qualisys_drone_sdk/qfly_tello.png)
 
 ## Robomaster TT
 
@@ -108,6 +114,6 @@ Coming soon...
 
 The auto-generated documentation needs to be rebuilt using [pdoc3](https://pdoc3.github.io/) following code contributions. To re-generate the documentation files and place them correctly into the `docs/` folder that is served to the web, use the commands in Windows:
 
-    del docs\*
-    pdoc qfly --html --output-dir docs
+    del docs\*.html
+    pdoc qfly --force --html --output-dir docs
     move .\docs\qfly\* .\docs\
