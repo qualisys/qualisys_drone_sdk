@@ -59,7 +59,9 @@ To install qfly DEV PREVIEW:
 
 - White running the example scripts, Press `Esc` to stop the program and attempt to calmly land the drone.
 
-### [cf_solo.py](examples/cf_solo.py)
+### Examples
+
+#### [cf_solo.py](examples/cf_solo.py)
 
 This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
 
@@ -69,25 +71,25 @@ This script demonstrates a basic scenario using the Qualisys motion capture syst
 4. Circle around the X axis
 6. Come back to center, land carefully
 
-### [cf_multi.py](examples/cf_multi.py)
+#### [cf_multi.py](examples/cf_multi.py)
 
 The drones take off and fly circles around Z axis.
 
 *Notice: The swarm scripts have so far been tested with 4 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *
 
-### [Example script: cf_interactive_deck.py](examples/cf_interactive_deck.py)
+#### [cf_interactive_deck.py](examples/cf_interactive_deck.py)
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another drone equipped with an [Active Marker Deck](https://www.bitcraze.io/products/active-marker-deck/).
 
 The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the second Crazyflie.
 
-### [Example script: cf_interactive_traqr.py](examples/cf_interactive_traqr.py)
+#### [cf_interactive_traqr.py](examples/cf_interactive_traqr.py)
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of a [Qualisys Traqr](https://www.qualisys.com/accessories/traqr/).
 
 The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the Traqr.
 
-### [Example script: cf_multi_interactive.py](examples/cf_multi_interactive.py)
+#### [cf_multi_interactive.py](examples/cf_multi_interactive.py)
 
 This script demonstrates real-time interactive control of a Crazyflie swarm, coupling the drones' flight to the position of a [Qualisys Traqr](https://www.qualisys.com/accessories/traqr/).
 

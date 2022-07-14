@@ -82,7 +82,8 @@
 <p>White running the example scripts, Press <code>Esc</code> to stop the program and attempt to calmly land the drone.</p>
 </li>
 </ul>
-<h3 id="cf_solopy"><a href="examples/cf_solo.py">cf_solo.py</a></h3>
+<h3 id="examples">Examples</h3>
+<h4 id="cf_solopy"><a href="examples/cf_solo.py">cf_solo.py</a></h4>
 <p>This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:</p>
 <ol>
 <li>Take off and hover at the center of its airspace</li>
@@ -91,16 +92,16 @@
 <li>Circle around the X axis</li>
 <li>Come back to center, land carefully</li>
 </ol>
-<h3 id="cf_multipy"><a href="examples/cf_multi.py">cf_multi.py</a></h3>
+<h4 id="cf_multipy"><a href="examples/cf_multi.py">cf_multi.py</a></h4>
 <p>The drones take off and fly circles around Z axis.</p>
 <p>*Notice: The swarm scripts have so far been tested with 4 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *</p>
-<h3 id="example-script-cf_interactive_deckpy"><a href="examples/cf_interactive_deck.py">Example script: cf_interactive_deck.py</a></h3>
+<h4 id="cf_interactive_deckpy"><a href="examples/cf_interactive_deck.py">cf_interactive_deck.py</a></h4>
 <p>This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another drone equipped with an <a href="https://www.bitcraze.io/products/active-marker-deck/">Active Marker Deck</a>.</p>
 <p>The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the second Crazyflie.</p>
-<h3 id="example-script-cf_interactive_traqrpy"><a href="examples/cf_interactive_traqr.py">Example script: cf_interactive_traqr.py</a></h3>
+<h4 id="cf_interactive_traqrpy"><a href="examples/cf_interactive_traqr.py">cf_interactive_traqr.py</a></h4>
 <p>This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of a <a href="https://www.qualisys.com/accessories/traqr/">Qualisys Traqr</a>.</p>
 <p>The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the Traqr.</p>
-<h3 id="example-script-cf_multi_interactivepy"><a href="examples/cf_multi_interactive.py">Example script: cf_multi_interactive.py</a></h3>
+<h4 id="cf_multi_interactivepy"><a href="examples/cf_multi_interactive.py">cf_multi_interactive.py</a></h4>
 <p>This script demonstrates real-time interactive control of a Crazyflie swarm, coupling the drones' flight to the position of a <a href="https://www.qualisys.com/accessories/traqr/">Qualisys Traqr</a>.</p>
 <p>The drones take off and fly circles around Z axis. The altitude (z) tracks the Traqr.
 ESC to land at any time.</p>
@@ -118,7 +119,7 @@ ESC to land at any time.</p>
 <h1 id="contributing">Contributing</h1>
 <p>The auto-generated documentation needs to be rebuilt using <a href="https://pdoc3.github.io/">pdoc3</a> following code contributions. To re-generate the documentation files and place them correctly into the <code>docs/</code> folder that is served to the web, use the commands in Windows:</p>
 <pre><code>del docs\*.html
-pdoc qfly --html --output-dir docs
+pdoc qfly --force --html --output-dir docs
 move .\docs\qfly\* .\docs\
 </code></pre>
 <details class="source">
@@ -204,11 +205,14 @@ from .parallel_contexts import ParallelContexts</code></pre>
 <li><a href="#bitcraze-crazyflie">Bitcraze Crazyflie</a><ul>
 <li><a href="#requirements_1">Requirements</a></li>
 <li><a href="#setup_1">Setup</a></li>
+<li><a href="#examples">Examples</a><ul>
 <li><a href="#cf_solopy">cf_solo.py</a></li>
 <li><a href="#cf_multipy">cf_multi.py</a></li>
-<li><a href="#example-script-cf_interactive_deckpy">Example script: cf_interactive_deck.py</a></li>
-<li><a href="#example-script-cf_interactive_traqrpy">Example script: cf_interactive_traqr.py</a></li>
-<li><a href="#example-script-cf_multi_interactivepy">Example script: cf_multi_interactive.py</a></li>
+<li><a href="#cf_interactive_deckpy">cf_interactive_deck.py</a></li>
+<li><a href="#cf_interactive_traqrpy">cf_interactive_traqr.py</a></li>
+<li><a href="#cf_multi_interactivepy">cf_multi_interactive.py</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#robomaster-tt">Robomaster TT</a></li>
