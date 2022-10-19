@@ -1,7 +1,7 @@
 <QTM_Body_File_Ver_1.00>
     <Body>
-        <Name>E7E7E7E7E7</Name>
-        <Color R="255" G="0" B="0"/>
+        <Name>Crazyflie</Name>
+        <Color R="0" G="255" B="0"/>
         <MaximumResidual>10.000000</MaximumResidual>
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>

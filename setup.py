@@ -1,6 +1,6 @@
 from setuptools import setup
 
-version = "0.1"
+version = "0.1a1"
 
 setup(
     name="qfly",
@@ -12,7 +12,7 @@ setup(
     ),
     author="Mehmet Aydin Baytas",
     author_email="support@qualisys.com",
-    install_requires=['qtm'],
+    install_requires=['qtm', 'cflib', 'pynput'],
     license="MIT",
     packages=["qfly"],
     classifiers=[
