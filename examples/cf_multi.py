@@ -18,21 +18,21 @@ import numpy as np
 cf_body_names = [
     'E7E7E7E701',
     'E7E7E7E702',
-    'E7E7E7E703',
+    # 'E7E7E7E703',
     # 'E7E7E7E704',
 ]
 # Crazyflie addresses
 cf_uris = [
     'radio://0/80/2M/E7E7E7E701',
     'radio://0/80/2M/E7E7E7E702',
-    'radio://0/80/2M/E7E7E7E703',
+    # 'radio://0/80/2M/E7E7E7E703',
     # 'radio://0/80/2M/E7E7E7E704',
 ]
 # Crazyflie marker ids
 cf_marker_ids = [
     [11, 12, 13, 14],
     [21, 22, 23, 24],
-    [31, 32, 33, 34],
+    # [31, 32, 33, 34],
     # [41, 42, 43, 44],
 ]
 
