@@ -14,10 +14,10 @@
             <Opacity>1.000000</Opacity>
         </Mesh>
         <Points>
-            <Point X="-0.000000" Y="35.000000" Z="0.000000" Virtual="0" PhysicalId="1" Name="E7E7E7E707 - 1"/>
-            <Point X="-35.000000" Y="-0.000000" Z="0.000000" Virtual="0" PhysicalId="2" Name="E7E7E7E707 - 2"/>
-            <Point X="0.000000" Y="-35.000000" Z="0.000000" Virtual="0" PhysicalId="3" Name="E7E7E7E707 - 3"/>
-            <Point X="35.000000" Y="0.000000" Z="0.000000" Virtual="0" PhysicalId="4" Name="E7E7E7E707 - 4"/>
+            <Point X="35.000000" Y="0.000000" Z="0.000000" Virtual="0" PhysicalId="1" Name="Crazyflie - 1"/>
+            <Point X="0.000000" Y="-35.000000" Z="0.000000" Virtual="0" PhysicalId="2" Name="Crazyflie - 2"/>
+            <Point X="-35.000000" Y="0.000000" Z="0.000000" Virtual="0" PhysicalId="3" Name="Crazyflie - 3"/>
+            <Point X="0.000000" Y="35.000000" Z="0.000000s" Virtual="0" PhysicalId="4" Name="Crazyflie - 4"/>
         </Points>
         <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>

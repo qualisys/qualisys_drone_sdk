@@ -16,24 +16,18 @@ import numpy as np
 # SETTINGS
 # QTM rigid body names
 cf_body_names = [
-    'E7E7E7E701',
-    'E7E7E7E702',
-    # 'E7E7E7E703',
-    # 'E7E7E7E704',
+    'Crazyflie1',
+    'Crazyflie2'
 ]
 # Crazyflie addresses
 cf_uris = [
     'radio://0/80/2M/E7E7E7E701',
-    'radio://0/80/2M/E7E7E7E702',
-    # 'radio://0/80/2M/E7E7E7E703',
-    # 'radio://0/80/2M/E7E7E7E704',
+    'radio://0/80/2M/E7E7E7E702'
 ]
 # Crazyflie marker ids
 cf_marker_ids = [
     [11, 12, 13, 14],
-    [21, 22, 23, 24],
-    # [31, 32, 33, 34],
-    # [41, 42, 43, 44],
+    [21, 22, 23, 24]
 ]
 
 
@@ -64,7 +58,6 @@ _qcfs = [QualisysCrazyflie(cf_body_name,
                            marker_ids=cf_marker_id)
          for cf_body_name, cf_uri, cf_marker_id
          in zip(cf_body_names, cf_uris, cf_marker_ids)]
-
 
 with ParallelContexts(*_qcfs) as qcfs:
 

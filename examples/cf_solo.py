@@ -15,7 +15,7 @@ from qfly import Pose, QualisysCrazyflie, World, utils
 # SETTINGS
 cf_body_name = 'Crazyflie'  # QTM rigid body name
 cf_uri = 'radio://0/80/2M/E7E7E7E7E7'  # Crazyflie address
-cf_marker_ids = [1, 2, 3, 4]
+cf_marker_ids = [1, 2, 3, 4] # Active marker IDs
 
 
 # Watch key presses with a global variable
