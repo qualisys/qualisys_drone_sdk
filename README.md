@@ -49,17 +49,18 @@ To install qfly DEV PREVIEW:
 - Install drivers for both Crazyflie and the Crazyradio dongle using [Zadig](https://zadig.akeo.ie/) following [Bitcraze's instructions](https://www.bitcraze.io/documentation/repository/crazyradio-firmware/master/building/usbwindows/).
 - To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).\
     - This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
-- **Before takeoff with the Crazyflie, always place the drone(s) flat on the floor, with the front pointing in the positive x-direction of the QTM coordinate system.**
 
 - To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
 
-- **Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.**
+- Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.
+
+### Examples
 
 - In case of emergency, press `Ctrl` + `C` in the terminal window to terminate the program.
 
 - White running the example scripts, Press `Esc` to stop the program and attempt to calmly land the drone.
 
-### Examples
+- The swarm scripts have so far been tested with 4 drones. They may or may not work with more drones. Testing with larger swarms is in progress.
 
 #### [cf_solo.py](examples/cf_solo.py)
 
@@ -75,7 +76,6 @@ This script demonstrates a basic scenario using the Qualisys motion capture syst
 
 The drones take off and fly circles around Z axis.
 
-*Notice: The swarm scripts have so far been tested with 4 drones. They may or may not work with more drones. Testing with larger swarms is in progress. *
 
 #### [cf_interactive_deck.py](examples/cf_interactive_deck.py)
 
@@ -97,7 +97,7 @@ The drones take off and fly circles around Z axis. The altitude (z) tracks the T
 ESC to land at any time.
 
 
-![Tello EDU](https://qualisys.github.io/qualisys_drone_sdk/qfly_tello.png)
+![Tello EDU](https://qualisys.github.io/qualisys_drone_sdk/qfly_tt.png)
 
 ## Robomaster TT
 
