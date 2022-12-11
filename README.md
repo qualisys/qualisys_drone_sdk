@@ -2,36 +2,38 @@
 
 # Qualisys Drone SDK
 
-qfly | Qualisys Drone SDK is a Python library to track and fly drones with [Qualisys motion capture systems](https://qualisys.com/). It is is designed to be an entry point for students, researchers, engineers, artists, and designers to develop drone applications. 
+qfly | Qualisys Drone SDK is a Python library to track and fly drones with [Qualisys motion capture systems](https://qualisys.com/). It is designed to be an entry point for students, researchers, engineers, artists, and designers to develop drone applications. 
 
-**STATUS: DEV PREVIEW** :: Development and testing is ongoing for many features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/mbaytas/qualisys_drone_sdk/issues).
+**STATUS: ALPHA** :: Core functionality is reasonably stable, but development and testing is ongoing for more features. For bug reports, feature requests, and other contributions, please use [Issues](https://github.com/qualisys/qualisys_drone_sdk/issues).
 
-qfly is architected as a concurrent wrapper running the [Qualisys Python SDK](https://github.com/qualisys/qualisys_python_sdk) together with Python libraries for popular drone platforms like [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Robomaster TT](https://www.dji.com/robomaster-tt). It dramatically reduces the software development workload for real-time drone control, compared to using these libraries vanilla form. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.
+qfly is architected as a concurrent wrapper running the [Qualisys Python SDK](https://github.com/qualisys/qualisys_python_sdk) together with Python libraries for drone platforms. Currently the [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) is supported, while support for [Robomaster TT](https://www.dji.com/robomaster-tt) may be added in the future.
+
+qfly dramatically reduces the software development workload for real-time drone control, compared to using these libraries vanilla form. For creative applications like drone shows, light painting, and cinematography, movements can be easily programmed by non-engineers using principles of keyframe animation. For interactive applications like games and exercise, qfly is able to ingest signals and control drones in real time.
 
 Various safety, stability, and convenience measures are built in, including:
 
-- geofencing
+- virtual geofencing
 - speed limits
 - smooth takeoff and landing
 - interrupt and land
 
-qfly can control swarms comprising an arbitrary combination of drones, e.g. [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Ryze Tello EDU](https://www.ryzerobotics.com/tello-edu) drones can be flown together. The maximum number of drones in the swarm depends on limitations of the drone's software and electronics as well as fleet management practicalities.
+qfly can control swarms comprising an arbitrary combination of drones, e.g. [Bitcraze Crazyflie](https://www.bitcraze.io/products/crazyflie-2-1/) and [Robomaster TT](https://www.dji.com/robomaster-tt) drones can be flown together. (Currently qfly provides classes to control the Bitcraze Crazyflie, while other drone platforms require the programmer to import and incorporate their own libraries into their scripts.) The maximum number of drones in the swarm depends on limitations of the drone's software and electronics as well as fleet management practicalities.
 
 ### Requirements
 
 - [Python](https://www.python.org/) 3.10 or equivalent
-- Python packages (install using [pip](https://pypi.org/project/pip/)):
-    - [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
+- Python packages:
     - [cflib](https://github.com/bitcraze/crazyflie-lib-python) (for Crazyflie Drones) 0.1.18 or equivalent
+    - [qtm](https://github.com/qualisys/qualisys_python_sdk) (Qualisys Python SDK) 2.1.1 or equivalent
+    - [pynput](https://github.com/moses-palmer/pynput)  1.7.6 or equivalent
 
-qfly has been designed and tested on Windows. It may or may not work on other operating systems.
+qfly has been designed and tested on Windows.
 
 ### Setup
 
-To install qfly DEV PREVIEW:
+Install using pip:
 
-1. Clone the [qfly source code](https://github.com/qualisys/qualisys_drone_sdk) to your local machine.
-2. Navigate to the package root directory and install the qfly package in "development mode" by running: `python -m pip install -e .`
+    pip install qfly
 
 # Drone Platforms and Example Scripts
 
@@ -47,24 +49,21 @@ To install qfly DEV PREVIEW:
 ### Setup
 
 - Install drivers for both Crazyflie and the Crazyradio dongle using [Zadig](https://zadig.akeo.ie/) following [Bitcraze's instructions](https://www.bitcraze.io/documentation/repository/crazyradio-firmware/master/building/usbwindows/).
-- To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).\
+- To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).)
     - This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
+- *IMPORTANT:* Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.
 
-- To fly multiple drones, assign different radio addresses to them using the [Crazyflie PC client](https://github.com/bitcraze/crazyflie-clients-python). (Refer to "Firmware Configuration" in the [Crazyflie PC client docs](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/userguides/userguide_client/).) This can be done over the Crazyradio (requires you to know the current radio address, see Bitcraze docs) or over USB (requires Crazyflie driver, see above).
-
-- Before takeoff with the Crazyflie, always place the drone flat on the floor, with its front pointing in the positive x-direction of the QTM coordinate system.
-
-### Examples
+### How To Use Example Scripts and What They Do
 
 - In case of emergency, press `Ctrl` + `C` in the terminal window to terminate the program.
-
 - White running the example scripts, Press `Esc` to stop the program and attempt to calmly land the drone.
-
-- The swarm scripts have so far been tested with 4 drones. They may or may not work with more drones. Testing with larger swarms is in progress.
+- The swarm scripts have so far been tested with up to 4 drones.
 
 #### [cf_solo.py](examples/cf_solo.py)
 
-This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie. The script commands the Crazyflie to:
+This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of a Crazyflie drone.
+
+The script commands the drone to:
 
 1. Take off and hover at the center of its airspace
 2. Circle around the Z axis
@@ -74,14 +73,15 @@ This script demonstrates a basic scenario using the Qualisys motion capture syst
 
 #### [cf_multi.py](examples/cf_multi.py)
 
-The drones take off and fly circles around Z axis.
+This script demonstrates a basic scenario using the Qualisys motion capture system to control the flight path of two Crazyflie drones.
 
+The script commands the drones to take off and fly circles around Z axis.
 
 #### [cf_interactive_deck.py](examples/cf_interactive_deck.py)
 
 This script demonstrates real-time interactive control of a Crazyflie, coupling the drone's flight to the position of another drone equipped with an [Active Marker Deck](https://www.bitcraze.io/products/active-marker-deck/).
 
-The drone flies along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the second Crazyflie.
+The drone is commanded to fly along the YZ plane while centered at 0 along the X plane. The Y and Z coordinates track the Y-Z position second Crazyflie.
 
 #### [cf_interactive_traqr.py](examples/cf_interactive_traqr.py)
 
@@ -91,13 +91,11 @@ The drone flies along the YZ plane while centered at 0 along the X plane. The Y 
 
 #### [cf_multi_interactive.py](examples/cf_multi_interactive.py)
 
-This script demonstrates real-time interactive control of a Crazyflie swarm, coupling the drones' flight to the position of a [Qualisys Traqr](https://www.qualisys.com/accessories/traqr/).
+This script demonstrates real-time interactive control of two Crazyflie drones, coupling the drones' flight to the position of a [Qualisys Traqr](https://www.qualisys.com/accessories/traqr/).
 
-The drones take off and fly circles around Z axis. The altitude (z) tracks the Traqr.
-ESC to land at any time.
+The drones take off and fly circles around Z axis. Their altitude (Z coordinate) tracks the Traqr.
 
-
-![Tello EDU](https://qualisys.github.io/qualisys_drone_sdk/qfly_tt.png)
+![Robomaster TT](https://qualisys.github.io/qualisys_drone_sdk/qfly_tt.png)
 
 ## Robomaster TT
 
@@ -112,9 +110,11 @@ Coming soon...
 - [Overview of different positioning systems](https://www.bitcraze.io/2021/05/positioning-system-overview/) you can use with the Bitcraze Crazyflie
 - [Notes on the design of Drone Chi](https://www.bitcraze.io/2019/12/designing-dronechi/), a meditative human-drone interaction experiment by Joseph La Delfa
 
-# Contributing
+# Development
 
-The auto-generated documentation needs to be rebuilt using [pdoc3](https://pdoc3.github.io/) following code contributions. To re-generate the documentation files and place them correctly into the `docs/` folder that is served to the web, use the commands in Windows:
+Following code contributions, the auto-generated documentation needs to be rebuilt using [pdoc3](https://pdoc3.github.io/).
+
+To re-generate the documentation files and place them correctly into the `docs/` folder that is served to the web, use the commands in Windows:
 
     del docs\*.html
     pdoc qfly --force --html --output-dir docs
