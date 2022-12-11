@@ -1,20 +1,15 @@
 from setuptools import setup
 
-version = "0.1a1"
-
 setup(
     name="qfly",
-    version=version,
     description="Qualisys Drone SDK",
-    url="https://github.com/qualisys/qfly",
-    download_url="https://github.com/qualisys/qfly/tarball/{}".format(
-        version
-    ),
-    author="Mehmet Aydin Baytas",
-    author_email="support@qualisys.com",
-    install_requires=['qtm', 'cflib', 'pynput'],
+    version=0.2,
+    url="https://github.com/qualisys/qualisys_drone_sdk",
     license="MIT",
+    install_requires=['qtm', 'cflib', 'pynput'],
     packages=["qfly"],
+    author="Mehmet Aydin Baytas c/o Qualisys AB",
+    author_email="support@qualisys.com",
     classifiers=[
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
@@ -27,5 +22,4 @@ setup(
         "Topic :: Utilities",
     ],
     python_requires=">=3.9",
-    zip_safe=True,
 )
