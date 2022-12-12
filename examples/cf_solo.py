@@ -14,7 +14,7 @@ from qfly import Pose, QualisysCrazyflie, World, utils
 
 # SETTINGS
 cf_body_name = 'Crazyflie'  # QTM rigid body name
-cf_uri = 'radio://0/80/2M/E7E7E7E7E7'  # Crazyflie address
+cf_uri = 'radio://0/80/2M/E7E7E7E701'  # Crazyflie address
 cf_marker_ids = [1, 2, 3, 4] # Active marker IDs
 
 
@@ -75,7 +75,7 @@ with QualisysCrazyflie(cf_body_name,
         elif dt < 10:
             print(f'[t={int(dt)}] Maneuvering - Circle around Z...')
             # Set target
-            phi = 2 * 360 * (dt-5) / 5  # Calculate angle based on time
+            phi = 2 * 360 * (dt-5) / 8  # Calculate angle based on time
             _x, _y = utils.pol2cart(0.5, phi)
             target = Pose(world.origin.x + _x,
                           world.origin.y + _y,
@@ -97,7 +97,7 @@ with QualisysCrazyflie(cf_body_name,
         elif dt < 20:
             print(f'[t={int(dt)}] Maneuvering - Circle around X...')
             # Set target
-            phi = 2 * 360 * (dt-5) / 5  # Calculate angle based on time
+            phi = 2 * 360 * (dt-5) / 8  # Calculate angle based on time
             _x, _z = utils.pol2cart(0.5, phi)
             target = Pose(world.origin.x + _x,
                           world.origin.y,
@@ -119,7 +119,7 @@ with QualisysCrazyflie(cf_body_name,
         elif dt < 30:
             print(f'[t={int(dt)}] Maneuvering - Circle around X...')
             # Set target
-            phi = 2 * 360 * (dt-5) / 5  # Calculate angle based on time
+            phi = 2 * 360 * (dt-5) / 8  # Calculate angle based on time
             _y, _z = utils.pol2cart(0.5, phi)
             target = Pose(world.origin.x,
                           world.origin.y + _y,

@@ -10,7 +10,7 @@ class World:
                  origin=Pose(0, 0, 0),  # x, y, z in m
                  expanse=1.0,  # in m
                  padding=0.15,  # in m
-                 speed_limit=0.4,  # in m/s
+                 speed_limit=0.6,  # in m/s
                  tracking_tolerance=100  # in frames
                  ):
         """
