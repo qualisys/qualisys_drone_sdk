@@ -16,6 +16,8 @@ from qfly import Pose, QualisysCrazyflie, World, utils
 cf_body_name = 'Crazyflie'  # QTM rigid body name
 cf_uri = 'radio://0/80/2M/E7E7E7E7E7'  # Crazyflie address
 cf_marker_ids = [1, 2, 3, 4] # Active marker IDs
+circle_radius = 0.5 # Radius of the circular flight path
+circle_speed_factor = 0.12 # How fast the Crazyflie should move along circle
 
 
 # Watch key presses with a global variable
@@ -62,80 +64,74 @@ with QualisysCrazyflie(cf_body_name,
         # Mind the clock
         dt = time() - t
 
+        # Calculate Crazyflie's angular position in circle, based on time
+        phi = circle_speed_factor * dt * 360
+
+
         # Take off and hover in the center of safe airspace for 5 seconds
-        if dt < 3:
+        if dt < 5:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.02)
 
-        # Move out half of the safe airspace in the X direction and circle around Z axis
-        elif dt < 10:
+        # Move out and circle around Z axis
+        elif dt < 20:
             print(f'[t={int(dt)}] Maneuvering - Circle around Z...')
             # Set target
-            phi = 2 * 360 * (dt-5) / 8  # Calculate angle based on time
-            _x, _y = utils.pol2cart(0.5, phi)
+            _x, _y = utils.pol2cart(circle_radius, phi)
             target = Pose(world.origin.x + _x,
                           world.origin.y + _y,
                           world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.02)
 
         # Back to center
-        elif dt < 13:
+        elif dt < 25:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.02)
 
-        # Move out half of the safe airspace in the Z direction and circle around Y axis
-        elif dt < 20:
+        # Move out and circle around Y axis
+        elif dt < 40:
             print(f'[t={int(dt)}] Maneuvering - Circle around X...')
             # Set target
-            phi = 2 * 360 * (dt-5) / 8  # Calculate angle based on time
-            _x, _z = utils.pol2cart(0.5, phi)
+            _x, _z = utils.pol2cart(circle_radius, phi)
             target = Pose(world.origin.x + _x,
                           world.origin.y,
                           world.expanse + _z)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.02)
 
         # Back to center
-        elif dt < 23:
+        elif dt < 45:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.02)
 
-        # Move out half of the safe airspace in the Z direction and circle around X axis
-        elif dt < 30:
+        # Move and circle around X axis
+        elif dt < 60:
             print(f'[t={int(dt)}] Maneuvering - Circle around X...')
             # Set target
-            phi = 2 * 360 * (dt-5) / 8  # Calculate angle based on time
-            _y, _z = utils.pol2cart(0.5, phi)
+            _y, _z = utils.pol2cart(circle_radius, phi)
             target = Pose(world.origin.x,
                           world.origin.y + _y,
                           world.expanse + _z)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.02)
 
         # Back to center
-        elif dt < 33:
+        elif dt < 65:
             print(f'[t={int(dt)}] Maneuvering - Center...')
             # Set target
             target = Pose(world.origin.x, world.origin.y, world.expanse)
             # Engage
             qcf.safe_position_setpoint(target)
-            sleep(0.02)
 
         else:
             break
@@ -143,4 +139,3 @@ with QualisysCrazyflie(cf_body_name,
     # Land
     while (qcf.pose.z > 0.1):
         qcf.land_in_place()
-        sleep(0.02)
