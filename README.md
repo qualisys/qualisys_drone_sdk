@@ -95,11 +95,6 @@ This script demonstrates real-time interactive control of two Crazyflie drones, 
 
 The drones take off and fly circles around Z axis. Their altitude (Z coordinate) tracks the Traqr.
 
-![Robomaster TT](https://qualisys.github.io/qualisys_drone_sdk/qfly_tt.png)
-
-## Robomaster TT
-
-Coming soon...
 
 ---
 
